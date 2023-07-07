@@ -19,7 +19,14 @@ Create table Clientes(
 
 
 -- Entidad Proveedores --
-
+Create table Proveedores(
+	idProveedor int auto_increment not null,
+    nombreProveedor varchar(100) not null,
+    direccion varchar(200) not null,
+    correo varchar(100) not null,
+    telefonoProveedor varchar(10) not null,
+    primary key PK_idProveedor(idProveedor)
+);
 
 -- Entidad Tipo Moneda --
 
