@@ -43,7 +43,17 @@ Create table  TipoEmpleado (
 
 
 -- Entidad Empleados --
-
+Create table Empleados(
+	idEmpleado int not null auto_increment,
+    fechaContratacion DATE not null,
+    nombre varchar(100) not null,
+    direccion varchar(200) not null,
+    numeroContacto varchar(10) not null,
+    idTipoEmpleado int not null,
+    primary key PK_idEmpleado (idEmpleado),
+    constraint FK_idTipoEmpleado foreign key (idTipoEmpleado)
+		references TipoEmpleado(idTipoEmpleado)
+);
 
 -- Entidad Sucursales --
 
