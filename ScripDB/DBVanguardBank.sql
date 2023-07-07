@@ -16,7 +16,13 @@ Create table Clientes(
 );
 
 -- Entidad Departamentos --
-
+Create table Departamentos(
+	idDepartamento int auto_increment not null,
+    nombreDepartamento varchar(100) not null,
+    codigoPostal varchar(50) not null,
+    fechaApertura date not null,
+    primary key PK_idDepartamento(idDepartamento)
+);
 
 -- Entidad Proveedores --
 Create table Proveedores(
