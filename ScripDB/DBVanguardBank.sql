@@ -32,6 +32,14 @@ Create table Proveedores(
 
 
 -- Entidad Tipo Empleado --
+Create table  TipoEmpleado (
+	idTipoEmpleado int not null auto_increment,
+    nombresTipoPuesto varchar(150) not null,
+    salarioTipoEmpleado varchar(150) not null,
+    contratoTipoEmpleado varchar(150) not null,
+ 
+    primary key PK_idTipoEmpleado (idTipoEmpleado)
+);
 
 
 -- Entidad Empleados --
