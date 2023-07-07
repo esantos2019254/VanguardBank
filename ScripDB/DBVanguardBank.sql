@@ -59,7 +59,25 @@ Create table Empleados(
 
 
 -- Entidad Cuentas --
-
+Create table Cuenta(
+	idcuenta int not null auto_increment,
+    numeroCuenta bigint not null auto_increment,
+    saldo decimal (10,2) not null,
+    tipoCuenta varchar(100) not null,
+    fechaApertura date not null,
+    idCliente int not null,
+    idEmpleado int not null,
+    idTipoMoneda int not null,
+    idSucursal int not null,
+    constraint FK_idCliente foreign key (idCliente)
+		references Cliente(idCliente),
+	constraint FK_idTipoEmpleado foreign key (idTipoEmpleado)
+		references TipoEmpleado(idTipoEmpleado),
+	constraint FK_idTipoMoneda foreign key (idTipoMoneda)
+		references TipoMoneda(idTipoMoneda),
+	constraint FK_idSucursal foreign key (idSucursal)
+		references Sucursal(idSucursal)
+);
 
 -- Entidad Créditos --
 
