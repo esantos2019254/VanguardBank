@@ -101,6 +101,15 @@ Create table Credito(
 
 -- Entidad Login --
 
+Create table Login(
+	idUser int auto_increment not null,
+	usuario varchar(50) not null,
+	contrasena varchar(15) not null,
+	horasesion time not null,
+	primary key PK_idUser (idUser),
+	constraint FK_Login_Cuenta foreign key (idCuenta) 
+		references Cuenta(idCuenta) on delete cascade
+);
 
 -- Entidad Transacciones --
 create table Transacciones(
