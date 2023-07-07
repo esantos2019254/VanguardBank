@@ -122,6 +122,15 @@ create table Transacciones(
 );	
 
 -- Entidad Historial Transacción --
-
+Create table HistorialDeTransacciones(
+	idHistorialTransaccion int not null auto_increment,
+    idCuenta int not null,
+    idTransacciones int not null,
+    primary key PK_HistorialDeTransacciones (idHistorialTransaccion),
+	constraint FK_HistorialDeTransacciones_Cuenta foreign key (idCuenta)
+			references Cuenta (idCuenta),
+	constraint FK_HistorialDeTransacciones_Transacciones foreign key (idTransacciones)
+		references Transacciones (idTransacciones)
+);
 
 -- Entidad Depositos --
