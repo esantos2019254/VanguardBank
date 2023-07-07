@@ -16,7 +16,13 @@ Create table Clientes(
 );
 
 -- Entidad Departamentos --
-
+Create table Departamentos(
+	idDepartamento int auto_increment not null,
+    nombreDepartamento varchar(100) not null,
+    codigoPostal varchar(50) not null,
+    fechaApertura date not null,
+    primary key PK_idDepartamento(idDepartamento)
+);
 
 -- Entidad Proveedores --
 Create table Proveedores(
@@ -80,7 +86,15 @@ Create table Cuenta(
 );
 
 -- Entidad Créditos --
-
+Create table Credito(
+	idCredito int not null auto_increment,
+    monto decimal(10,2) not null,
+    fechaHora datetime not null,
+    interes decimal(10,2) not null,
+    primary key PK_idCredito(idCredito),
+    constraint FK_Credito_Cuenta foreign key (idCuenta)
+		references Cuenta (idCuenta)
+);
 
 -- Entidad Servicios --
 
@@ -89,7 +103,17 @@ Create table Cuenta(
 
 
 -- Entidad Transacciones --
-
+create table Transacciones(
+	idTransaccion int not null auto_increment,
+    tipoTransaccion varchar(50) not null,
+    monto decimal(10,2) not null,
+    fechaHora datetime not null,
+    primary key PK_idTransaccion(idTransaccion),
+    constraint FK_Transacciones_Empleado foreign key (idEmpleado) 
+		references Empleados (idEmpleado),
+	constraint FK_Transacciones_Cuenta foreign key (idCuenta)
+		references Cuenta (idCuenta)
+);	
 
 -- Entidad Historial Transacción --
 
