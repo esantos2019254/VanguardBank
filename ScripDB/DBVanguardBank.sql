@@ -35,7 +35,13 @@ Create table Proveedores(
 );
 
 -- Entidad Tipo Moneda --
-
+Create table tipoMoneda(
+	idMoneda int not null auto_increment,
+    simbolo varchar(10) not null,
+    nombre varchar(50) not null,
+    conversionDolar decimal(10,2),
+    primary key PK_idMoneda (idMoneda)
+);
 
 -- Entidad Tipo Empleado --
 Create table  TipoEmpleado (
