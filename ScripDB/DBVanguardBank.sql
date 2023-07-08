@@ -134,3 +134,21 @@ Create table HistorialDeTransacciones(
 );
 
 -- Entidad Depositos --
+Create table Deposito(
+
+    idDeposito int auto_increment not null, 
+    monto decimal(10, 2) not null, 
+    fechaDeposito date not null, 
+    horaDeposito time not null, 
+    idCuentaOrigen int not null,
+    idCuentaDeposito int not null,
+
+    primary key PK_idDeposito(idDeposito), 
+
+    constraint FK_Deposito_Cuenta foreign key (idCuentaOrigen)
+        references Cuenta (idCuentaOrigen),
+
+    constraint FK_Deposito_Cuenta foreign key (idCuentaDeposito)
+        references Cuenta (idCuentaDeposito)
+
+);
