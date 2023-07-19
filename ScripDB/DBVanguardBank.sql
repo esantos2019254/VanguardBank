@@ -434,6 +434,20 @@ Delimiter $$
         End$$
 Delimiter ;
 
+#	Buscar Empleado 	#
+Delimiter $$
+	Create procedure sp_BuscarEmpleado(in codEmpleado int)
+		Begin
+			Select idEmpleado as Id_Empleado,
+				nombreEmpleado as Nombre_Empleado,
+				apellidoEmpleado as Apellido_Empleado,
+                fechaContratacion as Fecha_Contratacion,
+                direccionEmpleado as Dirección_Empleado,
+                numeroContactoEmpleado as Numero_Contacto,
+                idTipoEmpleado as Id_TipoEmpleado
+                from Empleado where idEmpleado = codEmpleado;
+        End$$
+Delimiter ;
 -- CRUD Sucursales --
 
 
