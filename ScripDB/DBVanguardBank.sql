@@ -419,6 +419,21 @@ Delimiter $$
         End$$
 Delimiter ;
 
+#	Listar Empleados	#
+Delimiter $$
+	Create procedure sp_ListarEmpleados()
+		Begin
+			Select idEmpleado as Id_Empleado,
+				nombreEmpleado as Nombre_Empleado,
+				apellidoEmpleado as Apellido_Empleado,
+                fechaContratacion as Fecha_Contratacion,
+                direccionEmpleado as Dirección_Empleado,
+                numeroContactoEmpleado as Numero_Contacto,
+                idTipoEmpleado as Id_TipoEmpleado
+                from Empleado;
+        End$$
+Delimiter ;
+
 -- CRUD Sucursales --
 
 
