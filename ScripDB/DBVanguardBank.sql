@@ -179,3 +179,114 @@ Create table Deposito(
     constraint FK_Deposito_Cuenta foreign key (idCuentaDeposito)
         references Cuenta (idCuenta)
 );
+
+-- ------ PROCEDIMIENTO ALMACENADOS ------ --
+
+-- CRUD Clientes--
+
+Delimiter $$
+	Create procedure sp_AgregarCliente(in DPI bigint, in nombreCliente varchar(100), in apellidoCliente varchar(100), in telefonoContacto varchar(10),
+										in direccionCliente varchar(200), in generoCliente varchar(100))
+		Begin
+			Insert into Cliente(DPI, nombreCliente, apellidoCliente, telefonoContacto, direccionCliente, generoCliente)
+				values(DPI, nombreCliente, apellidoCliente, telefonoContacto, direccionCliente, generoCliente);
+        End $$
+Delimiter ;
+
+call sp_AgregarCliente(1879451248101,'Elmer Rodrigo','Santos García','4874-5487','Ciudad de Guatemala','Masculino');
+
+Delimiter $$
+	Create procedure sp_ListarClientes()
+		Begin
+			Select 
+				C.DPI,
+				C.nombreCliente,
+                C.apellidoCliente,
+                C.telefonoContacto,
+                C.direccionCliente,
+                C.generoCliente
+                from Cliente C;
+        End $$
+Delimiter ;
+
+call sp_ListarClientes();
+
+Delimiter $$
+	Create procedure sp_EditarCliente(in DPI bigint, in nombreCliente varchar(100), in apellidoCliente varchar(100), in telefonoContacto varchar(10),
+										in direccionCliente varchar(200), in generoCliente varchar(100))
+		Begin
+			Update Cliente C
+				set C.nombreCliente = nombreCliente,
+                    C.apellidoCliente = apellidoCliente,
+                    C.telefonoContacto = telefonoContacto,
+                    C.direccionCliente = direccionCliente,
+                    C.generoCliente = generoCliente
+                    where C.DPI = DPI;
+        End $$
+Delimiter ;
+
+-- call sp_EditarCliente(1879451248101,'Elmer Rodrigo','Santos García','4874-5487','Ciudad de Guatemala','Masculino');
+
+Delimiter $$
+	Create procedure sp_BuscarCliente(in DPI bigint)
+		Begin
+			Select 
+				C.DPI,
+				C.nombreCliente,
+                C.apellidoCliente,
+                C.telefonoContacto,
+                C.direccionCliente,
+                C.generoCliente
+                from Cliente C where C.DPI = DPI;
+        End $$
+Delimiter ;
+
+-- call sp_BuscarCliente(1879451248101);
+
+Delimiter $$
+	Create procedure sp_EliminarCliente(in DPICliente bigint)
+		Begin
+			Delete from Cliente where DPI = DPICliente;
+        End $$
+Delimiter ;
+
+-- call sp_EliminarCliente(1879451248101);
+
+-- CRUD Departamentos --
+
+
+-- CRUD Proveedores --
+
+
+-- CRUD Tipo Moneda --
+
+
+-- CRUD Tipo Empleado --
+
+
+-- CRUD Empleados --
+
+
+-- CRUD Sucursales --
+
+
+-- CRUD Cuentas --
+
+
+-- CRUD Créditos --
+
+
+-- CRUD Servicios --
+
+
+-- CRUD Login --
+
+
+-- CRUD Transacciones --
+	
+
+-- CRUD Historial Transacción --
+
+
+-- CRUD Depositos --
+
