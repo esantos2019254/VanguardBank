@@ -601,6 +601,59 @@ Delimiter $$
 Delimiter ;
 
 -- CRUD Créditos --
+-- Agregar --
+Delimiter $$
+	Create procedure sp_AgregarCredito(in montoCredito decimal(10,2), in fechaHora datetime,
+		in interesCredito decimal(10,2), in idCuenta int)
+			Begin
+				Insert into Credito (montoCredito, fechaHora, interesCredito, idCuenta)
+					values(montoCredito, fechaHora, interesCredito, idCuenta);
+			End $$
+Delimiter ;
+/*call sp_AgregarCredito(1250.00, '2023-06-06 14:20:00', 0.05, 1);
+call sp_AgregarCredito(3000.00, '2023-07-12 18:13:34', 0.08, 2);*/
+
+-- Listar --
+Delimiter $$
+	Create procedure sp_ListarCredito()
+		Begin
+			Select * from Credito;
+        End $$
+Delimiter ;
+
+-- Buscar --
+Delimiter $$
+	Create procedure sp_BuscarCredito(in idCred int)
+		Begin
+			Select Cr.idCredito,
+				Cr.monto,
+                Cr.fechaHora,
+                Cr.interes from Credito Cr 
+					where idCredito = idCred;
+        End $$
+Delimiter ;
+
+-- Editar --
+Delimiter $$
+	Create procedure sp_EditarCredito(in idCred int, in mt decimal(10,2), in fH datetime,
+		in intr decimal(10,2))
+		Begin
+			Update Credito 
+				set monto = mt,
+                    fechaHora = fH,
+                    interes = intr 
+                    where idCredito = idCred;
+        End $$
+Delimiter ;
+
+-- Eliminar --
+Delimiter $$
+	Create procedure sp_EliminarCredito(in idCred int)
+		Begin
+			Delete from Credito 
+				where idCred=idCredito;
+        End $$
+Delimiter ;
 
 
 -- CRUD Servicios --
@@ -610,6 +663,60 @@ Delimiter ;
 
 
 -- CRUD Transacciones --
+-- Agregar --
+Delimiter $$
+	Create procedure sp_AgregarTransaccion(in tipoTransaccion varchar(50), 
+		in montoTransaccion decimal(10,2), in fechaHora datetime, in idEmpleado int, 
+			in idCuenta int)
+				Begin 
+					Insert into Transaccione(tipoTransaccion, montoTransaccion, fechaHora, idEmpleado, idCuenta)
+						values(tipoTransaccion, montoTransaccion, fechaHora, idEmpleado, idCuenta);
+				End $$
+Delimiter ;
+/*call sp_AgregarTransaccion('compra', 1000.50, '2023-02-15 15:30:30', 1, 1);
+call sp_AgregarTransaccion('Venta', 2540.34, '2023-05-20 13:44:10', 2, 2);*/
+
+-- Listar --
+Delimiter $$
+	Create procedure sp_ListarTransaccion()
+		Begin
+			Select * from Transacciones;
+        End $$
+Delimiter ;
+
+-- Buscar --
+Delimiter $$
+	Create procedure sp_BuscarTransaccion(in idTransaction int)
+		Begin
+			Select Tr.idTransaccion, 
+				   Tr.tipoTransaccion, 
+                   Tr.monto, 
+                   Tr.fechaHora from Transacciones Tr
+					where idTransaccion = idTransaction;	
+        End $$
+Delimiter ;
+
+-- Editar --
+Delimiter $$
+	Create procedure sp_EditarTransaccion(in idTransaction int, in tpTransaccion varchar(50), 
+		in mnt decimal(10,2), in fH datetime)
+			Begin
+				Update Transacciones 
+					set tipoTransaccion = tpTransaccion, 
+                        monto = mnt, 
+                        fechaHora = fH
+                        where idTransaccion = idTransaction;
+            End $$
+Delimiter ;
+
+-- Eliminar --
+Delimiter $$
+	Create procedure sp_EliminarTransaccion(in idTransaction int)
+		Begin
+			Delete from Transacciones 
+				where idTransaction = idTransaccion;
+        End $$
+Delimiter ;
 	
 
 -- CRUD Historial Transacción --
