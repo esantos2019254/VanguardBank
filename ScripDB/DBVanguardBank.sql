@@ -463,6 +463,15 @@ Delimiter $$
                 where idEmpleado = codigoEmp;
         End$$
 Delimiter ;
+
+#	Eliminar Empleado 	#
+Delimiter $$
+	Create procedure sp_EliminarEmpleado (in codigoEmpleado int)
+		Begin
+			Delete from Empleado where idEmpleado = codigoEmpleado;
+        End$$
+Delimiter ;
+
 -- CRUD Sucursales --
 
 
