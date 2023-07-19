@@ -539,6 +539,14 @@ Delimiter $$
 		End$$
 Delimiter ;
 
+#	Eliminar Cuenta 	#
+Delimiter $$
+	Create procedure sp_EliminarCuenta(in numCuenta bigint)
+		Begin
+			Delete from Cuenta where numeroCuenta = numCuenta;
+		End$$
+Delimiter ;
+
 -- CRUD Créditos --
 
 
