@@ -448,6 +448,21 @@ Delimiter $$
                 from Empleado where idEmpleado = codEmpleado;
         End$$
 Delimiter ;
+
+#	Editar Empleado 	#
+Delimiter $$
+	Create procedure sp_EditarEmpleado(in codigoEmp int,in nuevoNombreEmp varchar(100),in nuevoApellidoEmp varchar(100),in nuevaFechaCon date,
+		in nuevaDireccionEmp varchar(200),in nuevoNumeroEmp varchar(10),in nuevoIdTipoEmp int)
+		Begin
+			Update Empleado set nombreEmpleado = nuevoNombreEmp,
+				apellidoEmpleado = nuevoApellidoEmp,
+                fechaContratacion = nuevaFechaCon,
+                direccionEmpleado = nuevaDireccionEmp,
+                numeroContactoEmpleado = nuevoNumeroEmp,
+                idTipoEmpleado = nuevoIdTipoEmp
+                where idEmpleado = codigoEmp;
+        End$$
+Delimiter ;
 -- CRUD Sucursales --
 
 
