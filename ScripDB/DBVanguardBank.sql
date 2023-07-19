@@ -253,7 +253,82 @@ Delimiter ;
 -- call sp_EliminarCliente(1879451248101);
 
 -- CRUD Departamentos --
+-- ----------------------------------- Procedimientos almacenados Entidad Departamentos ----------------------------------------------------
 
+-- Agregar Departamentos
+
+Delimiter //
+	Create procedure sp_AgregarDepartamento (in nombreDepartamento varchar(100), in codigoPostal varchar(50), in fechaApertura date)
+		Begin
+			Insert into Departamento (nombreDepartamento, codigoPostal, fechaApertura)
+				values (nombreDepartamento, codigoPostal, fechaApertura);
+        End//
+Delimiter ;
+
+call sp_AgregarDepartamento('Totonicapan', '08000', '2023-04-24');
+call sp_AgregarDepartamento('Qutzaltenango', '09000', '2023-02-12');
+call sp_AgregarDepartamento('San marcos', '12000', '2023-06-10');
+call sp_AgregarDepartamento('Escuintla', '05000', '2023-02-12');
+call sp_AgregarDepartamento('Chimaltenango', '04000', '2023-05-20');
+
+
+-- Buscar Departamentos
+
+Delimiter //
+	Create procedure sp_BuscarDepartamentos(in idDepartamento int)
+		Begin
+			Select 
+				D.idDepartamento,
+				D.nombreDepartamento,
+                D.codigoPostal,
+                D.fechaApertura
+                from Departamento D where D.idDepartamento = idDepartamento;
+        End//
+Delimiter ;
+
+call sp_BuscarDepartamentos(1);
+
+-- Eliminar Departamento
+
+Delimiter //
+	Create procedure sp_EliminarDepartamento(in codDepartamento int)
+		Begin
+			Delete from Departamento
+				where idDepartamento = codDepartamento;
+		End//
+Delimiter ;
+
+call sp_EliminarDepartamento (4);
+
+-- Editar Departamento
+
+Delimiter //
+	Create procedure sp_EditarDepartamento(in idDepartamento int, in nombreDep varchar (100), in codPostal varchar(50), in dateApertura date)
+		Begin 
+			update Departamento D
+				set  D.nombreDepartamento = nombreDep,
+					 D.codigoPostal = codPostal,
+                     D.fechaApertura = dateApertura
+                where D.idDepartamento = idDepartamento;
+        End//
+Delimiter ;
+call sp_EditarDepartamento (3, 'Huehuetenango', '13000', '2023-04-12');
+
+-- Listar Departamento
+
+Delimiter //
+	Create procedure sp_ListarDepartamento()
+	Begin
+		Select 
+			D.idDepartamento,
+            D.nombreDepartamento,
+            D.codigoPostal,
+            D.fechaApertura
+			From Departamento D;
+	End//
+Delimiter ;
+
+Call sp_ListarDepartamento();
 
 -- CRUD Proveedores --
 
