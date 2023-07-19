@@ -661,6 +661,63 @@ Delimiter ;
 
 -- CRUD Login --
 
+Delimiter $$
+	create procedure sp_AgregarLogin(in nombreUsuario varchar(150), in passwordUsuario varchar(150), in horaSesion datetime, in idCuenta int)
+		begin
+			Insert into Login(nombreUsuario, passwordUsuario, horaSesion, idCuenta)
+				value (nombreUsuario, passwordUsuario, horaSesion, idCuenta);
+        end $$
+Delimiter ;
+
+Delimiter $$
+	create procedure sp_EliminarLogin(in idUser_ int)
+		begin 
+			Delete from Login where idUser = idUser_;
+        end $$
+Delimiter ;
+
+Delimiter $$
+	create procedure sp_ListarLogin()
+		begin
+			select 
+				L.idUser,
+                L.nombreUsuario,
+                L.passwordUsuario,
+                L.horaSesion,
+                L.idCuenta from Login;
+        end $$
+Delimiter ;
+
+Delimiter $$
+	create procedure sp_BuscarLogin(in idUser_ int)
+		begin
+			select 
+				L.idUser,
+                L.nombreUsuario,
+                L.passwordUsuario,
+                L.horaSesion,
+                L.idCuenta from Login where L.idUser = idUser_;
+        end $$
+Delimiter ;
+
+Delimiter $$
+	create procedure sp_EditarLogin(in idUser_ int,in nombreUsuario_ varchar(150), in passwordUsuario_ varchar(150), in horaSesion_ datetime, in idCuenta_ int)
+		begin
+			Update Login L set
+                L.nombreUsuario = nombreUsuario_,
+                L.passwordUsuario = passwordUsuario_,
+                L.horaSesion = horaSesion_,
+                L.idCuenta = idCuenta_  where L.idUser = idUser_;
+        end $$
+Delimiter ;
+
+/*
+call sp_AgregarLogin('asanchez','12345','2023-07-19 12:34:56','1');
+call sp_AgregarLogin('asanchez','12345','2023-07-19 12:34:56','2');
+call sp_AgregarLogin('asanchez','12345','2023-07-19 12:34:56','3');
+call sp_AgregarLogin('asanchez','12345','2023-07-19 12:34:56','4');
+call sp_AgregarLogin('asanchez','12345','2023-07-19 12:34:56','5');
+*/
 
 -- CRUD Transacciones --
 -- Agregar --
