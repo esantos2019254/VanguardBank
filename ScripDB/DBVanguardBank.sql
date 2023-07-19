@@ -331,7 +331,75 @@ Delimiter ;
 Call sp_ListarDepartamento();
 
 -- CRUD Proveedores --
+-- Agregar Proveedor --
+Delimiter $$
+	Create procedure sp_AgregarProveedor (in nombreProveedor varchar(100), in direccionProveedor varchar(200), in correoProveedor varchar(100), in telefonoProveedor varchar(10))
+		Begin
+			Insert into Proveedor (nombreProveedor, direccionProveedor, correoProveedor, telefonoProveedor)
+            values (nombreProveedor, direccionProveedor, correoProveedor, telefonoProveedor);
+        End $$
+Delimiter ;
 
+Call sp_AgregarProveedor('Campero','Guatemala','campero@gmail.com', '6332-8483');
+Call sp_AgregarProveedor('Pepsi','Guatemala','pepsi@gmail.com', '9984-1212' );
+Call sp_AgregarProveedor('Burguer King','Guatemala','burguer@gmail.com', '3232-3232');
+
+-- Listar Proveedor --
+Delimiter $$
+	Create procedure sp_ListarProveedor()
+		Begin
+			Select
+			Proveedor.idProveedor,
+            Proveedor.nombreProveedor,
+            Proveedor.direccionProveedor,
+            Proveedor.correoProveedor,
+            Proveedor.telefonoProveedor
+            from Proveedor;
+        End $$
+Delimiter ;
+
+Call sp_ListarProveedor();
+
+-- Editar Proveedor --
+Delimiter $$
+	Create procedure sp_EditarProveedor(in idProveedor int, in nombreProveedor varchar(100), in direccionProveedor varchar(200), in correoProveedor varchar(100), in telefonoProveedor varchar(10))
+		Begin
+			Update Proveedor P
+				set P.nombreProveedor = nombreProveedor,
+					P.direccionProveedor = direccionProveedor,
+                    P.correoProveedor = correoProveedor,
+                    P.telefonoProveedor = telefonoProveedor
+                    where P.idProveedor = idProveedor;
+        End $$
+Delimiter ;
+
+-- Call sp_EditarProveedor(1, 'La torre', 'Japon', 'torre@gmail.com', '1111-2222');
+
+-- Eliminar Proveedor --
+Delimiter $$
+	Create procedure sp_EliminarProveedor(in IdPro int)
+		Begin
+			Delete from Proveedor where IdPro = idProveedor;
+        End $$
+Delimiter ;
+
+-- Call sp_EliminarProveedor(3);
+
+-- Buscar Proveedor --
+Delimiter $$
+	Create procedure sp_BuscarProveedor(in idProveedor int)
+		Begin
+			Select
+			Proveedor.idProveedor,
+            Proveedor.nombreProveedor,
+            Proveedor.direccionProveedor,
+            Proveedor.correoProveedor,
+            Proveedor.telefonoProveedor
+            from Proveedor where Proveedor.idProveedor = idProveedor;
+        End $$
+Delimiter ;
+
+Call sp_BuscarProveedor(1);
 
 -- CRUD Tipo Moneda --
 
