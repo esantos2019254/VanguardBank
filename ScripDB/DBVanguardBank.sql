@@ -522,6 +522,23 @@ Delimiter $$
 		End$$
 Delimiter ;
 
+#	Editar Cuenta 	#
+Delimiter $$
+	Create procedure sp_EditarCuenta(in numCuenta bigint,in saldoCue decimal(10,2),in tipoCue varchar(100),
+		in fechaAperturaCue date,in DPICue bigint,in idEmpleadoCue int,in idTipoMonedaCue int,in idSucursarlCue int)
+		Begin
+			Update Cuenta set idCuenta = Id_Cuenta,
+                saldoCuenta = saldoCue,
+                tipoCuenta = tipoCue,
+                fechaApertura = fechaAperturaCue,
+                DPI = DPICue,
+                idEmpleado = idEmpleadoCue,
+                idTipoMoneda = idTipoMonedaCue,
+                idSucursal = idSucursarlCue
+                where numeroCuenta = numCuenta;
+		End$$
+Delimiter ;
+
 -- CRUD Créditos --
 
 
