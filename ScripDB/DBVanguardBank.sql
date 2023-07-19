@@ -476,7 +476,17 @@ Delimiter ;
 
 
 -- CRUD Cuentas --
-
+#	Agregar Cuenta 	#
+Delimiter $$
+	Create procedure sp_AgregarCuenta(in numeroCuenta bigint,in saldoCuenta decimal(10,2),in tipoCuenta varchar(100),
+		in fechaApertura date,in DPI bigint,in idEmpleado int,in idTipoMoneda int,in idSucursarl int)
+		Begin
+			insert into Cuenta(numeroCuenta, saldoCuenta, tipoCuenta, fechaApertura, DPI, idEmpleado,
+				idTipoMoneda, idSucursal) 
+                values(numeroCuenta, saldoCuenta, tipoCuenta, fechaApertura, DPI, idEmpleado,
+                idTipoMoneda, idSucursal);
+        End$$
+Delimiter ;
 
 -- CRUD Créditos --
 
