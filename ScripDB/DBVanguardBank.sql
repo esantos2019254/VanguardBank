@@ -459,6 +459,52 @@ Delimiter ;
 
 -- CRUD Tipo Empleado --
 
+-- AGREGAR 
+Delimiter $$
+	Create procedure sp_AgregarTipoEmpleado(in nombreTipoPuesto varchar(150), in salarioTipoEmpleado varchar(150), in contratoTipoEmpleado varchar(150))
+		begin 
+			Insert into TipoEmpleado(nombreTipoPuesto, salarioTipoEmpleado, contratoTipoEmpleado)
+				values(nombreTipoPuesto, salarioTipoEmpleado, contratoTipoEmpleado); 
+        end$$
+Delimiter ;
+
+call sp_AgregarTipoEmpleado('Gerente', '7,000', 'Tiempo Completo');
+call sp_AgregarTipoEmpleado('Jefe', '3,000', 'medio Tiempo');
+call sp_AgregarTipoEmpleado('Sub gerente', '7,000', 'Tiempo Cpmpleto');
+call sp_AgregarTipoEmpleado('Supervisor', '2,500', 'Medio Tiempo');
+call sp_AgregarTipoEmpleado('Limpieza', '3,500', 'Medio Tiempo');
+
+-- ELIMINAR
+Delimiter $$
+	Create procedure sp_EliminarTipoEmpleado(in idTipoEmpleado int) 
+		begin 
+			delete from TipoEmpleado 
+				where codigoTipoEmpleado = codTipoEmpleado; 
+        end $$
+Delimiter ;
+
+-- LISTAR
+Delimiter $$
+	Create procedure sp_ListarTipoEmpleados()
+	begin 
+		Select 
+			TE.idTipoEmpleado, 
+            TE.contratoTipoEmpleado
+            from TipoEmpleado TE; 
+    end $$
+Delimiter ;
+
+-- EDITAR
+Delimiter $$
+	Create procedure sp_EditarTipoEmpleado(in codTipoEmpleado int)
+	begin 
+		Select 
+			salarioTipoEmpleado,
+            contratoTipoEmpleado
+            from TipoEmpleado  where codigoTipoEmpleado = codTipoEmpleado; 
+    end $$
+Delimiter ;
+
 
 -- CRUD Empleados --
 #	Agregar Empleado	#
