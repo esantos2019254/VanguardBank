@@ -408,7 +408,16 @@ Call sp_BuscarProveedor(1);
 
 
 -- CRUD Empleados --
-
+#	Agregar Empleado	#
+Delimiter $$
+	Create procedure sp_AgregarEmpleado(in nombreEmpleado varchar(100),in apellidoEmpleado varchar(100),in fechaContratacion date,
+    in direccionEmpleado varchar(200),in numeroContactoEmpleado varchar(10),in idTipoEmpleado int)
+		Begin
+			Insert into Empleado(nombreEmpleado, apellidoEmpleado, fechaContratacion, direccionEmpleado, numeroContactoEmpleado,
+				idTipoEmpleado)
+				values (nombreEmpleado, apellidoEmpleado, fechaContratacion, direccionEmpleado, numeroContactoEmpleado, idTipoEmpleado);
+        End$$
+Delimiter ;
 
 -- CRUD Sucursales --
 
