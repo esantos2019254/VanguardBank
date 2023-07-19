@@ -505,6 +505,23 @@ Delimiter $$
         End$$
 Delimiter ;
 
+#	Buscar Cuenta 	#
+Delimiter $$
+	Create procedure sp_BuscarCuenta(in numCuenta bigint)
+		Begin
+			Select idCuenta as Id_Cuenta,
+				numeroCuenta as Número_Cuenta,
+                saldoCuenta as Saldo,
+                tipoCuenta as TipoCuenta,
+                fechaApertura as Fecha_Apertura,
+                DPI as DPI,
+                idEmpleado as Id_Empleado,
+                idTipoMoneda as Id_Tipo_Moneda,
+                idSucursal as Id_Sucursal
+                from Cuenta where numeroCuenta = numCuenta;
+		End$$
+Delimiter ;
+
 -- CRUD Créditos --
 
 
