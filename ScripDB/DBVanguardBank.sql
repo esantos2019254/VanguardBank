@@ -403,6 +403,59 @@ Call sp_BuscarProveedor(1);
 
 -- CRUD Tipo Moneda --
 
+-- Agregar
+Delimiter $$
+	Create Procedure sp_AgregarTipoMoneda(in simboloMoneda varchar(10),in nombreMoneda varchar(50), in conversionDolar decimal(10,2))
+		begin
+			Insert into TipoMoneda(simboloMoneda, nombreMoneda, conversionDolar)
+				values (simboloMoneda, nombreMoneda, conversionDolar);
+        end $$
+Delimiter ;
+
+call sp_agregarTipoMoneda('€','Euro',1);
+Call sp_agregarTipoMoneda('£','Libra Esterlina', 1);
+Call sp_agregarTipoMoneda('¥','Yen Japonés',100);
+Call sp_agregarTipoMoneda('CHF','Franco suizo',1);
+Call sp_agregarTipoMoneda('$','Dólar Canadiense',0.79);
+-- Listar
+Delimiter $$
+	Create procedure sp_ListarTipoMoneda()
+		begin
+			select idTipoMoneda, simboloMoneda, nombreMoneda, conversionDolar
+				from TipoMoneda;
+        end $$
+Delimiter ;
+
+-- Editar
+Delimiter $$
+	Create procedure sp_editarTipoMoneda(in idTipo int, in simbolo varchar(10),in nombre varchar(50), in conversion decimal(10,2))
+		begin
+			Update TipoMoneda
+			set simboloMoneda = simbolo, nombreMoneda = nombre, conversionDolar = conversion
+				where idTipoMoneda = idTipo;
+        end $$
+Delimiter ;
+
+-- Buscar
+Delimiter $$
+	Create procedure sp_BuscarTipoMoneda(in idTipo int)
+		begin
+			select idTipoMoneda, simboloMoneda, nombreMoneda, conversionDolar
+				from TipoMoneda where  idTipoMoneda = idTipo;
+        end $$
+Delimiter ;
+
+call sp_BuscarTipoMoneda(1);
+
+-- Eliminar
+
+Delimiter $$
+	Create procedure sp_EliminarTipoMoneda(in idTipo int)
+		begin	
+			Delete from TipoMoneda
+				where idTipoMoneda = idTipo;
+        end $$
+Delimiter ;
 
 -- CRUD Tipo Empleado --
 
