@@ -572,6 +572,84 @@ Delimiter $$
 Delimiter ;
 
 -- CRUD Sucursales --
+-- **********************************************************PROCEDIMIENTOS DAVID SANDOVAL******************************************************
+
+-- **************************************** PROCEDIMIENTOS ALMACENADOS SUCURSALES ****************************************
+-- *********************************** PROCEDURE AGREGAR SUCURSAL *************************************************
+
+Delimiter //
+	Create procedure sp_agregarSucursal(in nombreSucursal varchar(150), in direccionSucursal varchar(150), in correoSucursal varchar(150), in idDepartamento int, in idProveedor int)
+		Begin
+			Insert into Sucursal(nombreSucursal, direccionSucursal, correoSucursal, idDepartamento, idProveedor)
+				values(nombreSucursal, direccionSucursal, correoSucursal, idDepartamento, idProveedor);
+        End //
+Delimiter ;
+
+/*
+call sp_agregarSucursal('Sucursal Central', 'zona 1', 'sucursalCental@gmail.com', 1, 1 );
+call sp_agregarSucursal('Sucursal Financiera Internacional', 'zona 2', 'sucursalfinancierainter@gmail.com', 2, 2);
+call sp_agregarSucursal('Sucursal del Norte', 'zona 3', 'sucursalnorte@gmail.com', 3, 3);
+call sp_agregarSucursal('Sucursal del Sur', 'zona 4', 'sucursalsur@gmail.com', 4, 1);
+call sp_agregarSucursal('Sucursal del Este', 'zona 5', 'sucursaleste@gmail.com', 5, 2);
+call sp_agregarSucursal('Sucursal del Oeste', 'zona 6', 'sucursaloeste@gmail.com', 6, 3);
+call sp_agregarSucursal('Sucursal Plaza Mayor', 'zona 7', 'sucursalplazamayor@gmail.com', 7, 3);
+call sp_agregarSucursal('Sucursal Avenida Principal', 'zona 8', 'sucursalavenidaprincipal@gmail.com', 8, 2);
+call sp_agregarSucursal('Sucursal Vanguardia', 'zona 9', 'sucursalvanguardia@gmail.com', 9, 1);
+call sp_agregarSucursal('Sucursal Innovación Financiera', 'zona 10', 'sucursalinnovacionfinanciera@gmail.com', 10, 3);
+*/
+
+-- ************************************** PROCEDURE LISTAR SUCURSALES *********************************************************
+Delimiter //
+	Create procedure sp_listarSucursales()
+		Begin
+			Select 
+				S.idSucursal, 
+                S.nombreSucursal, 
+                S.direccionSucursal, 
+                S.correoSucursal, 
+                S.idDepartamento, 
+                S.idProveedor 
+					from Sucursal S;
+        End //
+Delimiter ;
+
+-- ************************************** PROCEDURE EDITAR SUCURSAL *******************************************************
+
+Delimiter //
+	Create procedure sp_editarSucursal(in idSucu int, in nSucursal varchar(150), in dSucursal varchar(150), in cSucursal varchar(150))
+		Begin
+			Update Sucursal S
+				Set
+					nombreSucursal = nSucursal, 
+                    direccionSucursal = dSucursal, 
+                    correoSucursal = cSucursal
+						where S.idSucursal = idSucu;
+        End //
+Delimiter ;
+
+-- **************************************** PROCEDURE BUSCAR SUCURSAL *******************************************************
+
+Delimiter //
+	Create procedure sp_buscarSucursal(in idSucu int)
+		Begin
+			Select 
+				S.idSucursal, 
+                S.nombreSucursal, 
+                S.direccionSucursal, 
+                S.correoSucursal, 
+                S.idDepartamento, 
+                S.idProveedor 
+					from Sucursal S where S.idSucursal = idSucu;
+        End //
+Delimiter ;
+
+-- ************************************** PROCEDURE ELIMIAR SUCURSAL *********************************************************
+Delimiter //
+	Create procedure sp_eliminarSucursal(in idSucursal int)
+		Begin
+			Delete from Sucursal where idSucursal = idSucu;
+        End //
+Delimiter ;
 
 
 -- CRUD Cuentas --
@@ -703,6 +781,83 @@ Delimiter ;
 
 
 -- CRUD Servicios --
+
+-- **************************************** PROCEDIMIENTOS ALMACENADOS SERVICIOS ****************************************
+
+-- *********************************** PROCEDURE AGREGAR SERVICIO *************************************************
+Delimiter //
+	Create procedure sp_agregarServicio(in tipoServicio varchar(100), in correlativo varchar(100), in montoServicio decimal(10,2), in idCuenta int)
+		Begin
+			Insert into Servicio(tipoServicio, correlativo, montoServicio, idCuenta)
+				values(tipoServicio, correlativo, montoServicio, idCuenta);
+        End //
+Delimiter ;
+
+/*
+call sp_agregarServicio('Transferencias de dinero', 'Número de cuenta de destino', 1500.50, 1);
+call sp_agregarServicio('Banca móvil', 'Aplicación móvil', 255.50, 2);
+call sp_agregarServicio('Banca en línea', 'contraseña', 325.25, 3);
+call sp_agregarServicio('Tarjetas de débito', 'código de seguridad', 555.50, 4);
+call sp_agregarServicio('Préstamos para automóviles', 'Tasas de interés', 600.50, 5);
+call sp_agregarServicio('Préstamos personales', 'Tasas de interés', 904.50, 6);
+call sp_agregarServicio('Préstamos hipotecarios', 'Tasas de interés', 651.45, 7);
+call sp_agregarServicio('Tarjetas de crédito', 'Estados de cuenta mensuales', 850.50, 8);
+call sp_agregarServicio('Cuentas de ahorro', 'Libretas de ahorro', 2000.25, 9);
+call sp_agregarServicio('Cuentas corrientes', 'Estados de cuenta', 1000.65, 10);
+*/
+
+-- *********************************** PROCEDURE LISTAR SERVICIO *************************************************
+
+Delimiter //
+	Create procedure sp_listarServicios()
+		Begin
+			Select 
+				S.idServicio, 
+				S.tipoServicio, 
+                S.correlativo, 
+                S.montoServicio, 
+                S.idCuenta from Servicio S;
+			
+        End //
+Delimiter ;
+
+-- *********************************** PROCEDURE EDITAR SERVICIO *************************************************
+
+Delimiter //
+	Create procedure sp_editarServicios(in idServi int, in tServicio varchar(100), in correla varchar(100), in mServicio decimal(10,2))
+		Begin
+			Update Servicio S
+				Set
+					S.tipoServico = tServicio,
+                    S.correlativo = correla,
+                    S.montoServicio = mServicio
+						where S.idServicio = idServi;
+        End //
+Delimiter ;
+
+-- *********************************** PROCEDURE BUSCAR SERVICIO *************************************************
+
+Delimiter //
+	Create procedure sp_buscarServicio(in idServi int)
+		Begin
+			Select 
+				S.idServicio, 
+				S.tipoServicio, 
+                S.correlativo, 
+                S.montoServicio, 
+                S.idCuenta from Servicio S where S.idServicio = idServi;
+        End //
+Delimiter ;
+
+-- *********************************** PROCEDURE ELIMINAR SERVICIO *************************************************
+
+Delimiter //
+	Create procedure sp_eliminarServio(in idServi int)
+		Begin
+			Delete from Servicio where idServicio = idServi;
+        End //
+Delimiter ;
+
 
 
 -- CRUD Login --
