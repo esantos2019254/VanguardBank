@@ -827,3 +827,74 @@ Delimiter ;
 
 -- CRUD Depositos --
 
+-- AGREGAR --- 
+
+Delimiter $$ 
+	Create procedure sp_AgregarDeposito(in montoDeposito decimal(10,2), in fechaDeposito date, in horaDeposito time, in idCuentaOrigen int, in idCuentaDeposito int) 
+		Begin 
+			Insert into Deposito(montoDeposito, fechaDeposito, horaDeposito, idCuentaOrigen, idCuentaDeposito) 
+					values(montoDeposito, fechaDeposito, horaDeposito, idCuentaOrigen, idCuentaDeposito); 
+		End $$ 
+Delimiter ; 
+
+/*call sp_AgregarDeposito('200.25', '2021-05-13', '14:35:25', 1, 1); 
+call sp_AgregarDeposito('400.50', '2021-06-14', '15:32:20', 2, 2); 
+call sp_AgregarDeposito('500.02', '2022-06-09', '14:20:32', 3, 3); 
+call sp_AgregarDeposito('650.250', '2023-07-16', '17:25:58', 4, 4); 
+call sp_AgregarDeposito('788.45', '2023-05-07', '13:52:32', 5, 5);*/
+
+-- LISTAR --
+
+Delimiter $$ 
+	Create procedure sp_ListarDepositos()
+		Begin 
+			Select idDeposito as id_Depósito, 
+				montoDeposito as monto_Depósito, 
+				fechaDeposito as fecha_Depósito, 
+				horaDeposito as hora_Depósito, 
+				idCuentaOrigen as id_Cuenta_Origen, 
+				idCuentaDeposito as id_Cuenta_Deposito
+				from Deposito; 
+		End $$
+Delimiter ; 
+
+call sp_ListarDepositos(); 
+
+-- BUSCAR---
+
+Delimiter $$ 
+	Create procedure sp_BuscarDeposito(in idDep int)
+		Begin 
+			Select idDeposito as id_Depósito, 
+			montoDeposito as montoDeposito, 
+			fechaDeposito as fechaDeposito, 
+			horaDeposito as horaDeposito, 
+			idCuentaOrigen as idCuentaOrigen, 
+			idCuentaDeposito as idCuentaDeposito
+			from Deposito where idDeposito = idDep; 
+		End $$ 
+Delimiter ;
+
+-- EDITAR--- 
+
+Delimiter $$ 
+	Create procedure sp_EditarDeposito(in idDep int, in montDep decimal(10,2), in fechDep date, in horDep time, idCuentOrig int, idCuentDep int)
+		Begin 
+			Update Deposito set montoDeposito = montDep, 
+						fechaDeposito = fechDep, 
+						horaDeposito = horDep, 
+						idCuentaOrigen = idCuentOrig, 
+						idCuentaDeposito = idCuentDep
+						where 	idDeposito = idDep;
+		End $$  
+Delimiter ; 
+
+-- ELIMINAR --
+
+Delimiter $$
+	Create procedure sp_EliminarDeposito(in idDep int)
+		Begin 
+			Delete from Deposito	
+			where idDeposito = idDep; 
+		End $$
+Delimiter ; 
