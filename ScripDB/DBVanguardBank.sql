@@ -209,7 +209,7 @@ Delimiter $$
         End $$
 Delimiter ;
 
-call sp_ListarClientes();
+#call sp_ListarClientes();
 
 Delimiter $$
 	Create procedure sp_EditarCliente(in DPI bigint, in nombreCliente varchar(100), in apellidoCliente varchar(100), in telefonoContacto varchar(10),
@@ -271,7 +271,6 @@ call sp_AgregarDepartamento('San marcos', '12000', '2023-06-10');
 call sp_AgregarDepartamento('Escuintla', '05000', '2023-02-12');
 call sp_AgregarDepartamento('Chimaltenango', '04000', '2023-05-20');
 
-
 -- Buscar Departamentos
 
 Delimiter //
@@ -286,7 +285,7 @@ Delimiter //
         End//
 Delimiter ;
 
-call sp_BuscarDepartamentos(1);
+#call sp_BuscarDepartamentos(1);
 
 -- Eliminar Departamento
 
@@ -328,7 +327,7 @@ Delimiter //
 	End//
 Delimiter ;
 
-Call sp_ListarDepartamento();
+#Call sp_ListarDepartamento();
 
 -- CRUD Proveedores --
 -- Agregar Proveedor --
@@ -358,7 +357,7 @@ Delimiter $$
         End $$
 Delimiter ;
 
-Call sp_ListarProveedor();
+#Call sp_ListarProveedor();
 
 -- Editar Proveedor --
 Delimiter $$
@@ -399,7 +398,7 @@ Delimiter $$
         End $$
 Delimiter ;
 
-Call sp_BuscarProveedor(1);
+#Call sp_BuscarProveedor(1);
 
 -- CRUD Tipo Moneda --
 
@@ -417,6 +416,7 @@ Call sp_agregarTipoMoneda('£','Libra Esterlina', 1);
 Call sp_agregarTipoMoneda('¥','Yen Japonés',100);
 Call sp_agregarTipoMoneda('CHF','Franco suizo',1);
 Call sp_agregarTipoMoneda('$','Dólar Canadiense',0.79);
+
 -- Listar
 Delimiter $$
 	Create procedure sp_ListarTipoMoneda()
@@ -445,7 +445,7 @@ Delimiter $$
         end $$
 Delimiter ;
 
-call sp_BuscarTipoMoneda(1);
+#call sp_BuscarTipoMoneda(1);
 
 -- Eliminar
 
@@ -662,7 +662,6 @@ Delimiter //
         End //
 Delimiter ;
 
-
 -- CRUD Cuentas --
 #	Agregar Cuenta 	#
 Delimiter $$
@@ -795,7 +794,6 @@ Delimiter $$
 				where idCred=idCredito;
         End $$
 Delimiter ;
-
 
 -- CRUD Servicios --
 
@@ -992,11 +990,57 @@ Delimiter $$
 				where idTransaction = idTransaccion;
         End $$
 Delimiter ;
-	
 
 -- CRUD Historial Transacción --
+-- AGREGAR HISTORIAL DE TRANSACCIONES
+Delimiter $$
+	Create procedure sp_AgregarHistorialDeTransacciones(in _idCuenta int, in _idTransaccion int)
+		begin
+			Insert into HistorialDeTransacciones (idCuenta, idTransaccion)
+				values (_idCuenta, _idTransaccion);
+        end $$
+Delimiter ;
+call sp_AgregarHistorialDeTransacciones(1,1);
+-- LISTAR HISTORIAL DE TRANSACCIONES
+Delimiter $$
+	Create procedure sp_ListarHistorialDeTransacciones()
+		Begin 
+        select * from HistorialDeTransacciones;
+        end $$
+    ;
+Delimiter ;
+#call sp_ListarHistorialDeTransacciones();
 
+-- BUSCAR HISTORIAL DE TRANSACCIONES
+Delimiter $$
+	Create procedure sp_BuscarHistorialDeTransacciones(in _idHistorialTransacciones int)
+    begin
+		select * from HistorialDeTransacciones
+			where idHistorialTransaccion = _idHistorialTransacciones;
+    end $$
+Delimiter ;
+#call sp_BuscarHistorialDeTransacciones(1);
 
+-- EDITAR HISTORIAL DE TRANSACCIONES
+Delimiter $$
+	Create procedure sp_EditarHistorialDeTransacciones(in _idHistorialTransaccion int, in _idCuenta int, in _idTransacciones int)
+		begin
+			Update HistorialDeTransacciones 
+				set idCuenta = _idCuenta,
+					idTransaccion = _idTransacciones
+                    where idHistorialTransaccion = _idHistorialTransaccion;
+		end $$
+Delimiter ;
+
+-- ELIMINAR HISTORIAL DE TRANSACCIONES
+Delimiter $$
+	Create procedure sp_EliminarHistorialDeTransacciones (in _idHistorialTransaccion int)
+		begin
+			delete from HistorialDeTransacciones 
+				where idHistorialTransaccion = _idHistorialTransaccion;
+        end $$
+Delimiter ;
+call sp_EliminarHistorialDetransacciones(1);
 -- CRUD Depositos --
 
 -- AGREGAR --- 
@@ -1030,7 +1074,7 @@ Delimiter $$
 		End $$
 Delimiter ; 
 
-call sp_ListarDepositos(); 
+#call sp_ListarDepositos(); 
 
 -- BUSCAR---
 
