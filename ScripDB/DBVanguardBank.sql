@@ -521,12 +521,12 @@ Delimiter ;
 Call sp_AgregarEmpleado('Luisa Silvia','Hidalgo de Barrera','2017-06-15','7ma calle 69-31 zona 1 de Mixco, Guatemala'
 	,'9845-8796', 1);
 Call sp_AgregarEmpleado('Pedro Castro','Menéndez Contreras','2011-11-03','5ta calle 25-12 Colonia Quinta Samayoa zona 7 Ciudad de Guatemala, Guatemala'
-	,'2138-4758', 1);
+	,'2138-4758', 2);
 Call sp_AgregarEmpleado('Humberto Daniel','Domingues Arriola','2016-10-21','9na calle 15-2 zona 1 Guatemala, Guatemala'
 	,'1973-8264', 3);
 Call sp_AgregarEmpleado('Hugo Monserrat','Perez Granizo','2018-06-15','10ma avenida, 5ta calle 5-65 zona 4 Guatemala'
 	,'6519-3784', 4);
-Call sp_AgregarEmpleado('Frankli Isaac','Flores Corado','2018-06-15','2da avenida, 11va calle 36-19 zona 8 Guatemala'
+Call sp_AgregarEmpleado('Frankli Isaac','Flores Corado','2018-06-15','2da avenida, 11va calle 36-19 zona 8 Antigua Guatemala'
 	,'3461-8212', 5);
 
 #	Listar Empleados	#
@@ -596,10 +596,10 @@ Delimiter //
         End //
 Delimiter ;
 
-/*
+
 call sp_agregarSucursal('Sucursal Central', 'zona 1', 'sucursalCental@gmail.com', 1, 1 );
 call sp_agregarSucursal('Sucursal Financiera Internacional', 'zona 2', 'sucursalfinancierainter@gmail.com', 2, 2);
-call sp_agregarSucursal('Sucursal del Norte', 'zona 3', 'sucursalnorte@gmail.com', 3, 3);
+/*call sp_agregarSucursal('Sucursal del Norte', 'zona 3', 'sucursalnorte@gmail.com', 3, 3);
 call sp_agregarSucursal('Sucursal del Sur', 'zona 4', 'sucursalsur@gmail.com', 4, 1);
 call sp_agregarSucursal('Sucursal del Este', 'zona 5', 'sucursaleste@gmail.com', 5, 2);
 call sp_agregarSucursal('Sucursal del Oeste', 'zona 6', 'sucursaloeste@gmail.com', 6, 3);
@@ -667,7 +667,7 @@ Delimiter ;
 #	Agregar Cuenta 	#
 Delimiter $$
 	Create procedure sp_AgregarCuenta(in numeroCuenta bigint,in saldoCuenta decimal(10,2),in tipoCuenta varchar(100),
-		in fechaApertura date,in DPI bigint,in idEmpleado int,in idTipoMoneda int,in idSucursarl int)
+		in fechaApertura date,in DPI bigint,in idEmpleado int,in idTipoMoneda int,in idSucursal int)
 		Begin
 			insert into Cuenta(numeroCuenta, saldoCuenta, tipoCuenta, fechaApertura, DPI, idEmpleado,
 				idTipoMoneda, idSucursal) 
@@ -675,6 +675,12 @@ Delimiter $$
                 idTipoMoneda, idSucursal);
         End$$
 Delimiter ;
+
+Call sp_AgregarCuenta(10001,1486.55,'Depósito','2014-01-18', 1879451248101, 1, 1, 1);
+/*Call sp_AgregarCuenta(10002,565.10,'Ahorro','2010-05-25', 6329418527416, 2, 1, 2);
+Call sp_AgregarCuenta(10003,2365.00,'Depósito','2009-08-07', 3694185270251, 3, 2, 1);
+Call sp_AgregarCuenta(10004,2015,'Ahorro','2017-07-14', 9854123210485, 4, 1, 2);
+Call sp_AgregarCuenta(10005,565.10,'Ahorro','2019-04-19', 3625149685744, 5, 2, 1);*/
 
 #	Listar Cuentas 	#
 Delimiter $$
@@ -804,9 +810,9 @@ Delimiter //
         End //
 Delimiter ;
 
-/*
+
 call sp_agregarServicio('Transferencias de dinero', 'Número de cuenta de destino', 1500.50, 1);
-call sp_agregarServicio('Banca móvil', 'Aplicación móvil', 255.50, 2);
+/*call sp_agregarServicio('Banca móvil', 'Aplicación móvil', 255.50, 2);
 call sp_agregarServicio('Banca en línea', 'contraseña', 325.25, 3);
 call sp_agregarServicio('Tarjetas de débito', 'código de seguridad', 555.50, 4);
 call sp_agregarServicio('Préstamos para automóviles', 'Tasas de interés', 600.50, 5);
@@ -923,9 +929,9 @@ Delimiter $$
         end $$
 Delimiter ;
 
-/*
+
 call sp_AgregarLogin('asanchez','12345','2023-07-19 12:34:56','1');
-call sp_AgregarLogin('asanchez','12345','2023-07-19 12:34:56','2');
+/*call sp_AgregarLogin('asanchez','12345','2023-07-19 12:34:56','2');
 call sp_AgregarLogin('asanchez','12345','2023-07-19 12:34:56','3');
 call sp_AgregarLogin('asanchez','12345','2023-07-19 12:34:56','4');
 call sp_AgregarLogin('asanchez','12345','2023-07-19 12:34:56','5');
@@ -938,12 +944,12 @@ Delimiter $$
 		in montoTransaccion decimal(10,2), in fechaHora datetime, in idEmpleado int, 
 			in idCuenta int)
 				Begin 
-					Insert into Transaccione(tipoTransaccion, montoTransaccion, fechaHora, idEmpleado, idCuenta)
+					Insert into Transaccion(tipoTransaccion, montoTransaccion, fechaHora, idEmpleado, idCuenta)
 						values(tipoTransaccion, montoTransaccion, fechaHora, idEmpleado, idCuenta);
 				End $$
 Delimiter ;
-/*call sp_AgregarTransaccion('compra', 1000.50, '2023-02-15 15:30:30', 1, 1);
-call sp_AgregarTransaccion('Venta', 2540.34, '2023-05-20 13:44:10', 2, 2);*/
+call sp_AgregarTransaccion('compra', 1000.50, '2023-02-15 15:30:30', 1, 1);
+/*call sp_AgregarTransaccion('Venta', 2540.34, '2023-05-20 13:44:10', 2, 2);*/
 
 -- Listar --
 Delimiter $$
@@ -1003,8 +1009,8 @@ Delimiter $$
 		End $$ 
 Delimiter ; 
 
-/*call sp_AgregarDeposito('200.25', '2021-05-13', '14:35:25', 1, 1); 
-call sp_AgregarDeposito('400.50', '2021-06-14', '15:32:20', 2, 2); 
+call sp_AgregarDeposito('200.25', '2021-05-13', '14:35:25', 1, 1); 
+/*call sp_AgregarDeposito('400.50', '2021-06-14', '15:32:20', 2, 2); 
 call sp_AgregarDeposito('500.02', '2022-06-09', '14:20:32', 3, 3); 
 call sp_AgregarDeposito('650.250', '2023-07-16', '17:25:58', 4, 4); 
 call sp_AgregarDeposito('788.45', '2023-05-07', '13:52:32', 5, 5);*/
