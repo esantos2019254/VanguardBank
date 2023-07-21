@@ -518,6 +518,17 @@ Delimiter $$
         End$$
 Delimiter ;
 
+Call sp_AgregarEmpleado('Luisa Silvia','Hidalgo de Barrera','2017-06-15','7ma calle 69-31 zona 1 de Mixco, Guatemala'
+	,'9845-8796', 1);
+Call sp_AgregarEmpleado('Pedro Castro','Menéndez Contreras','2011-11-03','5ta calle 25-12 Colonia Quinta Samayoa zona 7 Ciudad de Guatemala, Guatemala'
+	,'2138-4758', 1);
+Call sp_AgregarEmpleado('Humberto Daniel','Domingues Arriola','2016-10-21','9na calle 15-2 zona 1 Guatemala, Guatemala'
+	,'1973-8264', 3);
+Call sp_AgregarEmpleado('Hugo Monserrat','Perez Granizo','2018-06-15','10ma avenida, 5ta calle 5-65 zona 4 Guatemala'
+	,'6519-3784', 4);
+Call sp_AgregarEmpleado('Frankli Isaac','Flores Corado','2018-06-15','2da avenida, 11va calle 36-19 zona 8 Guatemala'
+	,'3461-8212', 5);
+
 #	Listar Empleados	#
 Delimiter $$
 	Create procedure sp_ListarEmpleados()
