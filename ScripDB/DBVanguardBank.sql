@@ -927,6 +927,7 @@ Delimiter $$
         end $$
 Delimiter ;
 
+select * from Login where nombreUsuario = 'asanchez' and passwordUsuario = 12345;
 
 call sp_AgregarLogin('asanchez','12345','2023-07-19 12:34:56','1');
 /*call sp_AgregarLogin('asanchez','12345','2023-07-19 12:34:56','2');
