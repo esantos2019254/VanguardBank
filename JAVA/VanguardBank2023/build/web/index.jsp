@@ -14,6 +14,7 @@
     <body>
         <div>
             <a href="Controlador?accion=listar">Listar Clientes</a>
+            <a href="Controlador?accion=listarDeposito">Listar Depositos</a>
         </div>
     </body>
 </html>
