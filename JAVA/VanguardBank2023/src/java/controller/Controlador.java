@@ -11,10 +11,12 @@ import model.Cliente;
 import model.Deposito;
 import model.Proveedor;
 import model.TipoEmpleado;
+import model.Transaccion;
 import modelDAO.ClienteDAO;
 import modelDAO.DepositoDAO;
 import modelDAO.ProveedorDAO;
 import modelDAO.TipoEmpleadoDAO;
+import modelDAO.TransaccionDAO;
 
 public class Controlador extends HttpServlet {
 
@@ -43,6 +45,13 @@ public class Controlador extends HttpServlet {
     String editarTipoEmpleado = "view/editarTipoEmpleado.jsp";
     TipoEmpleado nuevoTipoEmpleado = new TipoEmpleado();
     TipoEmpleadoDAO nuevoTipoEmpleadoDAO = new TipoEmpleadoDAO();
+    
+    // Transaccion
+    String listarTransaccion = "view/listarTransaccion.jsp";
+    String addTransaccion = "view/agregarTransaccion.jsp";
+    String editTransaccion = "view/editarTransaccion.jsp";
+    Transaccion nuevaTransaccion = new Transaccion();
+    TransaccionDAO nuevaTransaccionDAO = new TransaccionDAO();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -180,6 +189,39 @@ public class Controlador extends HttpServlet {
             nuevoTipoEmpleado.setContratoTipoEmpleado(request.getParameter("txtContrato"));
             nuevoTipoEmpleadoDAO.editar(nuevoTipoEmpleado);
             acceso = listarTipoEmpleado;
+        
+        
+        
+        //Transacciones
+        }else if(accion.equalsIgnoreCase("listarTransaccion")){
+            acceso = listarTransaccion;
+        }else if(accion.equalsIgnoreCase("addTransaccion")){
+            acceso = addTransaccion;
+        }else if (accion.equalsIgnoreCase("AgregarTransaccion")) {
+            String tipoTransaccion = request.getParameter("txtTipoTransaccion"); 
+            double montoTransaccion = Double.parseDouble(request.getParameter("txtMontoTransaccion"));
+            String fechaHora = request.getParameter("txtFechaHora");
+            int idEmpleado = Integer.parseInt(request.getParameter("txtIdEmpleado")); 
+            int idCuenta = Integer.parseInt(request.getParameter("txtIdCuenta"));
+            nuevaTransaccion.setTipoTransaccion(tipoTransaccion);
+            nuevaTransaccion.setMontoTransaccion(montoTransaccion);
+            nuevaTransaccion.setFechaHora(fechaHora);
+            nuevaTransaccion.setIdEmpleado(idEmpleado);
+            nuevaTransaccion.setIdCuenta(idCuenta);
+            nuevaTransaccionDAO.agregar(nuevaTransaccion);
+            acceso = listarDeposito;
+        }else if (accion.equalsIgnoreCase("editTransaccion")) {
+            request.setAttribute("idTr", request.getParameter("idTransaccion"));
+            acceso = editTransaccion;
+        }else if (accion.equalsIgnoreCase("ActualizarTransaccion")) {
+            nuevaTransaccion.setIdTransaccion(Integer.parseInt(request.getParameter("txtIdTransaccion")));
+            nuevaTransaccion.setTipoTransaccion(request.getParameter("txtTipoTransaccion"));
+            nuevaTransaccion.setMontoTransaccion(Double.parseDouble(request.getParameter("txtMontoTransaccion")));
+            nuevaTransaccion.setFechaHora(request.getParameter("txtFechaHora"));
+            nuevaTransaccion.setIdEmpleado(Integer.parseInt(request.getParameter("txtIdEmpleado")));
+            nuevaTransaccion.setIdCuenta(Integer.parseInt(request.getParameter("txtIdCuenta")));
+            nuevaTransaccionDAO.editar(nuevaTransaccion);
+            acceso = listarDeposito;
         }
         RequestDispatcher vista = request.getRequestDispatcher(acceso);
         vista.forward(request, response);
