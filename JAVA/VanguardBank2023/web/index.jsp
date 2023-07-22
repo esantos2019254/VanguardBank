@@ -16,6 +16,7 @@
             <a href="Controlador?accion=listar">Listar Clientes</a>
             <a href="Controlador?accion=listarDeposito">Listar Deposito</a>
             <a href="Controlador?accion=listarProveedor">Listar Proveedor</a>
+            <a href="Controlador?accion=listarTipoEmpleado">Listar Tipo Empleado</a>
         </div>
     </body>
 </html>

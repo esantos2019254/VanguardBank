@@ -10,9 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import model.Cliente;
 import model.Deposito;
 import model.Proveedor;
+import model.TipoEmpleado;
 import modelDAO.ClienteDAO;
 import modelDAO.DepositoDAO;
 import modelDAO.ProveedorDAO;
+import modelDAO.TipoEmpleadoDAO;
 
 public class Controlador extends HttpServlet {
 
@@ -33,6 +35,14 @@ public class Controlador extends HttpServlet {
     String editProveedor = "view/editarProveedor.jsp";
     Proveedor nuevoProveedor = new Proveedor();
     ProveedorDAO nuevoProveedorDAO = new ProveedorDAO();
+    
+    // TIPO EMPLEADO
+    
+    String listarTipoEmpleado = "view/listarTipoEmpleado.jsp";
+    String agregarTipoEmpleado = "view/agregarTipoEmpleado.jsp";
+    String editarTipoEmpleado = "view/editarTipoEmpleado.jsp";
+    TipoEmpleado nuevoTipoEmpleado = new TipoEmpleado();
+    TipoEmpleadoDAO nuevoTipoEmpleadoDAO = new TipoEmpleadoDAO();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -146,6 +156,30 @@ public class Controlador extends HttpServlet {
             nuevoProveedor.setTelefonoProveedor(request.getParameter("txtTelefono"));
             nuevoProveedorDAO.editar(nuevoProveedor);
             acceso = listarProveedor;
+            
+        }else if(accion.equalsIgnoreCase("listarTipoEmpleado")){
+            acceso = listarTipoEmpleado;
+        }else if(accion.equalsIgnoreCase("addTipoEmpleado")){
+            acceso = agregarTipoEmpleado;
+        }else if(accion.equalsIgnoreCase("AgregarTipoEmpleado")){
+            String puesto = request.getParameter("txtPuesto");
+            String salario = request.getParameter("txtSalario");
+            String contrato = request.getParameter("txtContrato");
+            nuevoTipoEmpleado.setNombreTipoPuesto(puesto);
+            nuevoTipoEmpleado.setSalarioTipoEmpleado(salario);
+            nuevoTipoEmpleado.setContratoTipoEmpleado(contrato);
+            nuevoTipoEmpleadoDAO.agregar(nuevoTipoEmpleado);
+            acceso = listarTipoEmpleado;
+        }else if(accion.equalsIgnoreCase("editarTipoEmpleado")){
+            request.setAttribute("Id", request.getParameter("idTipoEmpleado"));
+            acceso = editarTipoEmpleado;
+        }else if(accion.equalsIgnoreCase("ActualizarTipoEmpleado")){
+            nuevoTipoEmpleado.setIdTipoEmpleado(Integer.parseInt(request.getParameter("txtID")));
+            nuevoTipoEmpleado.setNombreTipoPuesto(request.getParameter("txtPuesto"));
+            nuevoTipoEmpleado.setSalarioTipoEmpleado(request.getParameter("txtSalario"));
+            nuevoTipoEmpleado.setContratoTipoEmpleado(request.getParameter("txtContrato"));
+            nuevoTipoEmpleadoDAO.editar(nuevoTipoEmpleado);
+            acceso = listarTipoEmpleado;
         }
         RequestDispatcher vista = request.getRequestDispatcher(acceso);
         vista.forward(request, response);
