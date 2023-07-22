@@ -9,22 +9,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Cliente;
 import model.Deposito;
+import model.Proveedor;
 import modelDAO.ClienteDAO;
 import modelDAO.DepositoDAO;
+import modelDAO.ProveedorDAO;
 
 public class Controlador extends HttpServlet {
-   String listar = "view/listarCliente.jsp";
+
+    String listar = "view/listarCliente.jsp";
     String add = "view/agregarCliente.jsp";
     String edit = "view/editarCliente.jsp";
     Cliente nuevoCliente = new Cliente();
     ClienteDAO nuevoClienteDAO = new ClienteDAO();
-    
+
     String listarDeposito = "view/listarDeposito.jsp";
     String addDeposito = "view/agregarDeposito.jsp";
     String editDeposito = "view/editarDeposito.jsp";
     Deposito nuevoDeposito = new Deposito();
     DepositoDAO nuevoDepositoDAO = new DepositoDAO();
-    
+
+    String listarProveedor = "view/listarProveedor.jsp";
+    String addProveedor = "view/agregarProveedor.jsp";
+    String editProveedor = "view/editarProveedor.jsp";
+    Proveedor nuevoProveedor = new Proveedor();
+    ProveedorDAO nuevoProveedorDAO = new ProveedorDAO();
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String menu = request.getParameter("menu");
@@ -48,11 +57,11 @@ public class Controlador extends HttpServlet {
             throws ServletException, IOException {
         String acceso = "";
         String accion = request.getParameter("accion");
-        if(accion.equalsIgnoreCase("listar")){
+        if (accion.equalsIgnoreCase("listar")) {
             acceso = listar;
-        }else if(accion.equalsIgnoreCase("add")){
+        } else if (accion.equalsIgnoreCase("add")) {
             acceso = add;
-        }else if(accion.equalsIgnoreCase("Agregar")){
+        } else if (accion.equalsIgnoreCase("Agregar")) {
             Long dpi = Long.parseLong(request.getParameter("txtDPI"));
             String nombre = request.getParameter("txtNombre");
             String apellido = request.getParameter("txtApellido");
@@ -67,10 +76,10 @@ public class Controlador extends HttpServlet {
             nuevoCliente.setGeneroCliente(genero);
             nuevoClienteDAO.agregar(nuevoCliente);
             acceso = listar;
-        }else if(accion.equalsIgnoreCase("editar")){
+        } else if (accion.equalsIgnoreCase("editar")) {
             request.setAttribute("Dpi", request.getParameter("DPI"));
             acceso = edit;
-        }else if(accion.equalsIgnoreCase("Actualizar")){
+        } else if (accion.equalsIgnoreCase("Actualizar")) {
             nuevoCliente.setNombreCliente(request.getParameter("txtNombre"));
             nuevoCliente.setApellidoCliente(request.getParameter("txtApellido"));
             nuevoCliente.setTelefonoContacto(request.getParameter("txtTelefono"));
@@ -79,40 +88,69 @@ public class Controlador extends HttpServlet {
             nuevoCliente.setDPI(Long.parseLong(request.getParameter("txtDPI")));
             nuevoClienteDAO.editar(nuevoCliente);
             acceso = listar;
-            
-        }else if(accion.equalsIgnoreCase("listarDeposito")){
+
+        } else if (accion.equalsIgnoreCase("listarDeposito")) {
             acceso = listarDeposito;
-        }else if(accion.equalsIgnoreCase("addDeposito")){
+        } else if (accion.equalsIgnoreCase("addDeposito")) {
             acceso = addDeposito;
-        }else if(accion.equalsIgnoreCase("AgregarDeposito")){
+        } else if (accion.equalsIgnoreCase("AgregarDeposito")) {
             double montoDeposito = Double.parseDouble(request.getParameter("txtMontoDeposito"));
-	    String fechaDeposito = request.getParameter("txtFechaDeposito"); 
-	    String horaDeposito = request.getParameter("txtHoraDeposito"); 
-	    int idCuentaOrigen = Integer.parseInt(request.getParameter("txtIdCuentaOrigen")); 
-	    int idCuentaDeposito = Integer.parseInt(request.getParameter("txtIdCuentaDeposito"));
+            String fechaDeposito = request.getParameter("txtFechaDeposito");
+            String horaDeposito = request.getParameter("txtHoraDeposito");
+            int idCuentaOrigen = Integer.parseInt(request.getParameter("txtIdCuentaOrigen"));
+            int idCuentaDeposito = Integer.parseInt(request.getParameter("txtIdCuentaDeposito"));
             nuevoDeposito.setMontoDeposito(montoDeposito);
             nuevoDeposito.setFechaDeposito(fechaDeposito);
-	    nuevoDeposito.setHoraDeposito(horaDeposito); 
-	    nuevoDeposito.setIdCuentaOrigen(idCuentaOrigen); 
-	    nuevoDeposito.setIdCuentaDeposito(idCuentaDeposito); 
+            nuevoDeposito.setHoraDeposito(horaDeposito);
+            nuevoDeposito.setIdCuentaOrigen(idCuentaOrigen);
+            nuevoDeposito.setIdCuentaDeposito(idCuentaDeposito);
             nuevoDepositoDAO.agregar(nuevoDeposito);
             acceso = listarDeposito;
-        }else if(accion.equalsIgnoreCase("editDeposito")){
+        } else if (accion.equalsIgnoreCase("editDeposito")) {
             request.setAttribute("idDep", request.getParameter("idDeposito"));
             acceso = editDeposito;
-        }else if(accion.equalsIgnoreCase("ActualizarDeposito")){
+        } else if (accion.equalsIgnoreCase("ActualizarDeposito")) {
             nuevoDeposito.setIdDeposito(Integer.parseInt(request.getParameter("txtIdDeposito")));
-	    nuevoDeposito.setMontoDeposito(Double.parseDouble(request.getParameter("txtMontoDeposito"))); 
+            nuevoDeposito.setMontoDeposito(Double.parseDouble(request.getParameter("txtMontoDeposito")));
             nuevoDeposito.setFechaDeposito(request.getParameter("txtFechaDeposito"));
-	    nuevoDeposito.setHoraDeposito(request.getParameter("txtHoraDeposito"));
-	    nuevoDeposito.setIdCuentaOrigen(Integer.parseInt(request.getParameter("txtIdCuentaOrigen")));
-	    nuevoDeposito.setIdCuentaDeposito(Integer.parseInt(request.getParameter("txtIdCuentaDeposito")));
+            nuevoDeposito.setHoraDeposito(request.getParameter("txtHoraDeposito"));
+            nuevoDeposito.setIdCuentaOrigen(Integer.parseInt(request.getParameter("txtIdCuentaOrigen")));
+            nuevoDeposito.setIdCuentaDeposito(Integer.parseInt(request.getParameter("txtIdCuentaDeposito")));
             nuevoDepositoDAO.editar(nuevoDeposito);
             acceso = listarDeposito;
+        } else if (accion.equalsIgnoreCase("listarProveedor")) {
+            acceso = listarProveedor;
+
+        } else if (accion.equalsIgnoreCase("addProveedor")) {
+            acceso = addProveedor;
+        } else if (accion.equalsIgnoreCase("AgregarProveedor")) {
+            String nombreProveedor = request.getParameter("txtNombre");
+            String direccionProveedor = request.getParameter("txtDireccion");
+            String correoProveedor = request.getParameter("txtCorreo");
+            String telefonoProveedor = request.getParameter("txtTelefono");
+            nuevoProveedor.setNombreProveedor(nombreProveedor);
+            nuevoProveedor.setDireccionProveedor(direccionProveedor);
+            nuevoProveedor.setCorreoProveedor(correoProveedor);
+            nuevoProveedor.setTelefonoProveedor(telefonoProveedor);
+            nuevoProveedorDAO.agregar(nuevoProveedor);
+            acceso = listarProveedor;
+
+        } else if (accion.equalsIgnoreCase("editarProveedor")) {
+            request.setAttribute("idProv", request.getParameter("idProveedor"));
+            acceso = editProveedor;
+        } else if (accion.equalsIgnoreCase("ActualizarProveedor")) {
+            nuevoProveedor.setIdProveedor(Integer.parseInt(request.getParameter("txtIdProveedor")));
+            nuevoProveedor.setNombreProveedor(request.getParameter("txtNombre"));
+            nuevoProveedor.setDireccionProveedor(request.getParameter("txtDireccion"));
+            nuevoProveedor.setCorreoProveedor(request.getParameter("txtCorreo"));
+            nuevoProveedor.setTelefonoProveedor(request.getParameter("txtTelefono"));
+            nuevoProveedorDAO.editar(nuevoProveedor);
+            acceso = listarProveedor;
         }
         RequestDispatcher vista = request.getRequestDispatcher(acceso);
         vista.forward(request, response);
     }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
