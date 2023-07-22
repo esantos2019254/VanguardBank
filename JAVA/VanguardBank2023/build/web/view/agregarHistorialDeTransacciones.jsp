@@ -14,13 +14,11 @@
     <body>
         <h1>Agregar Historial de Transacciones</h1>
         <form action="Controlador">
-            <strong>Id Historial de transaccion:</strong>
-            <input type="text" name="txtIdHistorialDeTransacciones"><br><br>
             <strong>Id Cuenta:</strong>
             <input type="text" name="txtIdCuenta"><br><br>
             <strong>Id Transaccion:</strong>
             <input type="text" name="txtTransaccion"><br><br>
-            <input type="submit" name="accion" value="Agregar">
+            <input type="submit" name="accion" value="AgregarHistorial">
         </form>
     </body>
 </html>

@@ -21,7 +21,7 @@
             <a href="Controlador?accion=listarDepartamento">Listar Departamento</a>
             <a href="Controlador?accion=listarEmpleado">Listar Empleados</a>
             <a href="Controlador?accion=listarTipoMoneda">Lista de Tipos de Moneda</a>
-            <a href="Controlador?accion=listar">Listar Historial De Transacciones</a>
+            <a href="Controlador?accion=listarHistorial">Listar Historial De Transacciones</a>
         </div>
     </body>
 </html>

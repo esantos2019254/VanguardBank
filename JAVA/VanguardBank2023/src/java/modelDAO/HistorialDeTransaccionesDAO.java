@@ -66,8 +66,8 @@ public class HistorialDeTransaccionesDAO implements HistorialDeTransaccionesCRUD
 
     @Override
     public boolean agregar(HistorialDeTransacciones histo) {
-        String sql = "insert into HistorialDeTransacciones (idHistorialTransaccion, idCuenta, idTransacciones) values('"
-                + histo.getIdHistorialTransaccion() + "','" + histo.getIdCuenta() + "','" + histo.getIdTransaccion() + "')";
+        String sql = "insert into HistorialDeTransacciones (idCuenta, idTransaccion) values('"
+                + histo.getIdCuenta() + "','" + histo.getIdTransaccion() + "')";
 
         try {
             con = conect.getConnection();
