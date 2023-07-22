@@ -19,6 +19,7 @@
             <a href="Controlador?accion=listarTipoEmpleado">Listar Tipo Empleado</a>
             <a href="Controlador?accion=listarTransaccion">Listar Transacciones</a>
             <a href="Controlador?accion=listarDepartamento">Listar Departamento</a>
+            <a href="Controlador?accion=listarEmpleado">Listar Empleados</a>
         </div>
     </body>
 </html>

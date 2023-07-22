@@ -11,12 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 import model.Cliente;
 import model.Departamento;
 import model.Deposito;
+import model.Empleado;
 import model.Proveedor;
 import model.TipoEmpleado;
 import model.Transaccion;
 import modelDAO.ClienteDAO;
 import modelDAO.DepartamentoDAO;
 import modelDAO.DepositoDAO;
+import modelDAO.EmpleadoDAO;
 import modelDAO.ProveedorDAO;
 import modelDAO.TipoEmpleadoDAO;
 import modelDAO.TransaccionDAO;
@@ -61,7 +63,14 @@ public class Controlador extends HttpServlet {
     String editDepartamento = "view/editarDepartamento.jsp";
     Departamento nuevoDepartamento = new Departamento();
     DepartamentoDAO nuevoDepartamentoDAO = new DepartamentoDAO();
-
+    
+    //Empleado
+    String listarEmpleado= "view/listarEmpleado.jsp";
+    String agregarEmpleado= "view/agregarEmpleado.jsp";
+    String editarEmpleado= "view/editarEmpleado.jsp";
+    Empleado nuevoEmpleado = new Empleado();
+    EmpleadoDAO nuevoEmpleadoDAO = new EmpleadoDAO();
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String menu = request.getParameter("menu");
@@ -253,6 +262,47 @@ public class Controlador extends HttpServlet {
             nuevoDepartamento.setFechaApertura(Date.valueOf(request.getParameter("txtFechaApertura")));
             nuevoDepartamentoDAO.editar(nuevoDepartamento);
             acceso = listarDepartamento;
+        }if(accion.equalsIgnoreCase("ListarEmpleado")){
+            acceso = listarEmpleado;
+        }else if(accion.equalsIgnoreCase("addEmpleado")){
+            acceso = agregarEmpleado;
+        }else if(accion.equalsIgnoreCase("AgregarEmpleado")){
+            String nombres = request.getParameter("txtNombres");
+            String apellidos = request.getParameter("txtApellidos");
+            String fechaDeContratacion = request.getParameter("dFechaContratacion");
+            Date fechaContratacion = Date.valueOf(fechaDeContratacion);
+            String direccion = request.getParameter("txtDireccion");
+            String numeroContacto = request.getParameter("txtNumeroContacto");
+            int idTipoEmpleado =Integer.parseInt(request.getParameter("txtIdTipoEmpleado"));
+            nuevoEmpleado.setNombreEmpleado(nombres);
+            nuevoEmpleado.setApellidoEmpleado(apellidos);
+            nuevoEmpleado.setFechaContratacion(fechaContratacion);
+            nuevoEmpleado.setDireccionEmpleado(direccion);
+            nuevoEmpleado.setNumeroContactoEmpleado(numeroContacto);
+            nuevoEmpleado.setIdTipoEmpleado(idTipoEmpleado);
+            nuevoEmpleadoDAO.agregarEmpleado(nuevoEmpleado);
+            acceso = listarEmpleado;
+        }else if(accion.equalsIgnoreCase("editEmpleado")){
+            request.setAttribute("idDeEmpleado", request.getParameter("idEmpleado"));
+            acceso = editarEmpleado;
+        }else if(accion.equalsIgnoreCase("ModificarEmpleado")){
+            int idEmpleado = Integer.parseInt(request.getParameter("txtIdEmpleado"));
+            String nombres = request.getParameter("txtNombres");
+            String apellidos = request.getParameter("txtApellidos");
+            String fechaDeContratacion = request.getParameter("dFechaContratacion");
+            Date fechaContratacion = Date.valueOf(fechaDeContratacion);
+            String direccion = request.getParameter("txtDireccion");
+            String numeroContacto = request.getParameter("txtNumeroContacto");
+            int idTipoEmpleado =Integer.parseInt(request.getParameter("txtIdTipoEmpleado"));
+            nuevoEmpleado.setIdEmpleado(idEmpleado);
+            nuevoEmpleado.setNombreEmpleado(nombres);
+            nuevoEmpleado.setApellidoEmpleado(apellidos);
+            nuevoEmpleado.setFechaContratacion(fechaContratacion);
+            nuevoEmpleado.setDireccionEmpleado(direccion);
+            nuevoEmpleado.setNumeroContactoEmpleado(numeroContacto);
+            nuevoEmpleado.setIdTipoEmpleado(idTipoEmpleado);
+            nuevoEmpleadoDAO.editarEmpleado(nuevoEmpleado);
+            acceso = listarEmpleado;
         }
         RequestDispatcher vista = request.getRequestDispatcher(acceso);
         vista.forward(request, response);
