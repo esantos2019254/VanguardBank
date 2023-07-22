@@ -12,6 +12,7 @@ import model.Cliente;
 import model.Departamento;
 import model.Deposito;
 import model.Empleado;
+import model.HistorialDeTransacciones;
 import model.Proveedor;
 import model.TipoEmpleado;
 import model.TipoMoneda;
@@ -20,6 +21,7 @@ import modelDAO.ClienteDAO;
 import modelDAO.DepartamentoDAO;
 import modelDAO.DepositoDAO;
 import modelDAO.EmpleadoDAO;
+import modelDAO.HistorialDeTransaccionesDAO;
 import modelDAO.ProveedorDAO;
 import modelDAO.TipoEmpleadoDAO;
 import modelDAO.TipoMonedaDAO;
@@ -65,21 +67,28 @@ public class Controlador extends HttpServlet {
     String editDepartamento = "view/editarDepartamento.jsp";
     Departamento nuevoDepartamento = new Departamento();
     DepartamentoDAO nuevoDepartamentoDAO = new DepartamentoDAO();
-    
+
     //Empleado
-    String listarEmpleado= "view/listarEmpleado.jsp";
-    String agregarEmpleado= "view/agregarEmpleado.jsp";
-    String editarEmpleado= "view/editarEmpleado.jsp";
+    String listarEmpleado = "view/listarEmpleado.jsp";
+    String agregarEmpleado = "view/agregarEmpleado.jsp";
+    String editarEmpleado = "view/editarEmpleado.jsp";
     Empleado nuevoEmpleado = new Empleado();
     EmpleadoDAO nuevoEmpleadoDAO = new EmpleadoDAO();
-    
+
     //TipoMonedaa
     String listarTipoMoneda = "view/listarTipoMoneda.jsp";
     String addTipoMoneda = "view/agregarTipoMoneda.jsp";
     String editTipoMoneda = "view/editarTipoMoneda.jsp";
     TipoMoneda nuevoTipoMoneda = new TipoMoneda();
     TipoMonedaDAO nuevoTipoMonedaDAO = new TipoMonedaDAO();
-    
+
+    //HistorialDeTransacciones
+    String listHistorial = "view/listarHistorialDeTransacciones.jsp";
+    String addHistorial = "view/agregarHistorialDeTransacciones.jsp";
+    String editHistorial = "";
+    HistorialDeTransacciones nuevoHistorialDeTransacciones = new HistorialDeTransacciones();
+    HistorialDeTransaccionesDAO nuevoHistorialDeTransaccionesDAO = new HistorialDeTransaccionesDAO();
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String menu = request.getParameter("menu");
@@ -247,42 +256,43 @@ public class Controlador extends HttpServlet {
             nuevaTransaccion.setIdCuenta(Integer.parseInt(request.getParameter("txtIdCuenta")));
             nuevaTransaccionDAO.editar(nuevaTransaccion);
             acceso = listarDeposito;
-            
-        }else if(accion.equalsIgnoreCase("listarDepartamento")){
+
+        } else if (accion.equalsIgnoreCase("listarDepartamento")) {
             acceso = listarDepartamento;
-        }else if(accion.equalsIgnoreCase("addDepartamento")){
+        } else if (accion.equalsIgnoreCase("addDepartamento")) {
             acceso = addDepartamento;
-        }else if(accion.equalsIgnoreCase("AgregarDepartamento")){
+        } else if (accion.equalsIgnoreCase("AgregarDepartamento")) {
             String nombreDepartamento = String.valueOf(request.getParameter("txtNombreDepartamento"));
-	    String codigoPostal = request.getParameter("txtCodigoPostal"); 
-	    Date fechaApertura = Date.valueOf(request.getParameter("txtFechaApertura")); 
+            String codigoPostal = request.getParameter("txtCodigoPostal");
+            Date fechaApertura = Date.valueOf(request.getParameter("txtFechaApertura"));
             nuevoDepartamento.setNombreDepartamento(nombreDepartamento);
             nuevoDepartamento.setCodigoPostal(codigoPostal);
-	    nuevoDepartamento.setFechaApertura(fechaApertura);  
+            nuevoDepartamento.setFechaApertura(fechaApertura);
             nuevoDepartamentoDAO.agregar(nuevoDepartamento);
             acceso = listarDepartamento;
-        }else if(accion.equalsIgnoreCase("editDepartamento")){
+        } else if (accion.equalsIgnoreCase("editDepartamento")) {
             request.setAttribute("idDepa", request.getParameter("idDepartamento"));
             acceso = editDepartamento;
-        }else if(accion.equalsIgnoreCase("ActualizarDepartamento")){
+        } else if (accion.equalsIgnoreCase("ActualizarDepartamento")) {
             nuevoDepartamento.setIdDepartamento(Integer.parseInt(request.getParameter("txtIdDepartamento")));
             nuevoDepartamento.setNombreDepartamento(request.getParameter("txtNombreDepartamento"));
             nuevoDepartamento.setCodigoPostal(request.getParameter("txtCodigoPostal"));
             nuevoDepartamento.setFechaApertura(Date.valueOf(request.getParameter("txtFechaApertura")));
             nuevoDepartamentoDAO.editar(nuevoDepartamento);
             acceso = listarDepartamento;
-        }if(accion.equalsIgnoreCase("ListarEmpleado")){
+        }
+        if (accion.equalsIgnoreCase("ListarEmpleado")) {
             acceso = listarEmpleado;
-        }else if(accion.equalsIgnoreCase("addEmpleado")){
+        } else if (accion.equalsIgnoreCase("addEmpleado")) {
             acceso = agregarEmpleado;
-        }else if(accion.equalsIgnoreCase("AgregarEmpleado")){
+        } else if (accion.equalsIgnoreCase("AgregarEmpleado")) {
             String nombres = request.getParameter("txtNombres");
             String apellidos = request.getParameter("txtApellidos");
             String fechaDeContratacion = request.getParameter("dFechaContratacion");
             Date fechaContratacion = Date.valueOf(fechaDeContratacion);
             String direccion = request.getParameter("txtDireccion");
             String numeroContacto = request.getParameter("txtNumeroContacto");
-            int idTipoEmpleado =Integer.parseInt(request.getParameter("txtIdTipoEmpleado"));
+            int idTipoEmpleado = Integer.parseInt(request.getParameter("txtIdTipoEmpleado"));
             nuevoEmpleado.setNombreEmpleado(nombres);
             nuevoEmpleado.setApellidoEmpleado(apellidos);
             nuevoEmpleado.setFechaContratacion(fechaContratacion);
@@ -291,10 +301,10 @@ public class Controlador extends HttpServlet {
             nuevoEmpleado.setIdTipoEmpleado(idTipoEmpleado);
             nuevoEmpleadoDAO.agregarEmpleado(nuevoEmpleado);
             acceso = listarEmpleado;
-        }else if(accion.equalsIgnoreCase("editEmpleado")){
+        } else if (accion.equalsIgnoreCase("editEmpleado")) {
             request.setAttribute("idDeEmpleado", request.getParameter("idEmpleado"));
             acceso = editarEmpleado;
-        }else if(accion.equalsIgnoreCase("ModificarEmpleado")){
+        } else if (accion.equalsIgnoreCase("ModificarEmpleado")) {
             int idEmpleado = Integer.parseInt(request.getParameter("txtIdEmpleado"));
             String nombres = request.getParameter("txtNombres");
             String apellidos = request.getParameter("txtApellidos");
@@ -302,7 +312,7 @@ public class Controlador extends HttpServlet {
             Date fechaContratacion = Date.valueOf(fechaDeContratacion);
             String direccion = request.getParameter("txtDireccion");
             String numeroContacto = request.getParameter("txtNumeroContacto");
-            int idTipoEmpleado =Integer.parseInt(request.getParameter("txtIdTipoEmpleado"));
+            int idTipoEmpleado = Integer.parseInt(request.getParameter("txtIdTipoEmpleado"));
             nuevoEmpleado.setIdEmpleado(idEmpleado);
             nuevoEmpleado.setNombreEmpleado(nombres);
             nuevoEmpleado.setApellidoEmpleado(apellidos);
@@ -326,7 +336,24 @@ public class Controlador extends HttpServlet {
             nuevoTipoMoneda.setConversionDolar(conversionDolar);
             nuevoTipoMonedaDAO.agregar(nuevoTipoMoneda);
             acceso = listarTipoMoneda;
-            }
+        } else if (accion.equalsIgnoreCase("list")) {
+            acceso = listHistorial;
+        } else if (accion.equalsIgnoreCase("add")) {
+            acceso = add;
+        } else if (accion.equalsIgnoreCase("Agregar")) {
+            int idHistorialDeTransacciones = Integer.parseInt(request.getParameter("txtIdHistorialDeTransacciones"));
+            int idCuenta = Integer.parseInt(request.getParameter("txtIdCuenta"));
+            int idTransaccion = Integer.parseInt(request.getParameter("txtTransaccion"));
+            nuevoHistorialDeTransacciones.setIdHistorialTransaccion(idHistorialDeTransacciones);
+            nuevoHistorialDeTransacciones.setIdCuenta(idCuenta);
+            nuevoHistorialDeTransacciones.setIdTransaccion(idTransaccion);
+            acceso = listHistorial;
+        } else if (accion.equalsIgnoreCase("edit")) {
+            request.setAttribute("idHistorialDeTransacciones", request.getParameter("idHistorialDeTransacciones"));
+            acceso = edit;
+        } else if (accion.equalsIgnoreCase("Actualizar")) {
+            //Agregar accion de editar.
+        }
         RequestDispatcher vista = request.getRequestDispatcher(acceso);
         vista.forward(request, response);
     }
