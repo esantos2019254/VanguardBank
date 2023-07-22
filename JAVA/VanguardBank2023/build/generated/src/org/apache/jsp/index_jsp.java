@@ -53,6 +53,11 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    <body>\r\n");
       out.write("        <div>\r\n");
       out.write("            <a href=\"Controlador?accion=listar\">Listar Clientes</a>\r\n");
+      out.write("            <a href=\"Controlador?accion=listarDeposito\">Listar Deposito</a>\r\n");
+      out.write("            <a href=\"Controlador?accion=listarProveedor\">Listar Proveedor</a>\r\n");
+      out.write("            <a href=\"Controlador?accion=listarTipoEmpleado\">Listar Tipo Empleado</a>\r\n");
+      out.write("            <a href=\"Controlador?accion=listarTransaccion\">Listar Transacciones</a>\r\n");
+      out.write("            <a href=\"Controlador?accion=listarDepartamento\">Listar Departamento</a>\r\n");
       out.write("        </div>\r\n");
       out.write("    </body>\r\n");
       out.write("</html>\r\n");

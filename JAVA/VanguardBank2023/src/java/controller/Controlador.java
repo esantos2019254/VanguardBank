@@ -2,17 +2,20 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Cliente;
+import model.Departamento;
 import model.Deposito;
 import model.Proveedor;
 import model.TipoEmpleado;
 import model.Transaccion;
 import modelDAO.ClienteDAO;
+import modelDAO.DepartamentoDAO;
 import modelDAO.DepositoDAO;
 import modelDAO.ProveedorDAO;
 import modelDAO.TipoEmpleadoDAO;
@@ -37,21 +40,27 @@ public class Controlador extends HttpServlet {
     String editProveedor = "view/editarProveedor.jsp";
     Proveedor nuevoProveedor = new Proveedor();
     ProveedorDAO nuevoProveedorDAO = new ProveedorDAO();
-    
+
     // TIPO EMPLEADO
-    
     String listarTipoEmpleado = "view/listarTipoEmpleado.jsp";
     String agregarTipoEmpleado = "view/agregarTipoEmpleado.jsp";
     String editarTipoEmpleado = "view/editarTipoEmpleado.jsp";
     TipoEmpleado nuevoTipoEmpleado = new TipoEmpleado();
     TipoEmpleadoDAO nuevoTipoEmpleadoDAO = new TipoEmpleadoDAO();
-    
+
     // Transaccion
     String listarTransaccion = "view/listarTransaccion.jsp";
     String addTransaccion = "view/agregarTransaccion.jsp";
     String editTransaccion = "view/editarTransaccion.jsp";
     Transaccion nuevaTransaccion = new Transaccion();
     TransaccionDAO nuevaTransaccionDAO = new TransaccionDAO();
+
+    // Departamentos
+    String listarDepartamento = "view/listarDepartamento.jsp";
+    String addDepartamento = "view/agregarDepartamento.jsp";
+    String editDepartamento = "view/editarDepartamento.jsp";
+    Departamento nuevoDepartamento = new Departamento();
+    DepartamentoDAO nuevoDepartamentoDAO = new DepartamentoDAO();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -165,12 +174,12 @@ public class Controlador extends HttpServlet {
             nuevoProveedor.setTelefonoProveedor(request.getParameter("txtTelefono"));
             nuevoProveedorDAO.editar(nuevoProveedor);
             acceso = listarProveedor;
-            
-        }else if(accion.equalsIgnoreCase("listarTipoEmpleado")){
+
+        } else if (accion.equalsIgnoreCase("listarTipoEmpleado")) {
             acceso = listarTipoEmpleado;
-        }else if(accion.equalsIgnoreCase("addTipoEmpleado")){
+        } else if (accion.equalsIgnoreCase("addTipoEmpleado")) {
             acceso = agregarTipoEmpleado;
-        }else if(accion.equalsIgnoreCase("AgregarTipoEmpleado")){
+        } else if (accion.equalsIgnoreCase("AgregarTipoEmpleado")) {
             String puesto = request.getParameter("txtPuesto");
             String salario = request.getParameter("txtSalario");
             String contrato = request.getParameter("txtContrato");
@@ -179,29 +188,27 @@ public class Controlador extends HttpServlet {
             nuevoTipoEmpleado.setContratoTipoEmpleado(contrato);
             nuevoTipoEmpleadoDAO.agregar(nuevoTipoEmpleado);
             acceso = listarTipoEmpleado;
-        }else if(accion.equalsIgnoreCase("editarTipoEmpleado")){
+        } else if (accion.equalsIgnoreCase("editarTipoEmpleado")) {
             request.setAttribute("Id", request.getParameter("idTipoEmpleado"));
             acceso = editarTipoEmpleado;
-        }else if(accion.equalsIgnoreCase("ActualizarTipoEmpleado")){
+        } else if (accion.equalsIgnoreCase("ActualizarTipoEmpleado")) {
             nuevoTipoEmpleado.setIdTipoEmpleado(Integer.parseInt(request.getParameter("txtID")));
             nuevoTipoEmpleado.setNombreTipoPuesto(request.getParameter("txtPuesto"));
             nuevoTipoEmpleado.setSalarioTipoEmpleado(request.getParameter("txtSalario"));
             nuevoTipoEmpleado.setContratoTipoEmpleado(request.getParameter("txtContrato"));
             nuevoTipoEmpleadoDAO.editar(nuevoTipoEmpleado);
             acceso = listarTipoEmpleado;
-        
-        
-        
-        //Transacciones
-        }else if(accion.equalsIgnoreCase("listarTransaccion")){
+
+            //Transacciones
+        } else if (accion.equalsIgnoreCase("listarTransaccion")) {
             acceso = listarTransaccion;
-        }else if(accion.equalsIgnoreCase("addTransaccion")){
+        } else if (accion.equalsIgnoreCase("addTransaccion")) {
             acceso = addTransaccion;
-        }else if (accion.equalsIgnoreCase("AgregarTransaccion")) {
-            String tipoTransaccion = request.getParameter("txtTipoTransaccion"); 
+        } else if (accion.equalsIgnoreCase("AgregarTransaccion")) {
+            String tipoTransaccion = request.getParameter("txtTipoTransaccion");
             double montoTransaccion = Double.parseDouble(request.getParameter("txtMontoTransaccion"));
             String fechaHora = request.getParameter("txtFechaHora");
-            int idEmpleado = Integer.parseInt(request.getParameter("txtIdEmpleado")); 
+            int idEmpleado = Integer.parseInt(request.getParameter("txtIdEmpleado"));
             int idCuenta = Integer.parseInt(request.getParameter("txtIdCuenta"));
             nuevaTransaccion.setTipoTransaccion(tipoTransaccion);
             nuevaTransaccion.setMontoTransaccion(montoTransaccion);
@@ -210,10 +217,10 @@ public class Controlador extends HttpServlet {
             nuevaTransaccion.setIdCuenta(idCuenta);
             nuevaTransaccionDAO.agregar(nuevaTransaccion);
             acceso = listarDeposito;
-        }else if (accion.equalsIgnoreCase("editTransaccion")) {
+        } else if (accion.equalsIgnoreCase("editTransaccion")) {
             request.setAttribute("idTr", request.getParameter("idTransaccion"));
             acceso = editTransaccion;
-        }else if (accion.equalsIgnoreCase("ActualizarTransaccion")) {
+        } else if (accion.equalsIgnoreCase("ActualizarTransaccion")) {
             nuevaTransaccion.setIdTransaccion(Integer.parseInt(request.getParameter("txtIdTransaccion")));
             nuevaTransaccion.setTipoTransaccion(request.getParameter("txtTipoTransaccion"));
             nuevaTransaccion.setMontoTransaccion(Double.parseDouble(request.getParameter("txtMontoTransaccion")));
@@ -222,6 +229,30 @@ public class Controlador extends HttpServlet {
             nuevaTransaccion.setIdCuenta(Integer.parseInt(request.getParameter("txtIdCuenta")));
             nuevaTransaccionDAO.editar(nuevaTransaccion);
             acceso = listarDeposito;
+            
+        }else if(accion.equalsIgnoreCase("listarDepartamento")){
+            acceso = listarDepartamento;
+        }else if(accion.equalsIgnoreCase("addDepartamento")){
+            acceso = addDepartamento;
+        }else if(accion.equalsIgnoreCase("AgregarDepartamento")){
+            String nombreDepartamento = String.valueOf(request.getParameter("txtNombreDepartamento"));
+	    String codigoPostal = request.getParameter("txtCodigoPostal"); 
+	    Date fechaApertura = Date.valueOf(request.getParameter("txtFechaApertura")); 
+            nuevoDepartamento.setNombreDepartamento(nombreDepartamento);
+            nuevoDepartamento.setCodigoPostal(codigoPostal);
+	    nuevoDepartamento.setFechaApertura(fechaApertura);  
+            nuevoDepartamentoDAO.agregar(nuevoDepartamento);
+            acceso = listarDepartamento;
+        }else if(accion.equalsIgnoreCase("editDepartamento")){
+            request.setAttribute("idDepa", request.getParameter("idDepartamento"));
+            acceso = editDepartamento;
+        }else if(accion.equalsIgnoreCase("ActualizarDepartamento")){
+            nuevoDepartamento.setIdDepartamento(Integer.parseInt(request.getParameter("txtIdDepartamento")));
+            nuevoDepartamento.setNombreDepartamento(request.getParameter("txtNombreDepartamento"));
+            nuevoDepartamento.setCodigoPostal(request.getParameter("txtCodigoPostal"));
+            nuevoDepartamento.setFechaApertura(Date.valueOf(request.getParameter("txtFechaApertura")));
+            nuevoDepartamentoDAO.editar(nuevoDepartamento);
+            acceso = listarDepartamento;
         }
         RequestDispatcher vista = request.getRequestDispatcher(acceso);
         vista.forward(request, response);
