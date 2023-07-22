@@ -16,10 +16,9 @@
         <title>Listar Historial de Transacciones</title>
     </head>
     <body>
-
         <div>
             <h1>Registro de historial de transacciones</h1>
-            <a href="Controlador?accion=add">Agregar nuevo Depósito</a>
+            <a href="Controlador?accion=addHistorial">Agregar nuevo Depósito</a>
             <table border="1">
                 <thead>
                     <tr>
@@ -38,13 +37,9 @@
                 %>
                 <tbody>
                     <tr>
-                        <td><%= dep.getIdHistorialTransaccion()%></td>
-                        <td><%= dep.getIdCuenta()%></td>
-                        <td><%= dep.getIdTransaccion()%></td>
-                        <td>
-                            <a href="Controlador?accion=edit&idDeposito=<%= dep.getIdHistorialTransaccion()%>">Edit</a>
-                            <a href="">Eliminar</a>
-                        </td>
+                        <td><%=dep.getIdHistorialTransaccion()%></td>
+                        <td><%=dep.getIdCuenta()%></td>
+                        <td><%=dep.getIdTransaccion()%></td>
                     </tr>
                     <%}%>
                 </tbody>

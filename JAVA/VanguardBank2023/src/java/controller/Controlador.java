@@ -336,17 +336,16 @@ public class Controlador extends HttpServlet {
             nuevoTipoMoneda.setConversionDolar(conversionDolar);
             nuevoTipoMonedaDAO.agregar(nuevoTipoMoneda);
             acceso = listarTipoMoneda;
-        } else if (accion.equalsIgnoreCase("list")) {
+        } else if (accion.equalsIgnoreCase("listarHistorial")) {
             acceso = listHistorial;
-        } else if (accion.equalsIgnoreCase("add")) {
-            acceso = add;
-        } else if (accion.equalsIgnoreCase("Agregar")) {
-            int idHistorialDeTransacciones = Integer.parseInt(request.getParameter("txtIdHistorialDeTransacciones"));
+        } else if (accion.equalsIgnoreCase("addHistorial")) {
+            acceso = addHistorial;
+        } else if (accion.equalsIgnoreCase("AgregarHistorial")) {
             int idCuenta = Integer.parseInt(request.getParameter("txtIdCuenta"));
             int idTransaccion = Integer.parseInt(request.getParameter("txtTransaccion"));
-            nuevoHistorialDeTransacciones.setIdHistorialTransaccion(idHistorialDeTransacciones);
             nuevoHistorialDeTransacciones.setIdCuenta(idCuenta);
             nuevoHistorialDeTransacciones.setIdTransaccion(idTransaccion);
+            nuevoHistorialDeTransaccionesDAO.agregar(nuevoHistorialDeTransacciones);
             acceso = listHistorial;
         } else if (accion.equalsIgnoreCase("edit")) {
             request.setAttribute("idHistorialDeTransacciones", request.getParameter("idHistorialDeTransacciones"));
