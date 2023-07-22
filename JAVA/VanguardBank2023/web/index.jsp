@@ -20,6 +20,7 @@
             <a href="Controlador?accion=listarTransaccion">Listar Transacciones</a>
             <a href="Controlador?accion=listarDepartamento">Listar Departamento</a>
             <a href="Controlador?accion=listarEmpleado">Listar Empleados</a>
+            <a href="Controlador?accion=listarTipoMoneda">Lista de Tipos de Moneda</a>
         </div>
     </body>
 </html>

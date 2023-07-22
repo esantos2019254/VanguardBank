@@ -14,6 +14,7 @@ import model.Deposito;
 import model.Empleado;
 import model.Proveedor;
 import model.TipoEmpleado;
+import model.TipoMoneda;
 import model.Transaccion;
 import modelDAO.ClienteDAO;
 import modelDAO.DepartamentoDAO;
@@ -21,6 +22,7 @@ import modelDAO.DepositoDAO;
 import modelDAO.EmpleadoDAO;
 import modelDAO.ProveedorDAO;
 import modelDAO.TipoEmpleadoDAO;
+import modelDAO.TipoMonedaDAO;
 import modelDAO.TransaccionDAO;
 
 public class Controlador extends HttpServlet {
@@ -70,6 +72,13 @@ public class Controlador extends HttpServlet {
     String editarEmpleado= "view/editarEmpleado.jsp";
     Empleado nuevoEmpleado = new Empleado();
     EmpleadoDAO nuevoEmpleadoDAO = new EmpleadoDAO();
+    
+    //TipoMonedaa
+    String listarTipoMoneda = "view/listarTipoMoneda.jsp";
+    String addTipoMoneda = "view/agregarTipoMoneda.jsp";
+    String editTipoMoneda = "view/editarTipoMoneda.jsp";
+    TipoMoneda nuevoTipoMoneda = new TipoMoneda();
+    TipoMonedaDAO nuevoTipoMonedaDAO = new TipoMonedaDAO();
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -303,7 +312,21 @@ public class Controlador extends HttpServlet {
             nuevoEmpleado.setIdTipoEmpleado(idTipoEmpleado);
             nuevoEmpleadoDAO.editarEmpleado(nuevoEmpleado);
             acceso = listarEmpleado;
-        }
+        } else if (accion.equalsIgnoreCase("listarTipoMoneda")) {
+            acceso = listarTipoMoneda;
+        } else if (accion.equalsIgnoreCase("addTipoMoneda")) {
+            acceso = addTipoMoneda;
+        } else if (accion.equalsIgnoreCase("AgregarTipoMoneda")) {
+
+            String simboloMoneda = request.getParameter("txtSimboloMoneda");
+            String nombreMoneda = request.getParameter("txtNombreMoneda");
+            Double conversionDolar = Double.parseDouble(request.getParameter("txtConversionDolar"));
+            nuevoTipoMoneda.setSimboloMoneda(simboloMoneda);
+            nuevoTipoMoneda.setNombreMoneda(nombreMoneda);
+            nuevoTipoMoneda.setConversionDolar(conversionDolar);
+            nuevoTipoMonedaDAO.agregar(nuevoTipoMoneda);
+            acceso = listarTipoMoneda;
+            }
         RequestDispatcher vista = request.getRequestDispatcher(acceso);
         vista.forward(request, response);
     }
