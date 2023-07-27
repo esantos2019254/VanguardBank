@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Cliente;
+import model.Cuenta;
 import model.Departamento;
 import model.Deposito;
 import model.Empleado;
@@ -18,6 +19,7 @@ import model.TipoEmpleado;
 import model.TipoMoneda;
 import model.Transaccion;
 import modelDAO.ClienteDAO;
+import modelDAO.CuentaDAO;
 import modelDAO.DepartamentoDAO;
 import modelDAO.DepositoDAO;
 import modelDAO.EmpleadoDAO;
@@ -89,6 +91,13 @@ public class Controlador extends HttpServlet {
     HistorialDeTransacciones nuevoHistorialDeTransacciones = new HistorialDeTransacciones();
     HistorialDeTransaccionesDAO nuevoHistorialDeTransaccionesDAO = new HistorialDeTransaccionesDAO();
 
+    //Cuenta
+    String listarCuenta = "view/listarCuentas.jsp";
+    String agregarCuenta = "view/agregarCuenta.jsp";
+    String editarCuenta = "view/editarCuenta.jsp";
+    Cuenta nuevaCuenta = new Cuenta();
+    CuentaDAO cuentaDAO = new CuentaDAO();
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String menu = request.getParameter("menu");
@@ -352,6 +361,51 @@ public class Controlador extends HttpServlet {
             acceso = edit;
         } else if (accion.equalsIgnoreCase("Actualizar")) {
             //Agregar accion de editar.
+        }else if(accion.equalsIgnoreCase("listarCuenta")){
+            acceso = listarCuenta;
+        }else if(accion.equalsIgnoreCase("addCuenta")){
+            acceso = agregarCuenta;
+        }else if(accion.equalsIgnoreCase("agregarCuenta")){
+            long numeroCuenta = Long.parseLong(request.getParameter("txtNumeroCuenta"));
+            double saldo = Double.parseDouble(request.getParameter("txtSaldoCuenta"));
+            String tipoCuenta = request.getParameter("txtTipoCuenta");
+            Date fechaApertura = Date.valueOf(request.getParameter("dFechaApertura"));
+            long DPI = Long.parseLong(request.getParameter("txtDPI"));
+            int idEmpleado = Integer.parseInt(request.getParameter("txtIdEmpleado"));
+            int idTipoMoneda = Integer.parseInt(request.getParameter("txtIdTipMon"));
+            int idSucursarl = Integer.parseInt(request.getParameter("txtIdSucursal"));
+            nuevaCuenta.setNumeroCuenta(numeroCuenta);
+            nuevaCuenta.setSaldoCuenta(saldo);
+            nuevaCuenta.setTipoCuenta(tipoCuenta);
+            nuevaCuenta.setFechaApertura(fechaApertura);
+            nuevaCuenta.setDPI(DPI);
+            nuevaCuenta.setIdEmpleado(idEmpleado);
+            nuevaCuenta.setIdTipoMoneda(idTipoMoneda);
+            nuevaCuenta.setIdSucursal(idSucursarl);
+            cuentaDAO.agregarCuenta(nuevaCuenta);
+            acceso = listarCuenta;
+        }else if(accion.equalsIgnoreCase("editCuenta")){
+            request.setAttribute("numeroDeCuenta", request.getParameter("numDeCuenta"));
+            acceso = editarCuenta;
+        }else if(accion.equalsIgnoreCase("editarCuenta")){
+            long numeroCuenta = Long.parseLong(request.getParameter("txtNumeroCuenta"));
+            double saldo = Double.parseDouble(request.getParameter("txtSaldoCuenta"));
+            String tipoCuenta = request.getParameter("txtTipoCuenta");
+            Date fechaApertura = Date.valueOf(request.getParameter("dFechaApertura"));
+            long DPI = Long.parseLong(request.getParameter("txtDPI"));
+            int idEmpleado = Integer.parseInt(request.getParameter("txtIdEmpleado"));
+            int idTipoMoneda = Integer.parseInt(request.getParameter("txtIdTipMon"));
+            int idSucursarl = Integer.parseInt(request.getParameter("txtIdSucursal"));
+            nuevaCuenta.setNumeroCuenta(numeroCuenta);
+            nuevaCuenta.setSaldoCuenta(saldo);
+            nuevaCuenta.setTipoCuenta(tipoCuenta);
+            nuevaCuenta.setFechaApertura(fechaApertura);
+            nuevaCuenta.setDPI(DPI);
+            nuevaCuenta.setIdEmpleado(idEmpleado);
+            nuevaCuenta.setIdTipoMoneda(idTipoMoneda);
+            nuevaCuenta.setIdSucursal(idSucursarl);
+            cuentaDAO.editarCuenta(nuevaCuenta);
+            acceso = listarCuenta;
         }
         RequestDispatcher vista = request.getRequestDispatcher(acceso);
         vista.forward(request, response);
