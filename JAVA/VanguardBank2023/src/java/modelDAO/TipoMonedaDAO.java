@@ -69,18 +69,17 @@ public class TipoMonedaDAO {
         return false;
     }
 
-//    public boolean editar(TipoMoneda tipo) {
-//        String sql = "Update TipoMoneda set simboloMoneda ='"
-//                + tipo.getSimboloMoneda() + "', nombreMoneda ='"
-//                + tipo.getNombreMoneda() + "', conversionDolar ="
-//                + tipo.getConversionDolar();
-//        try {
-//            con = conect.getConnection();
-//            ps = con.prepareStatement(sql);
-//            ps.executeUpdate();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return false;
-//    }
+    public boolean editar(TipoMoneda tipo) {
+        String sql = "Update TipoMoneda set simboloMoneda ='"+ tipo.getSimboloMoneda() + "', nombreMoneda = '"
+                + tipo.getNombreMoneda() + "', conversionDolar = '"+ tipo.getConversionDolar()
+                +"' where idTipoMoneda = " + tipo.getIdTipoMoneda();
+        try {
+            con = conect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
