@@ -40,6 +40,9 @@
                         <td><%=dep.getIdHistorialTransaccion()%></td>
                         <td><%=dep.getIdCuenta()%></td>
                         <td><%=dep.getIdTransaccion()%></td>
+                        <td>
+                            <a href="Controlador?accion=editarHistorial&idHistorialTransaccion=<%=dep.getIdHistorialTransaccion()%>">Edit</a>
+                        </td>
                     </tr>
                     <%}%>
                 </tbody>

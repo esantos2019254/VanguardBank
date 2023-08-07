@@ -13,47 +13,26 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Listar Depósito</title>
+        <title>Editar Historial de transacciones</title>
     </head>
     <body>
-
         <div>
-            <h1>Registro de Depósito</h1>
-            <a href="Controlador?accion=add">Agregar una nueva Historial de Transaccion</a>
-            <table border="1">
-                <thead>
-                    <tr>
-                        <th>ID DEPOSITO</th>
-                        <th>MONTO DEPOSITO</th>
-                        <th>FECHA DEPOSITO</th>
-
-                    </tr>
-                </thead>
+            <div>
                 <%
-                    HistorialDeTransaccionesDAO dao = new HistorialDeTransaccionesDAO();
-                    List<HistorialDeTransacciones> listaDeposito = dao.listar();
-                    Iterator<Deposito> iterator = listaDeposito.iterator();
-                    Deposito dep = null;
-                    while (iterator.hasNext()) {
-                        dep = iterator.next();
+                    HistorialDeTransaccionesDAO nuevoHistorialDAO = new HistorialDeTransaccionesDAO();
+                    int idHistorialTransaccion = Integer.parseInt((String)request.getAttribute("idHistorial"));
+                    HistorialDeTransacciones nuevoHistorial = (HistorialDeTransacciones)nuevoHistorialDAO.buscar(idHistorialTransaccion);
                 %>
-                <tbody>
-                    <tr>
-                        <td><%= dep.getIdDeposito()%></td>
-                        <td><%= dep.getMontoDeposito()%></td>
-                        <td><%= dep.getFechaDeposito()%></td>
-                        <td><%= dep.getHoraDeposito()%></td>
-                        <td><%= dep.getIdCuentaOrigen()%></td>
-                        <td><%= dep.getIdCuentaDeposit()%></td>
-
-                        <td>
-                            <a href="Controlador?accion=edit&idDeposito=<%= dep.getIdDeposito()%>">Edit</a>
-                            <a href="">Eliminar</a>
-                        </td>
-                    </tr>
-                    <%}%>
-                </tbody>
-            </table>
+                <h1>Editar un historial de transacciones</h1>
+                <form action="Controlador">
+                    <strong>ID Cuenta</strong><br>
+                    <input type="text" name="txtIdCuenta" value="<%=nuevoHistorial.getIdCuenta()%>"><br><br>
+                    <strong>ID Transacción</strong><br>
+                    <input type="text" name="txtIdTransaccion" value="<%=nuevoHistorial.getIdTransaccion()%>"><br>
+                    <input type="hidden" name="txtIdHistorialTransacion" value="<%=nuevoHistorial.getIdHistorialTransaccion()%>"><br>
+                    <input type="submit" name="accion" value="ActualizarHistorial"><br><br>
+                </form>
+            </div>
         </div>
     </body>
 </html>

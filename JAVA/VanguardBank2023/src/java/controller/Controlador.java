@@ -87,7 +87,7 @@ public class Controlador extends HttpServlet {
     //HistorialDeTransacciones
     String listHistorial = "view/listarHistorialDeTransacciones.jsp";
     String addHistorial = "view/agregarHistorialDeTransacciones.jsp";
-    String editHistorial = "";
+    String editHistorial = "view/editarHistorialDeTransacciones.jsp";
     HistorialDeTransacciones nuevoHistorialDeTransacciones = new HistorialDeTransacciones();
     HistorialDeTransaccionesDAO nuevoHistorialDeTransaccionesDAO = new HistorialDeTransaccionesDAO();
 
@@ -371,11 +371,18 @@ public class Controlador extends HttpServlet {
             nuevoHistorialDeTransacciones.setIdTransaccion(idTransaccion);
             nuevoHistorialDeTransaccionesDAO.agregar(nuevoHistorialDeTransacciones);
             acceso = listHistorial;
-        } else if (accion.equalsIgnoreCase("edit")) {
-            request.setAttribute("idHistorialDeTransacciones", request.getParameter("idHistorialDeTransacciones"));
-            acceso = edit;
+        } else if (accion.equalsIgnoreCase("editarHistorial")) {
+            request.setAttribute("idHistorial", request.getParameter("idHistorialTransaccion"));
+            acceso = editHistorial;
         } else if (accion.equalsIgnoreCase("ActualizarHistorial")) {
-            //Agregar accion de editar.
+            int idHistorialTransaccion = Integer.parseInt(request.getParameter("txtIdHistorialTransacion"));
+            int idCuenta = Integer.parseInt(request.getParameter("txtIdCuenta"));
+            int idTransaccion = Integer.parseInt(request.getParameter("txtIdTransaccion"));
+            nuevoHistorialDeTransacciones.setIdTransaccion(idHistorialTransaccion);
+            nuevoHistorialDeTransacciones.setIdCuenta(idCuenta);
+            nuevoHistorialDeTransacciones.setIdTransaccion(idTransaccion);
+            nuevoHistorialDeTransaccionesDAO.editar(nuevoHistorialDeTransacciones);
+            acceso = listHistorial;
         }else if(accion.equalsIgnoreCase("listarCuenta")){
             acceso = listarCuenta;
         }else if(accion.equalsIgnoreCase("addCuenta")){
