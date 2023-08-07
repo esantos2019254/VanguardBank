@@ -82,7 +82,8 @@ public class HistorialDeTransaccionesDAO implements HistorialDeTransaccionesCRUD
 
     @Override
     public boolean editar(HistorialDeTransacciones histo) {
-        String sql = "Update HistorialDeTransacciones set idCuenta = '" + histo.getIdCuenta() + "','" + histo.getIdTransaccion() + "' where idHistorialTransaccion = " + histo.getIdHistorialTransaccion();
+        String sql = "Update HistorialDeTransacciones set idCuenta = '"+histo.getIdCuenta()+"', idTransaccion = '"
+                    +histo.getIdTransaccion()+"' where idHistorialTransaccion = "+histo.getIdHistorialTransaccion();
         try {
             con = conect.getConnection();
             ps = con.prepareStatement(sql);

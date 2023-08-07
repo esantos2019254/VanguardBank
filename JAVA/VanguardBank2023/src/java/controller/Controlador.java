@@ -87,7 +87,7 @@ public class Controlador extends HttpServlet {
     //HistorialDeTransacciones
     String listHistorial = "view/listarHistorialDeTransacciones.jsp";
     String addHistorial = "view/agregarHistorialDeTransacciones.jsp";
-    String editHistorial = "";
+    String editHistorial = "view/editarHistorialDeTransacciones.jsp";
     HistorialDeTransacciones nuevoHistorialDeTransacciones = new HistorialDeTransacciones();
     HistorialDeTransaccionesDAO nuevoHistorialDeTransaccionesDAO = new HistorialDeTransaccionesDAO();
 
@@ -331,12 +331,12 @@ public class Controlador extends HttpServlet {
             nuevoEmpleado.setIdTipoEmpleado(idTipoEmpleado);
             nuevoEmpleadoDAO.editarEmpleado(nuevoEmpleado);
             acceso = listarEmpleado;
+            
         } else if (accion.equalsIgnoreCase("listarTipoMoneda")) {
             acceso = listarTipoMoneda;
         } else if (accion.equalsIgnoreCase("addTipoMoneda")) {
             acceso = addTipoMoneda;
         } else if (accion.equalsIgnoreCase("AgregarTipoMoneda")) {
-
             String simboloMoneda = request.getParameter("txtSimboloMoneda");
             String nombreMoneda = request.getParameter("txtNombreMoneda");
             Double conversionDolar = Double.parseDouble(request.getParameter("txtConversionDolar"));
@@ -345,6 +345,21 @@ public class Controlador extends HttpServlet {
             nuevoTipoMoneda.setConversionDolar(conversionDolar);
             nuevoTipoMonedaDAO.agregar(nuevoTipoMoneda);
             acceso = listarTipoMoneda;
+        } else if(accion.equalsIgnoreCase("editarTipoMoneda")){    
+            request.setAttribute("IdM", request.getParameter("idTipoMoneda"));
+            acceso = editTipoMoneda;
+        } else if(accion.equalsIgnoreCase("ActualizarTipoMoneda")){
+            int idTipoMoneda = Integer.parseInt(request.getParameter("txtIdTipoMoneda"));
+            String simboloMoneda = request.getParameter("txtSimboloMoneda");
+            String nombreMoneda = request.getParameter("txtNombreMoneda");
+            Double conversionDolar = Double.parseDouble(request.getParameter("txtConversionDolar"));
+            nuevoTipoMoneda.setIdTipoMoneda(idTipoMoneda);
+            nuevoTipoMoneda.setSimboloMoneda(simboloMoneda);
+            nuevoTipoMoneda.setNombreMoneda(nombreMoneda);
+            nuevoTipoMoneda.setConversionDolar(conversionDolar);
+            nuevoTipoMonedaDAO.editar(nuevoTipoMoneda);
+            acceso = listarTipoMoneda;
+            
         } else if (accion.equalsIgnoreCase("listarHistorial")) {
             acceso = listHistorial;
         } else if (accion.equalsIgnoreCase("addHistorial")) {
@@ -356,11 +371,18 @@ public class Controlador extends HttpServlet {
             nuevoHistorialDeTransacciones.setIdTransaccion(idTransaccion);
             nuevoHistorialDeTransaccionesDAO.agregar(nuevoHistorialDeTransacciones);
             acceso = listHistorial;
-        } else if (accion.equalsIgnoreCase("edit")) {
-            request.setAttribute("idHistorialDeTransacciones", request.getParameter("idHistorialDeTransacciones"));
-            acceso = edit;
-        } else if (accion.equalsIgnoreCase("Actualizar")) {
-            //Agregar accion de editar.
+        } else if (accion.equalsIgnoreCase("editarHistorial")) {
+            request.setAttribute("idHistorial", request.getParameter("idHistorialTransaccion"));
+            acceso = editHistorial;
+        } else if (accion.equalsIgnoreCase("ActualizarHistorial")) {
+            int idHistorialTransaccion = Integer.parseInt(request.getParameter("txtIdHistorialTransacion"));
+            int idCuenta = Integer.parseInt(request.getParameter("txtIdCuenta"));
+            int idTransaccion = Integer.parseInt(request.getParameter("txtIdTransaccion"));
+            nuevoHistorialDeTransacciones.setIdTransaccion(idHistorialTransaccion);
+            nuevoHistorialDeTransacciones.setIdCuenta(idCuenta);
+            nuevoHistorialDeTransacciones.setIdTransaccion(idTransaccion);
+            nuevoHistorialDeTransaccionesDAO.editar(nuevoHistorialDeTransacciones);
+            acceso = listHistorial;
         }else if(accion.equalsIgnoreCase("listarCuenta")){
             acceso = listarCuenta;
         }else if(accion.equalsIgnoreCase("addCuenta")){
