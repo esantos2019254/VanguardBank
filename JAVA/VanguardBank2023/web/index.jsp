@@ -23,6 +23,7 @@
             <a href="Controlador?accion=listarTipoMoneda">Lista de Tipos de Moneda</a>
             <a href="Controlador?accion=listarHistorial">Listar Historial De Transacciones</a>
             <a href="Controlador?accion=listarCuenta">Listar Cuentas</a>
+            <a href="Controlador?accion=listarCredito">Listar Crédito</a>
         </div>
     </body>
 </html>

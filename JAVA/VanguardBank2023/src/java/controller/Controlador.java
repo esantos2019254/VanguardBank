@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Cliente;
+import model.Credito;
 import model.Cuenta;
 import model.Departamento;
 import model.Deposito;
@@ -19,6 +20,7 @@ import model.TipoEmpleado;
 import model.TipoMoneda;
 import model.Transaccion;
 import modelDAO.ClienteDAO;
+import modelDAO.CreditoDAO;
 import modelDAO.CuentaDAO;
 import modelDAO.DepartamentoDAO;
 import modelDAO.DepositoDAO;
@@ -97,6 +99,13 @@ public class Controlador extends HttpServlet {
     String editarCuenta = "view/editarCuenta.jsp";
     Cuenta nuevaCuenta = new Cuenta();
     CuentaDAO cuentaDAO = new CuentaDAO();
+    
+    //Credito
+    String listarCredito = "view/listarCredito.jsp";
+    String agregarCredito = "view/agregarCredito.jsp";
+    String editarCredito = "view/editarCredito.jsp";
+    Credito nuevoCredito = new Credito();
+    CreditoDAO creditoDAO = new CreditoDAO();
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -252,7 +261,7 @@ public class Controlador extends HttpServlet {
             nuevaTransaccion.setIdEmpleado(idEmpleado);
             nuevaTransaccion.setIdCuenta(idCuenta);
             nuevaTransaccionDAO.agregar(nuevaTransaccion);
-            acceso = listarDeposito;
+            acceso = listarTransaccion;
         } else if (accion.equalsIgnoreCase("editTransaccion")) {
             request.setAttribute("idTr", request.getParameter("idTransaccion"));
             acceso = editTransaccion;
@@ -264,9 +273,40 @@ public class Controlador extends HttpServlet {
             nuevaTransaccion.setIdEmpleado(Integer.parseInt(request.getParameter("txtIdEmpleado")));
             nuevaTransaccion.setIdCuenta(Integer.parseInt(request.getParameter("txtIdCuenta")));
             nuevaTransaccionDAO.editar(nuevaTransaccion);
-            acceso = listarDeposito;
-
-        } else if (accion.equalsIgnoreCase("listarDepartamento")) {
+            acceso = listarTransaccion;
+            
+            
+            
+            //Credito
+        } else if (accion.equalsIgnoreCase("listarCredito")) {
+            acceso = listarCredito;
+        } else if (accion.equalsIgnoreCase("addCredito")) {
+            acceso = agregarCredito;
+        }  else if (accion.equalsIgnoreCase("AgregarCredito")) {
+            double montoCredito = Double.parseDouble(request.getParameter("txtMontoCredito"));
+            String fechaHora = request.getParameter("txtFechaHora");
+            double interesCredito = Double.parseDouble(request.getParameter("txtInteresCredito"));
+            int idCuenta = Integer.parseInt(request.getParameter("txtIdCuenta"));
+            nuevoCredito.setMontoCredito(montoCredito);
+            nuevoCredito.setFechaHora(fechaHora);
+            nuevoCredito.setInteresCredito(interesCredito);
+            nuevoCredito.setIdCuenta(idCuenta);
+            creditoDAO.agregar(nuevoCredito);
+            acceso = listarCredito;
+        }else if (accion.equalsIgnoreCase("editarCredito")) {
+            request.setAttribute("idCr", request.getParameter("idCredito"));
+            acceso = editarCredito;
+        }else if (accion.equalsIgnoreCase("ActualizarCredito")) {
+            nuevoCredito.setIdCredito(Integer.parseInt(request.getParameter("txtIdCredito")));
+            nuevoCredito.setMontoCredito(Double.parseDouble(request.getParameter("txtMontoCredito")));
+            nuevoCredito.setFechaHora(request.getParameter("txtFechaHora"));
+            nuevoCredito.setInteresCredito(Double.parseDouble(request.getParameter("txtInteresCredito")));
+            nuevoCredito.setIdCuenta(Integer.parseInt(request.getParameter("txtIdCuenta")));
+            creditoDAO.editar(nuevoCredito);
+            acceso = listarCredito;
+            
+        }
+        else if (accion.equalsIgnoreCase("listarDepartamento")) {
             acceso = listarDepartamento;
         } else if (accion.equalsIgnoreCase("addDepartamento")) {
             acceso = addDepartamento;

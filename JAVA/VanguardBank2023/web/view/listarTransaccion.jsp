@@ -30,34 +30,34 @@
                         <th>ID DE LA CUENTA</th>
                     </tr>
                 </thead>
-                <% 
+                <%
                     TransaccionDAO dao = new TransaccionDAO();
                     List<Transaccion> listaTransaccion = dao.listar();
                     Iterator<Transaccion> iterator = listaTransaccion.iterator();
                     Transaccion trn = null;
                     while (iterator.hasNext()) {
-                            trn = iterator.next();%>
-                    <tbody>
-                        <tr>
-                            <td><%=trn.getIdTransaccion()%></td>
-                            <td><%=trn.getTipoTransaccion()%></td>
-                            <td><%=trn.getMontoTransaccion()%></td>
-                            <td><%=trn.getFechaHora()%></td>
-                            <td><%=trn.getIdEmpleado()%></td>
-                            <td><%=trn.getIdCuenta()%></td>
-                            <td>
-                                <a href="Controlador?accion=editTransaccion&idTransaccion=<%= trn.getIdTransaccion()%>">Edit</a>
-                            </td>
-                        </tr>
-                    </tbody>        
-                            
-                            
-                            
-                        <%}%>
-                
-                
-                
-                %>
+                        trn = iterator.next();%>
+                <tbody>
+                    <tr>
+                        <td><%=trn.getIdTransaccion()%></td>
+                        <td><%=trn.getTipoTransaccion()%></td>
+                        <td><%=trn.getMontoTransaccion()%></td>
+                        <td><%=trn.getFechaHora()%></td>
+                        <td><%=trn.getIdEmpleado()%></td>
+                        <td><%=trn.getIdCuenta()%></td>
+                        <td>
+                            <a href="Controlador?accion=editTransaccion&idTransaccion=<%= trn.getIdTransaccion()%>">Edit</a>
+                        </td>
+                    </tr>
+                </tbody>        
+
+
+
+                <%}%>
+
+
+
+
             </table>
         </div>
     </body>
