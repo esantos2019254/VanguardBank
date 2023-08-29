@@ -50,7 +50,7 @@
                         <td><%=cli.getGeneroCliente()%></td>
                         <td>
                             <a href="Controlador?accion=editar&DPI=<%= cli.getDPI()%>">Edit</a>
-                            <a href="Controlador?accion=eliminar&DPI=<%= cli.getDPI()%>">Eliminar</a>
+                            <a href="Controlador?accion=eliminar&Eli=<%= cli.getDPI()%>">Eliminar</a>
                         </td>
                     </tr>
                     <%}%>
