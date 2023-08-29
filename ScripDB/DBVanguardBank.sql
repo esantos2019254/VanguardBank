@@ -86,7 +86,7 @@ Create table Cuenta(
     saldoCuenta decimal (10,2) not null,
     tipoCuenta varchar(100) not null,
     fechaApertura date not null,
-    DPI bigint not null,
+    DPI bigint not null, 
     idEmpleado int not null,
     idTipoMoneda int not null,
     idSucursal int not null,
