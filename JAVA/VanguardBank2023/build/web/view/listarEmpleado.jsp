@@ -49,6 +49,7 @@
                     <td><%= empleado.getIdTipoEmpleado()%></td>
                     <td>
                         <a href="Controlador?accion=editEmpleado&idEmpleado=<%= empleado.getIdEmpleado()%>">Editar</a><br>
+                        <a href="Controlador?accion=delEmpleado&idEmpleado=<%= empleado.getIdEmpleado()%>">Eliminar</a><br>
                     </td>
                 </tr>
                 <%}%>

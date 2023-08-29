@@ -17,4 +17,5 @@ public interface EmpleadoCRUD {
     public Empleado buscarEmpleado(int idEmpleado);
     public boolean agregarEmpleado(Empleado nuevoEmpleado);
     public boolean editarEmpleado(Empleado empleado);
+    public void eliminarEmpleado(int idEmpleado);
 }

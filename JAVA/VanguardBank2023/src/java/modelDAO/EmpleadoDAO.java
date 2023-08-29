@@ -104,4 +104,16 @@ public class EmpleadoDAO implements EmpleadoCRUD {
         }
         return false;
     }
+    
+    @Override
+    public void eliminarEmpleado(int idEmpleado){
+        String sql = "Delete from Empleado where idEmpleado ="+idEmpleado;
+        try {
+            con = connect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
