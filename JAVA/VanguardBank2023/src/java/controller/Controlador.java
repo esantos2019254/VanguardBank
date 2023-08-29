@@ -161,7 +161,10 @@ public class Controlador extends HttpServlet {
             nuevoCliente.setDPI(Long.parseLong(request.getParameter("txtDPI")));
             nuevoClienteDAO.editar(nuevoCliente);
             acceso = listar;
-
+        } else if (accion.equalsIgnoreCase("eliminar")){
+            Long DPI = Long.parseLong(request.getParameter("Eli"));
+            nuevoClienteDAO.eliminar(DPI);
+            acceso = listar;
         } else if (accion.equalsIgnoreCase("listarDeposito")) {
             acceso = listarDeposito;
         } else if (accion.equalsIgnoreCase("addDeposito")) {

@@ -50,10 +50,10 @@
                         <a style="margin-left: 10px; border: none"class="btn btn-outline-light" href="Controlador?accion=listarCredito" target="myFrame">Crédito</a>
                     </li>
                     <li class="nav-item">
-                        <a style="margin-left: 10px; border: none"class="btn btn-outline-light" href="Controlador?accion=listarTransaccion" target="myFrame">Transacciones</a>
+                        <a style="margin-left: 10px; border: none"class="btn btn-outline-light" href="#" target="myFrame">Sucursal</a>
                     </li>
                     <li class="nav-item">
-                        <a style="margin-left: 10px; border: none"class="btn btn-outline-light" href="Controlador?accion=listarTransaccion" target="myFrame">Transacciones</a>
+                        <a style="margin-left: 10px; border: none"class="btn btn-outline-light" href="#" target="myFrame">Servicio</a>
                     </li>
                 </ul>
             </div>

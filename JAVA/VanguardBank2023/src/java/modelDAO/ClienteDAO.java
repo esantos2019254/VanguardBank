@@ -94,4 +94,16 @@ public class ClienteDAO implements ClienteCRUD{
         return false;
     }
     
+    @Override
+    public boolean eliminar(Long dpi){
+        String sql = "Delete from Cliente where DPI ="+dpi;
+        try {
+            con = conect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
