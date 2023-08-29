@@ -12,4 +12,6 @@ public interface DepartamentoCRUD {
     public boolean agregar(Departamento depa);
 
     public boolean editar(Departamento depa);
+    
+    public void eliminar(int id);
 }

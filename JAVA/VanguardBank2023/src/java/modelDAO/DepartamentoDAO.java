@@ -86,5 +86,19 @@ public class DepartamentoDAO implements DepartamentoCRUD {
         }
         return false;
     }
+    
+    @Override
+    public void eliminar(int idDep) {
+        String sql = "delete from Departamento where idDepartamento =" + idDep;
+        try
+        {
+            con = conect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
 
 }
