@@ -17,8 +17,8 @@
     </head>
     <body>
         <div>
-        <h1>Registro de Departamento</h1>
-        <a href="Controlador?accion=addDepartamento">Agregar nuevo Departamento</a>
+            <h1>Registro de Departamento</h1>
+            <a href="Controlador?accion=addDepartamento">Agregar nuevo Departamento</a>
             <table border="1">
                 <thead>
                     <tr>
@@ -45,6 +45,7 @@
                         <td><%=depa.getFechaApertura()%></td>
                         <td>
                             <a href="Controlador?accion=editDepartamento&idDepartamento=<%= depa.getIdDepartamento()%>">Edit</a>
+                            <a href="Controlador?accion=eliminarDepartamento&idDepartamento=<%= depa.getIdDepartamento()%>">Delete</a>
                         </td>
                     </tr>
                     <%}%>

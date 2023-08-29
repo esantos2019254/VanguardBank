@@ -99,14 +99,14 @@ public class Controlador extends HttpServlet {
     String editarCuenta = "view/editarCuenta.jsp";
     Cuenta nuevaCuenta = new Cuenta();
     CuentaDAO cuentaDAO = new CuentaDAO();
-    
+
     //Credito
     String listarCredito = "view/listarCredito.jsp";
     String agregarCredito = "view/agregarCredito.jsp";
     String editarCredito = "view/editarCredito.jsp";
     Credito nuevoCredito = new Credito();
     CreditoDAO creditoDAO = new CreditoDAO();
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String menu = request.getParameter("menu");
@@ -161,7 +161,7 @@ public class Controlador extends HttpServlet {
             nuevoCliente.setDPI(Long.parseLong(request.getParameter("txtDPI")));
             nuevoClienteDAO.editar(nuevoCliente);
             acceso = listar;
-        } else if (accion.equalsIgnoreCase("eliminar")){
+        } else if (accion.equalsIgnoreCase("eliminar")) {
             Long DPI = Long.parseLong(request.getParameter("Eli"));
             nuevoClienteDAO.eliminar(DPI);
             acceso = listar;
@@ -277,15 +277,13 @@ public class Controlador extends HttpServlet {
             nuevaTransaccion.setIdCuenta(Integer.parseInt(request.getParameter("txtIdCuenta")));
             nuevaTransaccionDAO.editar(nuevaTransaccion);
             acceso = listarTransaccion;
-            
-            
-            
+
             //Credito
         } else if (accion.equalsIgnoreCase("listarCredito")) {
             acceso = listarCredito;
         } else if (accion.equalsIgnoreCase("addCredito")) {
             acceso = agregarCredito;
-        }  else if (accion.equalsIgnoreCase("AgregarCredito")) {
+        } else if (accion.equalsIgnoreCase("AgregarCredito")) {
             double montoCredito = Double.parseDouble(request.getParameter("txtMontoCredito"));
             String fechaHora = request.getParameter("txtFechaHora");
             double interesCredito = Double.parseDouble(request.getParameter("txtInteresCredito"));
@@ -296,10 +294,10 @@ public class Controlador extends HttpServlet {
             nuevoCredito.setIdCuenta(idCuenta);
             creditoDAO.agregar(nuevoCredito);
             acceso = listarCredito;
-        }else if (accion.equalsIgnoreCase("editarCredito")) {
+        } else if (accion.equalsIgnoreCase("editarCredito")) {
             request.setAttribute("idCr", request.getParameter("idCredito"));
             acceso = editarCredito;
-        }else if (accion.equalsIgnoreCase("ActualizarCredito")) {
+        } else if (accion.equalsIgnoreCase("ActualizarCredito")) {
             nuevoCredito.setIdCredito(Integer.parseInt(request.getParameter("txtIdCredito")));
             nuevoCredito.setMontoCredito(Double.parseDouble(request.getParameter("txtMontoCredito")));
             nuevoCredito.setFechaHora(request.getParameter("txtFechaHora"));
@@ -307,9 +305,8 @@ public class Controlador extends HttpServlet {
             nuevoCredito.setIdCuenta(Integer.parseInt(request.getParameter("txtIdCuenta")));
             creditoDAO.editar(nuevoCredito);
             acceso = listarCredito;
-            
-        }
-        else if (accion.equalsIgnoreCase("listarDepartamento")) {
+
+        } else if (accion.equalsIgnoreCase("listarDepartamento")) {
             acceso = listarDepartamento;
         } else if (accion.equalsIgnoreCase("addDepartamento")) {
             acceso = addDepartamento;
@@ -331,6 +328,10 @@ public class Controlador extends HttpServlet {
             nuevoDepartamento.setCodigoPostal(request.getParameter("txtCodigoPostal"));
             nuevoDepartamento.setFechaApertura(Date.valueOf(request.getParameter("txtFechaApertura")));
             nuevoDepartamentoDAO.editar(nuevoDepartamento);
+            acceso = listarDepartamento;
+        } else if (accion.equalsIgnoreCase("eliminarDepartamento")) {
+            int idDepartamento = Integer.parseInt(request.getParameter("idDepartamento"));
+            nuevoDepartamentoDAO.eliminar(idDepartamento);
             acceso = listarDepartamento;
         }
         if (accion.equalsIgnoreCase("ListarEmpleado")) {
@@ -373,8 +374,8 @@ public class Controlador extends HttpServlet {
             nuevoEmpleado.setNumeroContactoEmpleado(numeroContacto);
             nuevoEmpleado.setIdTipoEmpleado(idTipoEmpleado);
             nuevoEmpleadoDAO.editarEmpleado(nuevoEmpleado);
-            acceso = listarEmpleado;   
-        } else if(accion.equalsIgnoreCase("delEmpleado")){
+            acceso = listarEmpleado;
+        } else if (accion.equalsIgnoreCase("delEmpleado")) {
             int idEmpleado = Integer.parseInt(request.getParameter("idEmpleado"));
             nuevoEmpleadoDAO.eliminarEmpleado(idEmpleado);
             acceso = listarEmpleado;
@@ -391,10 +392,10 @@ public class Controlador extends HttpServlet {
             nuevoTipoMoneda.setConversionDolar(conversionDolar);
             nuevoTipoMonedaDAO.agregar(nuevoTipoMoneda);
             acceso = listarTipoMoneda;
-        } else if(accion.equalsIgnoreCase("editarTipoMoneda")){    
+        } else if (accion.equalsIgnoreCase("editarTipoMoneda")) {
             request.setAttribute("IdM", request.getParameter("idTipoMoneda"));
             acceso = editTipoMoneda;
-        } else if(accion.equalsIgnoreCase("ActualizarTipoMoneda")){
+        } else if (accion.equalsIgnoreCase("ActualizarTipoMoneda")) {
             int idTipoMoneda = Integer.parseInt(request.getParameter("txtIdTipoMoneda"));
             String simboloMoneda = request.getParameter("txtSimboloMoneda");
             String nombreMoneda = request.getParameter("txtNombreMoneda");
@@ -405,7 +406,7 @@ public class Controlador extends HttpServlet {
             nuevoTipoMoneda.setConversionDolar(conversionDolar);
             nuevoTipoMonedaDAO.editar(nuevoTipoMoneda);
             acceso = listarTipoMoneda;
-            
+
         } else if (accion.equalsIgnoreCase("listarHistorial")) {
             acceso = listHistorial;
         } else if (accion.equalsIgnoreCase("addHistorial")) {
@@ -429,11 +430,11 @@ public class Controlador extends HttpServlet {
             nuevoHistorialDeTransacciones.setIdTransaccion(idTransaccion);
             nuevoHistorialDeTransaccionesDAO.editar(nuevoHistorialDeTransacciones);
             acceso = listHistorial;
-        }else if(accion.equalsIgnoreCase("listarCuenta")){
+        } else if (accion.equalsIgnoreCase("listarCuenta")) {
             acceso = listarCuenta;
-        }else if(accion.equalsIgnoreCase("addCuenta")){
+        } else if (accion.equalsIgnoreCase("addCuenta")) {
             acceso = agregarCuenta;
-        }else if(accion.equalsIgnoreCase("agregarCuenta")){
+        } else if (accion.equalsIgnoreCase("agregarCuenta")) {
             long numeroCuenta = Long.parseLong(request.getParameter("txtNumeroCuenta"));
             double saldo = Double.parseDouble(request.getParameter("txtSaldoCuenta"));
             String tipoCuenta = request.getParameter("txtTipoCuenta");
@@ -452,10 +453,10 @@ public class Controlador extends HttpServlet {
             nuevaCuenta.setIdSucursal(idSucursarl);
             cuentaDAO.agregarCuenta(nuevaCuenta);
             acceso = listarCuenta;
-        }else if(accion.equalsIgnoreCase("editCuenta")){
+        } else if (accion.equalsIgnoreCase("editCuenta")) {
             request.setAttribute("numeroDeCuenta", request.getParameter("numDeCuenta"));
             acceso = editarCuenta;
-        }else if(accion.equalsIgnoreCase("editarCuenta")){
+        } else if (accion.equalsIgnoreCase("editarCuenta")) {
             long numeroCuenta = Long.parseLong(request.getParameter("txtNumeroCuenta"));
             double saldo = Double.parseDouble(request.getParameter("txtSaldoCuenta"));
             String tipoCuenta = request.getParameter("txtTipoCuenta");
@@ -474,7 +475,7 @@ public class Controlador extends HttpServlet {
             nuevaCuenta.setIdSucursal(idSucursarl);
             cuentaDAO.editarCuenta(nuevaCuenta);
             acceso = listarCuenta;
-        }else if(accion.equalsIgnoreCase("delCuenta")){
+        } else if (accion.equalsIgnoreCase("delCuenta")) {
             int numeroCuenta = Integer.parseInt(request.getParameter("numDeCuenta"));
             cuentaDAO.eliminarCuenta(numeroCuenta);
             acceso = listarCuenta;
