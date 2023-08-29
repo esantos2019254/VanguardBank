@@ -84,7 +84,7 @@ Create table Cuenta(
 	idCuenta int not null auto_increment,
     numeroCuenta bigint not null,
     saldoCuenta decimal (10,2) not null,
-    tipoCuenta varchar(100) not null,
+    tipoCuenta varchar(100) not null, 
     fechaApertura date not null,
     DPI bigint not null, 
     idEmpleado int not null,

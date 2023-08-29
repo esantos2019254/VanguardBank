@@ -474,6 +474,10 @@ public class Controlador extends HttpServlet {
             nuevaCuenta.setIdSucursal(idSucursarl);
             cuentaDAO.editarCuenta(nuevaCuenta);
             acceso = listarCuenta;
+        }else if(accion.equalsIgnoreCase("delCuenta")){
+            int numeroCuenta = Integer.parseInt(request.getParameter("numDeCuenta"));
+            cuentaDAO.eliminarCuenta(numeroCuenta);
+            acceso = listarCuenta;
         }
         RequestDispatcher vista = request.getRequestDispatcher(acceso);
         vista.forward(request, response);
