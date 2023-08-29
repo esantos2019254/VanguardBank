@@ -24,7 +24,7 @@
             <input type="text" name="txtIdEmpleado"><br><br>
             <strong>Codigo de la Cuenta</strong><br>
             <input type="text" name="txtIdCuenta"><br><br>
-            <input type="submit" name="accion" value="Agregar"><br><br>
+            <input type="submit" name="accion" value="AgregarTransaccion"><br><br>
         </form>
     </body>
 </html>

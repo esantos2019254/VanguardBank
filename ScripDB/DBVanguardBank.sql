@@ -750,9 +750,8 @@ Delimiter $$
 					values(montoCredito, fechaHora, interesCredito, idCuenta);
 			End $$
 Delimiter ;
-/*call sp_AgregarCredito(1250.00, '2023-06-06 14:20:00', 0.05, 1);
-call sp_AgregarCredito(3000.00, '2023-07-12 18:13:34', 0.08, 2);*/
-
+call sp_AgregarCredito(1250.00, '2023-06-06 14:20:00', 0.05, 1);
+call sp_AgregarCredito(1325.50, '2023-07-07 07:07:00', 0.02, 1);
 -- Listar --
 Delimiter $$
 	Create procedure sp_ListarCredito()
@@ -760,6 +759,8 @@ Delimiter $$
 			Select * from Credito;
         End $$
 Delimiter ;
+call sp_ListarCredito();
+
 
 -- Buscar --
 Delimiter $$

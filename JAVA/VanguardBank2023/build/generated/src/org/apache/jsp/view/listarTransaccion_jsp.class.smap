@@ -1,0 +1,18 @@
+SMAP
+listarTransaccion_jsp.java
+JSP
+*S JSP
+*F
++ 0 listarTransaccion.jsp
+view/listarTransaccion.jsp
+*L
+5,29:48
+34,6:78
+39,3:84
+42,6:87,3
+48:105
+49:106,3
+50,6:109
+56:115,3
+57,9:118
+*E

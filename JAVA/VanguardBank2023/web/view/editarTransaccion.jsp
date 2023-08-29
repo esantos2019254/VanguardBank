@@ -33,6 +33,8 @@
                     <input type="text" name="txtIdEmpleado" value="<%=nuevaTransaccion.getIdEmpleado()%>"><br><br>
                     <strong>ID de la Cuenta</strong>
                     <input type="text" name="txtIdCuenta" value="<%=nuevaTransaccion.getIdCuenta()%>"><br><br>
+                    <input type="hidden" name="txtIdTransaccion" value="<%=nuevaTransaccion.getIdTransaccion()%>"><br>
+                    <input type="submit" name="accion" value="ActualizarTransaccion"><br><br>
                 </form>
             </div>
         </div>
