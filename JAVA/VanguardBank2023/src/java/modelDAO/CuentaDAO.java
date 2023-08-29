@@ -123,4 +123,15 @@ public class CuentaDAO implements CuentaCRUD{
         return false;
     }
     
+    @Override
+    public void eliminarCuenta(long numCuenta) {
+        String sql = "Delete from Cuenta where numeroCuenta = "+numCuenta;
+        try {
+            con = conexion.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

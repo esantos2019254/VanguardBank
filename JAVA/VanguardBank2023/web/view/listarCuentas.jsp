@@ -13,7 +13,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Litar Cuentas</title>
+        <title>Listar Cuentas</title>
     </head>
     <body>
         <h1>Cuentas:</h1>
@@ -53,6 +53,7 @@
                     <td><%= cuenta.getIdSucursal()%></td>
                     <td>
                         <a href="Controlador?accion=editCuenta&numDeCuenta=<%= cuenta.getNumeroCuenta()%>">Edit</a>
+                        <a href="Controlador?accion=delCuenta&numDeCuenta=<%= cuenta.getNumeroCuenta()%>">Eliminar</a>
                     </td>
                 </tr>
                 <%}%>

@@ -13,4 +13,5 @@ public interface CuentaCRUD {
     public boolean agregarCuenta(Cuenta nuevaCuenta);
     public Cuenta buscarCuenta(long numCuenta);
     public boolean editarCuenta(Cuenta cuenta);
+    public void eliminarCuenta(long numCuenta);
 }
