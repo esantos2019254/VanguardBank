@@ -61,7 +61,7 @@ Create table Empleado(
     idTipoEmpleado int not null,
     primary key PK_idEmpleado (idEmpleado),
     constraint FK_Empleado_TipoEmpleado foreign key (idTipoEmpleado)
-		references TipoEmpleado(idTipoEmpleado)
+		references TipoEmpleado(idTipoEmpleado) on delete cascade
 );
 
 -- Entidad Sucursales --
@@ -74,9 +74,9 @@ Create table Sucursal(
     idProveedor int not null,
 	primary key PK_idSucursal(idSucursal),
     constraint FK_Sucursal_Departamento foreign key (idDepartamento)
-		references Departamento(idDepartamento),
+		references Departamento(idDepartamento) on delete cascade,
 	constraint FK_Sucursal_Proveedor foreign key(idProveedor)
-		references Proveedor(idProveedor)
+		references Proveedor(idProveedor) on delete cascade
 );
 
 -- Entidad Cuentas --
@@ -92,13 +92,13 @@ Create table Cuenta(
     idSucursal int not null,
     primary key PK_idCuenta(idCuenta),
     constraint FK_Cuenta_Cliente foreign key (DPI)
-		references Cliente(DPI),
+		references Cliente(DPI) on delete cascade,
 	constraint FK_Cuenta_Empleado foreign key (idEmpleado)
-		references Empleado(idEmpleado),
+		references Empleado(idEmpleado) on delete cascade,
 	constraint FK_Cuenta_TipoMoneda foreign key (idTipoMoneda)
-		references TipoMoneda(idTipoMoneda),
+		references TipoMoneda(idTipoMoneda) on delete cascade,
 	constraint FK_Cuenta_Sucursal foreign key (idSucursal)
-		references Sucursal(idSucursal)
+		references Sucursal(idSucursal) on delete cascade
 );
 
 -- Entidad Créditos --
@@ -122,7 +122,7 @@ Create table Servicio(
     idCuenta int not null,
     primary key PK_idServicio(idServicio),
     constraint FK_Servicio_Cuenta foreign key(idCuenta)
-		references Cuenta(idCuenta)
+		references Cuenta(idCuenta) on delete cascade
 );
 
 -- Entidad Login --
@@ -134,7 +134,7 @@ Create table Login(
     idCuenta int not null,
     primary key PK_idUser(idUser),
     constraint FK_Login_Cuenta foreign key(idCuenta)
-		references Cuenta(idCuenta)
+		references Cuenta(idCuenta) on delete cascade
 
 );
 
@@ -148,9 +148,9 @@ create table Transaccion(
     idCuenta int not null,
     primary key PK_idTransaccion(idTransaccion),
     constraint FK_Transacciones_Empleado foreign key (idEmpleado) 
-		references Empleado (idEmpleado),
+		references Empleado (idEmpleado) on delete cascade,
 	constraint FK_Transacciones_Cuenta foreign key (idCuenta)
-		references Cuenta (idCuenta)
+		references Cuenta (idCuenta) on delete cascade
 );	
 
 -- Entidad Historial Transacción --
@@ -160,9 +160,9 @@ Create table HistorialDeTransacciones(
     idTransaccion int not null,
     primary key PK_HistorialDeTransacciones (idHistorialTransaccion),
 	constraint FK_HistorialDeTransacciones_Cuenta foreign key (idCuenta)
-			references Cuenta (idCuenta),
+			references Cuenta (idCuenta) on delete cascade,
 	constraint FK_HistorialDeTransacciones_Transacciones foreign key (idTransaccion)
-		references Transaccion(idTransaccion)
+		references Transaccion(idTransaccion) on delete cascade
 );
 
 -- Entidad Depositos --
@@ -175,9 +175,9 @@ Create table Deposito(
     idCuentaDeposito int not null,
     primary key PK_idDeposito(idDeposito), 
     constraint FK_Deposito_Cuenta_Origen foreign key (idCuentaOrigen)
-        references Cuenta (idCuenta),
+        references Cuenta (idCuenta) on delete cascade,
     constraint FK_Deposito_Cuenta foreign key (idCuentaDeposito)
-        references Cuenta (idCuenta)
+        references Cuenta (idCuenta) on delete cascade
 );
 
 -- ------ PROCEDIMIENTO ALMACENADOS ------ --
@@ -194,6 +194,10 @@ Delimiter $$
 Delimiter ;
 
 call sp_AgregarCliente(1879451248101,'Elmer Rodrigo','Santos García','4874-5487','Ciudad de Guatemala','Masculino');
+call sp_AgregarCliente(6548721036548,'Luis Fernando','Pérez López','9471-2148','Mixco','Masculino');
+call sp_AgregarCliente(2548100254810,'Enrique Roberto','Jiménez Gonzáles','4720-3200','Ciudad de Guatemala','Masculino');
+call sp_AgregarCliente(2001548231201,'Carlos Alberto','Peréz Gonzáles','9912-0141','Zona 1 Guatemala','Masculino');
+call sp_AgregarCliente(9513578241010,'Raúl Fernando','López Rodriguez','9321-2147','Zona 7 Guatemala','Masculino');
 
 Delimiter $$
 	Create procedure sp_ListarClientes()
@@ -311,7 +315,7 @@ Delimiter //
                 where D.idDepartamento = idDepartamento;
         End//
 Delimiter ;
-call sp_EditarDepartamento (3, 'Huehuetenango', '13000', '2023-04-12');
+-- call sp_EditarDepartamento (3, 'Huehuetenango', '13000', '2023-04-12');
 
 -- Listar Departamento
 
@@ -599,15 +603,15 @@ Delimiter ;
 
 call sp_agregarSucursal('Sucursal Central', 'zona 1', 'sucursalCental@gmail.com', 1, 1 );
 call sp_agregarSucursal('Sucursal Financiera Internacional', 'zona 2', 'sucursalfinancierainter@gmail.com', 2, 2);
-/*call sp_agregarSucursal('Sucursal del Norte', 'zona 3', 'sucursalnorte@gmail.com', 3, 3);
-call sp_agregarSucursal('Sucursal del Sur', 'zona 4', 'sucursalsur@gmail.com', 4, 1);
+call sp_agregarSucursal('Sucursal del Norte', 'zona 3', 'sucursalnorte@gmail.com', 3, 3);
+/*call sp_agregarSucursal('Sucursal del Sur', 'zona 4', 'sucursalsur@gmail.com', 4, 1);
 call sp_agregarSucursal('Sucursal del Este', 'zona 5', 'sucursaleste@gmail.com', 5, 2);
 call sp_agregarSucursal('Sucursal del Oeste', 'zona 6', 'sucursaloeste@gmail.com', 6, 3);
 call sp_agregarSucursal('Sucursal Plaza Mayor', 'zona 7', 'sucursalplazamayor@gmail.com', 7, 3);
 call sp_agregarSucursal('Sucursal Avenida Principal', 'zona 8', 'sucursalavenidaprincipal@gmail.com', 8, 2);
 call sp_agregarSucursal('Sucursal Vanguardia', 'zona 9', 'sucursalvanguardia@gmail.com', 9, 1);
-call sp_agregarSucursal('Sucursal Innovación Financiera', 'zona 10', 'sucursalinnovacionfinanciera@gmail.com', 10, 3);
-*/
+call sp_agregarSucursal('Sucursal Innovación Financiera', 'zona 10', 'sucursalinnovacionfinanciera@gmail.com', 10, 3);*/
+
 
 -- ************************************** PROCEDURE LISTAR SUCURSALES *********************************************************
 Delimiter //
@@ -676,10 +680,10 @@ Delimiter $$
 Delimiter ;
 
 Call sp_AgregarCuenta(10001,1486.55,'Depósito','2014-01-18', 1879451248101, 1, 1, 1);
-/*Call sp_AgregarCuenta(10002,565.10,'Ahorro','2010-05-25', 6329418527416, 2, 1, 2);
-Call sp_AgregarCuenta(10003,2365.00,'Depósito','2009-08-07', 3694185270251, 3, 2, 1);
-Call sp_AgregarCuenta(10004,2015,'Ahorro','2017-07-14', 9854123210485, 4, 1, 2);
-Call sp_AgregarCuenta(10005,565.10,'Ahorro','2019-04-19', 3625149685744, 5, 2, 1);*/
+Call sp_AgregarCuenta(10002,565.10,'Ahorro','2010-05-25', 6548721036548, 2, 1, 2);
+Call sp_AgregarCuenta(10003,2365.00,'Depósito','2009-08-07', 2548100254810, 3, 2, 1);
+Call sp_AgregarCuenta(10004,2015,'Ahorro','2017-07-14', 9513578241010, 4, 1, 2);
+Call sp_AgregarCuenta(10005,565.10,'Ahorro','2019-04-19', 2001548231201, 5, 2, 1);
 
 #	Listar Cuentas 	#
 Delimiter $$
@@ -811,16 +815,16 @@ Delimiter ;
 
 
 call sp_agregarServicio('Transferencias de dinero', 'Número de cuenta de destino', 1500.50, 1);
-/*call sp_agregarServicio('Banca móvil', 'Aplicación móvil', 255.50, 2);
+call sp_agregarServicio('Banca móvil', 'Aplicación móvil', 255.50, 2);
 call sp_agregarServicio('Banca en línea', 'contraseña', 325.25, 3);
 call sp_agregarServicio('Tarjetas de débito', 'código de seguridad', 555.50, 4);
 call sp_agregarServicio('Préstamos para automóviles', 'Tasas de interés', 600.50, 5);
-call sp_agregarServicio('Préstamos personales', 'Tasas de interés', 904.50, 6);
+/*call sp_agregarServicio('Préstamos personales', 'Tasas de interés', 904.50, 6);
 call sp_agregarServicio('Préstamos hipotecarios', 'Tasas de interés', 651.45, 7);
 call sp_agregarServicio('Tarjetas de crédito', 'Estados de cuenta mensuales', 850.50, 8);
 call sp_agregarServicio('Cuentas de ahorro', 'Libretas de ahorro', 2000.25, 9);
-call sp_agregarServicio('Cuentas corrientes', 'Estados de cuenta', 1000.65, 10);
-*/
+call sp_agregarServicio('Cuentas corrientes', 'Estados de cuenta', 1000.65, 10);*/
+
 
 -- *********************************** PROCEDURE LISTAR SERVICIO *************************************************
 
@@ -928,14 +932,14 @@ Delimiter $$
         end $$
 Delimiter ;
 
-select * from Login where nombreUsuario = 'asanchez' and passwordUsuario = 12345;
+/*select * from Login where nombreUsuario = 'asanchez' and passwordUsuario = 12345;*/
 
 call sp_AgregarLogin('asanchez','12345','2023-07-19 12:34:56','1');
-/*call sp_AgregarLogin('asanchez','12345','2023-07-19 12:34:56','2');
-call sp_AgregarLogin('asanchez','12345','2023-07-19 12:34:56','3');
-call sp_AgregarLogin('asanchez','12345','2023-07-19 12:34:56','4');
-call sp_AgregarLogin('asanchez','12345','2023-07-19 12:34:56','5');
-*/
+call sp_AgregarLogin('esantos','12345','2023-07-19 12:34:56','2');
+call sp_AgregarLogin('dsiney','12345','2023-07-19 12:34:56','3');
+call sp_AgregarLogin('kvelasquez','12345','2023-07-19 12:34:56','4');
+call sp_AgregarLogin('jsoto','12345','2023-07-19 12:34:56','5');
+
 
 -- CRUD Transacciones --
 -- Agregar --
@@ -949,7 +953,7 @@ Delimiter $$
 				End $$
 Delimiter ;
 call sp_AgregarTransaccion('compra', 1000.50, '2023-02-15 15:30:30', 1, 1);
-/*call sp_AgregarTransaccion('Venta', 2540.34, '2023-05-20 13:44:10', 2, 2);*/
+call sp_AgregarTransaccion('Venta', 2540.34, '2023-05-20 13:44:10', 2, 2);
 
 -- Listar --
 Delimiter $$
@@ -1042,7 +1046,7 @@ Delimiter $$
 				where idHistorialTransaccion = _idHistorialTransaccion;
         end $$
 Delimiter ;
-call sp_EliminarHistorialDetransacciones(1);
+/*call sp_EliminarHistorialDetransacciones(1);*/
 -- CRUD Depositos --
 
 -- AGREGAR --- 
@@ -1056,10 +1060,10 @@ Delimiter $$
 Delimiter ; 
 
 call sp_AgregarDeposito('200.25', '2021-05-13', '14:35:25', 1, 1); 
-/*call sp_AgregarDeposito('400.50', '2021-06-14', '15:32:20', 2, 2); 
+call sp_AgregarDeposito('400.50', '2021-06-14', '15:32:20', 2, 2); 
 call sp_AgregarDeposito('500.02', '2022-06-09', '14:20:32', 3, 3); 
 call sp_AgregarDeposito('650.250', '2023-07-16', '17:25:58', 4, 4); 
-call sp_AgregarDeposito('788.45', '2023-05-07', '13:52:32', 5, 5);*/
+call sp_AgregarDeposito('788.45', '2023-05-07', '13:52:32', 5, 5);
 
 -- LISTAR --
 
