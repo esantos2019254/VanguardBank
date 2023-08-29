@@ -373,8 +373,11 @@ public class Controlador extends HttpServlet {
             nuevoEmpleado.setNumeroContactoEmpleado(numeroContacto);
             nuevoEmpleado.setIdTipoEmpleado(idTipoEmpleado);
             nuevoEmpleadoDAO.editarEmpleado(nuevoEmpleado);
+            acceso = listarEmpleado;   
+        } else if(accion.equalsIgnoreCase("delEmpleado")){
+            int idEmpleado = Integer.parseInt(request.getParameter("idEmpleado"));
+            nuevoEmpleadoDAO.eliminarEmpleado(idEmpleado);
             acceso = listarEmpleado;
-            
         } else if (accion.equalsIgnoreCase("listarTipoMoneda")) {
             acceso = listarTipoMoneda;
         } else if (accion.equalsIgnoreCase("addTipoMoneda")) {
