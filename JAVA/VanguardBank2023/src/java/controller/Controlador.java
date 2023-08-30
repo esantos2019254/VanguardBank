@@ -222,6 +222,10 @@ public class Controlador extends HttpServlet {
             nuevoProveedor.setTelefonoProveedor(request.getParameter("txtTelefono"));
             nuevoProveedorDAO.editar(nuevoProveedor);
             acceso = listarProveedor;
+        } else if (accion.equalsIgnoreCase("eliminarProveedor")) {
+            int idProveedor = Integer.parseInt(request.getParameter("IDPRO"));
+            nuevoProveedorDAO.eliminar(idProveedor);
+            acceso = listarProveedor;
 
         } else if (accion.equalsIgnoreCase("listarTipoEmpleado")) {
             acceso = listarTipoEmpleado;
@@ -277,11 +281,11 @@ public class Controlador extends HttpServlet {
             nuevaTransaccion.setIdCuenta(Integer.parseInt(request.getParameter("txtIdCuenta")));
             nuevaTransaccionDAO.editar(nuevaTransaccion);
             acceso = listarTransaccion;
-        }else if (accion.equalsIgnoreCase("eliminarTransaccion")) {
+        } else if (accion.equalsIgnoreCase("eliminarTransaccion")) {
             int idTransaccion = Integer.parseInt(request.getParameter("idTransaccion"));
             nuevaTransaccionDAO.eliminar(idTransaccion);
-            acceso=listarTransaccion;
-        }  //Credito
+            acceso = listarTransaccion;
+        } //Credito
         else if (accion.equalsIgnoreCase("listarCredito")) {
             acceso = listarCredito;
         } else if (accion.equalsIgnoreCase("addCredito")) {
@@ -311,9 +315,8 @@ public class Controlador extends HttpServlet {
         } else if (accion.equalsIgnoreCase("eliminarCredito")) {
             int idCredito = Integer.parseInt(request.getParameter("idCredito"));
             creditoDAO.eliminar(idCredito);
-            acceso=listarCredito;
-        }  
-        else if (accion.equalsIgnoreCase("listarDepartamento")) {
+            acceso = listarCredito;
+        } else if (accion.equalsIgnoreCase("listarDepartamento")) {
             acceso = listarDepartamento;
         } else if (accion.equalsIgnoreCase("addDepartamento")) {
             acceso = addDepartamento;
