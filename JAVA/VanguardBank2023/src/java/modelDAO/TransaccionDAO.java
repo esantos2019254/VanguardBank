@@ -92,4 +92,16 @@ public class TransaccionDAO implements TransaccionCRUD{
         return false;
     }
     
+    @Override
+    public void eliminar(int idTrn){
+        String sql = "delete from Transaccion where idTransaccion="+idTrn;
+        try {
+            con = connect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
 }

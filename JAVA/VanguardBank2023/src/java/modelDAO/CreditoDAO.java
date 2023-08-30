@@ -89,4 +89,17 @@ public class CreditoDAO implements CreditoCRUD{
         return false;
     }
     
+    @Override
+    public void eliminar(int idCre){
+        String sql = "delete from Credito  where idCredito ="+idCre;
+        try {
+            con = connect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }
+    
 }

@@ -47,6 +47,8 @@
                         <td><%=trn.getIdCuenta()%></td>
                         <td>
                             <a href="Controlador?accion=editTransaccion&idTransaccion=<%= trn.getIdTransaccion()%>">Edit</a>
+                            <a href="Controlador?accion=eliminarTransaccion&idTransaccion=<%= trn.getIdTransaccion()%>">Eliminar</a>
+                            
                         </td>
                     </tr>
                 </tbody>        

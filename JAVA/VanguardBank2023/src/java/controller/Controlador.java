@@ -277,9 +277,12 @@ public class Controlador extends HttpServlet {
             nuevaTransaccion.setIdCuenta(Integer.parseInt(request.getParameter("txtIdCuenta")));
             nuevaTransaccionDAO.editar(nuevaTransaccion);
             acceso = listarTransaccion;
-
-            //Credito
-        } else if (accion.equalsIgnoreCase("listarCredito")) {
+        }else if (accion.equalsIgnoreCase("eliminarTransaccion")) {
+            int idTransaccion = Integer.parseInt(request.getParameter("idTransaccion"));
+            nuevaTransaccionDAO.eliminar(idTransaccion);
+            acceso=listarTransaccion;
+        }  //Credito
+        else if (accion.equalsIgnoreCase("listarCredito")) {
             acceso = listarCredito;
         } else if (accion.equalsIgnoreCase("addCredito")) {
             acceso = agregarCredito;
@@ -305,8 +308,12 @@ public class Controlador extends HttpServlet {
             nuevoCredito.setIdCuenta(Integer.parseInt(request.getParameter("txtIdCuenta")));
             creditoDAO.editar(nuevoCredito);
             acceso = listarCredito;
-
-        } else if (accion.equalsIgnoreCase("listarDepartamento")) {
+        } else if (accion.equalsIgnoreCase("eliminarCredito")) {
+            int idCredito = Integer.parseInt(request.getParameter("idCredito"));
+            creditoDAO.eliminar(idCredito);
+            acceso=listarCredito;
+        }  
+        else if (accion.equalsIgnoreCase("listarDepartamento")) {
             acceso = listarDepartamento;
         } else if (accion.equalsIgnoreCase("addDepartamento")) {
             acceso = addDepartamento;
