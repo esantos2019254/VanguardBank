@@ -11,5 +11,4 @@ public interface ProveedorCRUD {
     public Proveedor buscar(int id);
     public boolean agregar(Proveedor pro);
     public boolean editar(Proveedor pro);
-    public void eliminar (int idpro);
 }

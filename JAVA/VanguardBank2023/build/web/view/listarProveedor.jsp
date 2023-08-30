@@ -48,7 +48,6 @@
                         <td><%=pro.getTelefonoProveedor()%></td>
                         <td>
                             <a href="Controlador?accion=editarProveedor&idProveedor=<%= pro.getIdProveedor() %>">Edit</a>
-                            <a href="Controlador?accion=eliminarProveedor&IDPRO=<%= pro.getIdProveedor() %>">Eliminar</a>
                         </td>
                     </tr>
                     <%}%>
