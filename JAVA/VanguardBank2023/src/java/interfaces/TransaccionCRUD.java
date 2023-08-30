@@ -8,4 +8,5 @@ public interface TransaccionCRUD {
     public Transaccion buscar(int id);
     public boolean agregar(Transaccion trn);
     public boolean editar(Transaccion trn);
+    public void eliminar(int idTrn);
 }

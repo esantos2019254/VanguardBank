@@ -9,4 +9,5 @@ public interface CreditoCRUD {
     public Credito buscar(int id);
     public boolean agregar(Credito cre);
     public boolean editar(Credito cre);
+    public void eliminar(int idCre);
 }

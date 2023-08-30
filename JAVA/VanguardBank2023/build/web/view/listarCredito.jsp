@@ -45,6 +45,7 @@
                         <td><%=cre.getIdCuenta()%></td>
                         <td>
                             <a href="Controlador?accion=editarCredito&idCredito=<%= cre.getIdCredito()%>">Edit</a>
+                            <a href="Controlador?accion=eliminarCredito&idCredito=<%= cre.getIdCredito()%>">Eliminar</a>
                         </td>
                     </tr>
                 </tbody>
