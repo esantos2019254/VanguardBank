@@ -8,5 +8,5 @@ public interface TipoEmpleadoCRUD {
     public TipoEmpleado buscar(int id);
     public boolean agregar(TipoEmpleado TipEm);
     public boolean editar(TipoEmpleado TipEm);
-
+    public void eliminar(int idTip);
 }

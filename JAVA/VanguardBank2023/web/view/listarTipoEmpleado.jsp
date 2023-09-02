@@ -46,6 +46,7 @@
                         <td><%=TipEm.getContratoTipoEmpleado()%></td>
                         <td>
                             <a href="Controlador?accion=editarTipoEmpleado&idTipoEmpleado=<%= TipEm.getIdTipoEmpleado()%>">Edit</a>
+                            <a href="Controlador?accion=eliminarTipoEmpleado&IDTIPO=<%= TipEm.getIdTipoEmpleado()%>">Eliminar</a>
                         </td>
                     </tr>
                     <%}%>
