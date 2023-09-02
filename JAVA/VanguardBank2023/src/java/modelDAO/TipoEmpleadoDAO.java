@@ -89,5 +89,16 @@ public class TipoEmpleadoDAO implements TipoEmpleadoCRUD {
         }
         return false;
     }
+    @Override
+    public void eliminar(int idTip){
+        String sql = "delete from TipoEmpleado where idTipoEmpleado =" +idTip;
+        try {
+            con = conect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     
 }

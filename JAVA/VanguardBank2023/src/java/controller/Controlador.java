@@ -250,6 +250,10 @@ public class Controlador extends HttpServlet {
             nuevoTipoEmpleado.setContratoTipoEmpleado(request.getParameter("txtContrato"));
             nuevoTipoEmpleadoDAO.editar(nuevoTipoEmpleado);
             acceso = listarTipoEmpleado;
+        }else if (accion.equalsIgnoreCase("eliminarTipoEmpleado")) {
+                int idTipoEmpleado = Integer.parseInt(request.getParameter("IDTIPO"));
+                nuevoTipoEmpleadoDAO.eliminar( idTipoEmpleado);
+                acceso = listarTipoEmpleado;
 
             //Transacciones
         } else if (accion.equalsIgnoreCase("listarTransaccion")) {
