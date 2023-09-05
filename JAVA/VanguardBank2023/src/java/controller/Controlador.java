@@ -446,7 +446,11 @@ public class Controlador extends HttpServlet {
             nuevoHistorialDeTransacciones.setIdTransaccion(idTransaccion);
             nuevoHistorialDeTransaccionesDAO.editar(nuevoHistorialDeTransacciones);
             acceso = listHistorial;
-        } else if (accion.equalsIgnoreCase("listarCuenta")) {
+        }else if (accion.equalsIgnoreCase("eliminarHistorial")) {
+            int idHistorialTransaccion = Integer.parseInt(request.getParameter("idHistorialTransaccion"));
+            nuevoHistorialDeTransaccionesDAO.eliminar(idHistorialTransaccion);
+            acceso = listHistorial;
+        }else if (accion.equalsIgnoreCase("listarCuenta")) {
             acceso = listarCuenta;
         } else if (accion.equalsIgnoreCase("addCuenta")) {
             acceso = agregarCuenta;
