@@ -1,7 +1,7 @@
 <%-- 
     Document   : list
     Created on : 5/07/2023, 09:26:12 AM
-    Author     : informatica
+    Author     : informatica clone
 --%>
 
 <%@page import="model.HistorialDeTransacciones"%>
@@ -42,6 +42,8 @@
                         <td><%=dep.getIdTransaccion()%></td>
                         <td>
                             <a href="Controlador?accion=editarHistorial&idHistorialTransaccion=<%=dep.getIdHistorialTransaccion()%>">Edit</a>
+                            <a href="Controlador?accion=eliminarHistorial&idHistorialTransaccion=<%=dep.getIdHistorialTransaccion()%>">Eliminar</a>
+
                         </td>
                     </tr>
                     <%}%>
