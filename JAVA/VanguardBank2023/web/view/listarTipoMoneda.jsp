@@ -44,6 +44,7 @@
                         <td><%= tipo.getConversionDolar()%></td>
                         <td>
                             <a href="Controlador?accion=editarTipoMoneda&idTipoMoneda=<%=tipo.getIdTipoMoneda()%>">Edit</a>
+                            <a href="Controlador?accion=eliminarTipoMoneda&idTipoMoneda=<%=tipo.getIdTipoMoneda()%>">Eliminar</a>
                         </td>
                     </tr>
                     <%}%>

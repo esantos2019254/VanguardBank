@@ -250,10 +250,10 @@ public class Controlador extends HttpServlet {
             nuevoTipoEmpleado.setContratoTipoEmpleado(request.getParameter("txtContrato"));
             nuevoTipoEmpleadoDAO.editar(nuevoTipoEmpleado);
             acceso = listarTipoEmpleado;
-        }else if (accion.equalsIgnoreCase("eliminarTipoEmpleado")) {
-                int idTipoEmpleado = Integer.parseInt(request.getParameter("IDTIPO"));
-                nuevoTipoEmpleadoDAO.eliminar( idTipoEmpleado);
-                acceso = listarTipoEmpleado;
+        } else if (accion.equalsIgnoreCase("eliminarTipoEmpleado")) {
+            int idTipoEmpleado = Integer.parseInt(request.getParameter("IDTIPO"));
+            nuevoTipoEmpleadoDAO.eliminar(idTipoEmpleado);
+            acceso = listarTipoEmpleado;
 
             //Transacciones
         } else if (accion.equalsIgnoreCase("listarTransaccion")) {
@@ -419,6 +419,11 @@ public class Controlador extends HttpServlet {
             nuevoTipoMoneda.setNombreMoneda(nombreMoneda);
             nuevoTipoMoneda.setConversionDolar(conversionDolar);
             nuevoTipoMonedaDAO.editar(nuevoTipoMoneda);
+            acceso = listarTipoMoneda;
+
+        } else if (accion.equalsIgnoreCase("eliminarTipoMoneda")) {
+            int idTipoMoneda = Integer.parseInt(request.getParameter("idTipoMoneda"));
+            nuevoTipoMonedaDAO.eliminar(idTipoMoneda);
             acceso = listarTipoMoneda;
 
         } else if (accion.equalsIgnoreCase("listarHistorial")) {
