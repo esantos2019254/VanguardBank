@@ -119,6 +119,7 @@ Create table Servicio(
     tipoServicio varchar(100) not null,
     correlativo varchar(100) not null,
     montoServicio decimal(10,2) not null,
+    whatIs varchar(500),
     idCuenta int not null,
     primary key PK_idServicio(idServicio),
     constraint FK_Servicio_Cuenta foreign key(idCuenta)
@@ -918,7 +919,7 @@ Delimiter ;
 
 -- *********************************** PROCEDURE AGREGAR SERVICIO *************************************************
 Delimiter //
-	Create procedure sp_agregarServicio(in tipoServicio varchar(100), in correlativo varchar(100), in montoServicio decimal(10,2), in idCuenta int)
+	Create procedure sp_agregarServicio(in tipoServicio varchar(100), in correlativo varchar(100), in montoServicio decimal(10,2), in whatIs varchar(500), in idCuenta int)
 		Begin
 			Insert into Servicio(tipoServicio, correlativo, montoServicio, idCuenta)
 				values(tipoServicio, correlativo, montoServicio, idCuenta);
@@ -926,16 +927,16 @@ Delimiter //
 Delimiter ;
 
 
-call sp_agregarServicio('Transferencias de dinero', 'Número de cuenta de destino', 1500.50, 1);
-call sp_agregarServicio('Banca móvil', 'Aplicación móvil', 255.50, 2);
-call sp_agregarServicio('Banca en línea', 'contraseña', 325.25, 3);
-call sp_agregarServicio('Tarjetas de débito', 'código de seguridad', 555.50, 4);
-call sp_agregarServicio('Préstamos para automóviles', 'Tasas de interés', 600.50, 5);
-call sp_agregarServicio('Préstamos personales', 'Tasas de interés', 904.50, 6);
-call sp_agregarServicio('Préstamos hipotecarios', 'Tasas de interés', 651.45, 7);
-call sp_agregarServicio('Tarjetas de crédito', 'Estados de cuenta mensuales', 850.50, 8);
-call sp_agregarServicio('Cuentas de ahorro', 'Libretas de ahorro', 2000.25, 9);
-call sp_agregarServicio('Cuentas corrientes', 'Estados de cuenta', 1000.65, 10);
+call sp_agregarServicio('Transferencias de dinero', 'Número de cuenta de destino', 1500.50, 'Nos especializamos en transferencias que son envíos de dinero realizados a la orden de un cliente desde su cuenta bancaria hacia otra cuenta designada.', 1);
+call sp_agregarServicio('Banca móvil', 'Aplicación móvil', 255.50, 'Facilita tu vida realizando consultas, transferencias, pagos y gestiones en cualquier momento y lugar con nuestra plataforma, tecnológica segura y confiable las 24hrs', 2);
+call sp_agregarServicio('Banca en línea', 'contraseña', 325.25, 'Es un servicio que otorgan los bancos a sus clientes para poder hacer procesos financieros en su teléfono celular o computadora, logrando que transacciones como transferencias o consultas sean mucho más versátiles.', 3);
+call sp_agregarServicio('Tarjetas de débito', 'código de seguridad', 555.50, 'Una tarjeta de débito es una herramienta que te permite acceder a tu dinero en una cuenta bancaria y realizar compras o retiros de efectivo. A diferencia de una tarjeta de crédito, gastas tu propio dinero, y los fondos se deducen directamente de tu cuenta.', 4);
+call sp_agregarServicio('Préstamos para automóviles', 'Tasas de interés', 600.50, 'Los préstamos para automóviles son acuerdos financieros en los que un prestamista proporciona fondos a un prestatario para la compra de un vehículo. Es importante investigar y comparar ofertas de préstamos de diferentes instituciones financieras para obtener las condiciones y tasas más favorables. También se recomienda revisar cuidadosamente los términos del préstamo antes de comprometerse. ', 5);
+call sp_agregarServicio('Préstamos personales', 'Tasas de interés', 904.50, 'Los préstamos para automóviles son acuerdos financieros en los que un prestamista proporciona fondos a un prestatario para la compra de un vehículo. Es importante investigar y comparar ofertas de préstamos de diferentes instituciones financieras para obtener las condiciones y tasas más favorables. También se recomienda revisar cuidadosamente los términos del préstamo antes de comprometerse. ', 6);
+call sp_agregarServicio('Préstamos hipotecarios', 'Tasas de interés', 651.45, 'Los préstamos para automóviles son acuerdos financieros en los que un prestamista proporciona fondos a un prestatario para la compra de un vehículo. Es importante investigar y comparar ofertas de préstamos de diferentes instituciones financieras para obtener las condiciones y tasas más favorables. También se recomienda revisar cuidadosamente los términos del préstamo antes de comprometerse.', 7);
+call sp_agregarServicio('Tarjetas de crédito', 'Estados de cuenta mensuales', 850.50, 'Vanguardbank te brinda la oportunidad  de comprar en Guatemala o cualquier parte del mundo sin usar dinero en efectivo y con beneficios hacia  los clientes con nuestras tarjetas de crédito, solicita o pide información aquí', 8);
+call sp_agregarServicio('Cuentas de ahorro', 'Libretas de ahorro', 2000.25, 'Una cuenta de ahorro es un tipo de cuenta bancaria diseñada específicamente para ayudarte a ahorrar dinero de manera segura y efectiva. Al abrir una cuenta de ahorro, puedes depositar dinero de forma regula, y el banco te paga intereses por mantener esos fondos en la cuenta.', 9);
+call sp_agregarServicio('Cuentas corrientes', 'Estados de cuenta', 1000.65, 'Una cuenta de ahorro es un tipo de cuenta bancaria diseñada específicamente para ayudarte a ahorrar dinero de manera segura y efectiva. Al abrir una cuenta de ahorro, puedes depositar dinero de forma regula, y el banco te paga intereses por mantener esos fondos en la cuenta.', 10);
 
 
 -- *********************************** PROCEDURE LISTAR SERVICIO *************************************************
