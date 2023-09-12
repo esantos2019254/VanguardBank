@@ -29,6 +29,7 @@
                         <th>HORA DEPOSITO</th>
 			<th>ID CUENTA ORIGEN</th>
 			<th>ID CUENTA DEPOSITO</th>
+                        <th>ACCIONES</th>
                     </tr>
                 </thead>
                 <%
@@ -50,6 +51,7 @@
 			
                         <td>
                             <a href="Controlador?accion=editDeposito&idDeposito=<%= dep.getIdDeposito()%>">Edit</a>
+                            <a href="Controlador?accion=eliminarDeposito&idDeposito=<%= dep.getIdDeposito()%>">Eliminar</a><br>
                         </td>
                     </tr>
                     <%}%>

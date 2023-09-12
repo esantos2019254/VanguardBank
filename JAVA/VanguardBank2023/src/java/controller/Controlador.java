@@ -194,6 +194,11 @@ public class Controlador extends HttpServlet {
             nuevoDeposito.setIdCuentaDeposito(Integer.parseInt(request.getParameter("txtIdCuentaDeposito")));
             nuevoDepositoDAO.editar(nuevoDeposito);
             acceso = listarDeposito;
+
+        } else if (accion.equalsIgnoreCase("eliminarDeposito")) {
+            int idDeposito = Integer.parseInt(request.getParameter("idDeposito"));
+            nuevoDepositoDAO.eliminar(idDeposito);
+            acceso = listarDeposito;
         } else if (accion.equalsIgnoreCase("listarProveedor")) {
             acceso = listarProveedor;
 
@@ -449,11 +454,11 @@ public class Controlador extends HttpServlet {
             nuevoHistorialDeTransacciones.setIdTransaccion(idTransaccion);
             nuevoHistorialDeTransaccionesDAO.editar(nuevoHistorialDeTransacciones);
             acceso = listHistorial;
-        }else if (accion.equalsIgnoreCase("eliminarHistorial")) {
+        } else if (accion.equalsIgnoreCase("eliminarHistorial")) {
             int idHistorialTransaccion = Integer.parseInt(request.getParameter("idHistorialTransaccion"));
             nuevoHistorialDeTransaccionesDAO.eliminar(idHistorialTransaccion);
             acceso = listHistorial;
-        }else if (accion.equalsIgnoreCase("listarCuenta")) {
+        } else if (accion.equalsIgnoreCase("listarCuenta")) {
             acceso = listarCuenta;
         } else if (accion.equalsIgnoreCase("addCuenta")) {
             acceso = agregarCuenta;

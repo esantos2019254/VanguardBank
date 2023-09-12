@@ -10,8 +10,8 @@ public class Conexion {
     public Conexion() {
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/DBVanguardBank?useSSL=false", "root", "admin");
-            //conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/DBVanguardBank?useSSL=false", "quinto", "admin");
+            //conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/DBVanguardBank?useSSL=false", "root", "admin");
+            conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/DBVanguardBank?useSSL=false", "quinto", "admin");
 
         } catch (Exception e) {
             e.printStackTrace();
