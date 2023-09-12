@@ -10,5 +10,6 @@ public interface DepositoCRUD {
     public Deposito buscar(int id);
     public boolean agregar(Deposito dep);
     public boolean editar(Deposito dep);
+    public void eliminar(int id);
     
 }

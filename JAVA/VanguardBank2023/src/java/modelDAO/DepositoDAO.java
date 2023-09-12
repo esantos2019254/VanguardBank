@@ -94,5 +94,16 @@ public class DepositoDAO implements DepositoCRUD{
         }
         return false;
     }
+        @Override
+    public void eliminar(int idDep) {
+        String sql = "delete from Deposito where idDeposito =" + idDep;
+        try {
+            con = connect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     
 }
