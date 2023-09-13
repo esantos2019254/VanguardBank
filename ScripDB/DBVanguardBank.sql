@@ -1141,6 +1141,27 @@ Delimiter $$
         end $$
 Delimiter ;
 call sp_AgregarHistorialDeTransacciones(1,1);
+call sp_AgregarHistorialDeTransacciones(2,1);
+call sp_AgregarHistorialDeTransacciones(3,1);
+call sp_AgregarHistorialDeTransacciones(4,1);
+call sp_AgregarHistorialDeTransacciones(5,1);
+call sp_AgregarHistorialDeTransacciones(6,1);
+call sp_AgregarHistorialDeTransacciones(1,2);
+call sp_AgregarHistorialDeTransacciones(2,3);
+call sp_AgregarHistorialDeTransacciones(2,4);
+call sp_AgregarHistorialDeTransacciones(2,5);
+call sp_AgregarHistorialDeTransacciones(2,6);
+call sp_AgregarHistorialDeTransacciones(3,1);
+call sp_AgregarHistorialDeTransacciones(3,2);
+call sp_AgregarHistorialDeTransacciones(3,3);
+call sp_AgregarHistorialDeTransacciones(3,4);
+call sp_AgregarHistorialDeTransacciones(3,5);
+call sp_AgregarHistorialDeTransacciones(4,1);
+call sp_AgregarHistorialDeTransacciones(4,2);
+call sp_AgregarHistorialDeTransacciones(4,3);
+call sp_AgregarHistorialDeTransacciones(4,4);
+call sp_AgregarHistorialDeTransacciones(4,5);
+
 -- LISTAR HISTORIAL DE TRANSACCIONES
 Delimiter $$
 	Create procedure sp_ListarHistorialDeTransacciones()
