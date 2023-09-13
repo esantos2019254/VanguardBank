@@ -21,7 +21,5 @@ public interface HistorialDeTransaccionesCRUD {
     public boolean agregar(HistorialDeTransacciones histo);
 
     public boolean editar(HistorialDeTransacciones histo);
-
     public void eliminar(int HistorialDeTransacciones);
-
 }

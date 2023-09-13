@@ -77,7 +77,33 @@ public class CuentaDAO implements CuentaCRUD{
     }
 
     @Override
-    public Cuenta buscarCuenta(long numCuenta) {
+    public Cuenta buscarCuenta(int numCuenta) {
+        String sql = "Select idCuenta as Id_Cuenta,numeroCuenta as Número_Cuenta,"
+                + "saldoCuenta as Saldo,tipoCuenta as TipoCuenta,fechaApertura as Fecha_Apertura,"
+                + "DPI as DPI,idEmpleado as Id_Empleado,idTipoMoneda as Id_Tipo_Moneda,"
+                + "idSucursal as Id_Sucursal from Cuenta where idCuenta =" + numCuenta;
+        try {
+            con = conexion.getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                cuenta.setIdCuenta(rs.getInt("Id_Cuenta"));
+                cuenta.setNumeroCuenta(rs.getLong("Número_Cuenta"));
+                cuenta.setSaldoCuenta(rs.getDouble("Saldo"));
+                cuenta.setTipoCuenta(rs.getString("TipoCuenta"));
+                cuenta.setFechaApertura(rs.getDate("Fecha_Apertura"));
+                cuenta.setDPI(rs.getLong("DPI"));
+                cuenta.setIdEmpleado(rs.getInt("Id_Empleado"));
+                cuenta.setIdTipoMoneda(rs.getInt("Id_Tipo_Moneda"));
+                cuenta.setIdSucursal(rs.getInt("Id_Sucursal"));
+            }
+        }catch (Exception error) {
+            error.printStackTrace();
+        }
+        return cuenta;
+    }
+    
+    public Cuenta buscarCuentaDPI(long numCuenta) {
         String sql = "Select idCuenta as Id_Cuenta,numeroCuenta as Número_Cuenta,"
                 + "saldoCuenta as Saldo,tipoCuenta as TipoCuenta,fechaApertura as Fecha_Apertura,"
                 + "DPI as DPI,idEmpleado as Id_Empleado,idTipoMoneda as Id_Tipo_Moneda,"
@@ -112,7 +138,7 @@ public class CuentaDAO implements CuentaCRUD{
                 + "',idEmpleado = '"+cuenta.getIdEmpleado()
                 + "',idTipoMoneda = '"+cuenta.getIdTipoMoneda()
                 + "',idSucursal ='"+cuenta.getIdSucursal()
-                + "' where numeroCuenta ='" + cuenta.getNumeroCuenta()+"';";
+                + "' where idCuenta ='" + cuenta.getIdCuenta()+"';";
         try {
             con = conexion.getConnection();
             ps = con.prepareStatement(sql);

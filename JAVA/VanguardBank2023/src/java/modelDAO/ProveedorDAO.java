@@ -76,7 +76,7 @@ public class ProveedorDAO implements ProveedorCRUD {
 
     @Override
     public boolean editar(Proveedor pro) {
-        String sql = "Update Proveedor set nombreProveedor = '" + pro.getNombreProveedor() + "', direccionProveedor = '" + pro.getDireccionProveedor()
+        String sql = "Update Proveedor set nombreProveedor = '"+pro.getNombreProveedor()+"', direccionProveedor = '"+pro.getDireccionProveedor()
                 + "', correoProveedor = '" + pro.getCorreoProveedor() + "', telefonoProveedor = '" + pro.getTelefonoProveedor() + "'where idProveedor = " + pro.getIdProveedor();
         try {
             con = conect.getConnection();
@@ -87,10 +87,9 @@ public class ProveedorDAO implements ProveedorCRUD {
         }
         return false;
     }
-
     @Override
-    public void eliminar(int idpro) {
-        String sql = "delete from Proveedor where idProveedor =" + idpro;
+    public void eliminar(int id) {
+        String sql = "Delete from Proveedor where idProveedor =" + id;
         try {
             con = conect.getConnection();
             ps = con.prepareStatement(sql);
