@@ -196,11 +196,11 @@ Delimiter $$
         End $$
 Delimiter ;
 
-call sp_AgregarCliente(1879451248101,'Elmer Rodrigo','Santos García','4874-5487','Km.123 Carretera Al Atlantico, Teculután','Masculino');
-call sp_AgregarCliente(6548721036548,'Luis Fernando','Pérez López','9471-2148','16 calle y 6a. Avenida, zona 9 Guatemala','Masculino');
-call sp_AgregarCliente(2548100254810,'Irma Beatriz','Jiménez Gonzáles','4720-3200','5a. calle 5-57, Barrio El centro, El Progreso','Femenino');
-call sp_AgregarCliente(2001548231201,'Carlos Alberto','Peréz Gonzáles','9912-0141','9a. Avenida y 5a. Calle, Barrio La cruz, Guastatoya','Masculino');
-call sp_AgregarCliente(9513578241010,'Raúl Fernando','López Rodriguez','9321-2147','Km. 282 de la Carretera al Atlántico, Izabal','Masculino');
+call sp_AgregarCliente(1879451248101,'Anderson Uriel','Sanches Rogel','4874-5487','Km.123 Carretera Al Atlantico, Teculután','Masculino');
+call sp_AgregarCliente(6548721036548,'Elmer Rodrigo','Santos García','9471-2148','16 calle y 6a. Avenida, zona 9 Guatemala','Masculino');
+call sp_AgregarCliente(2548100254810,'Diego Sebastian','Siney García','4720-3200','5a. calle 5-57, Barrio El centro, El Progreso','Femenino');
+call sp_AgregarCliente(2001548231201,'Kenneth Bryan','Velasquez Rodriguez','9912-0141','9a. Avenida y 5a. Calle, Barrio La cruz, Guastatoya','Masculino');
+call sp_AgregarCliente(9513578241010,'José David','Soto Puac','9321-2147','Km. 282 de la Carretera al Atlántico, Izabal','Masculino');
 call sp_AgregarCliente(1549531201541,'Ricardo Daniel','Gómez Soto','9486-6498','10 calle 9-68 zona 1 Guatemala','Masculino');
 call sp_AgregarCliente(2548913201547,'Andrés Felipe','Castro Romero','5132-3215','13 Calle y 16 Av. Zona 3 Zacapa','Masculino');
 call sp_AgregarCliente(3021549874102,'Laura Ximena','Gutiérrez Morales','3154-0255','8a Avenida, zona 1 Chiquimula','Femenino');
@@ -783,7 +783,6 @@ Call sp_AgregarCuenta(10017,98.50,'Depósito','1999-04-21', 9871612054893, 17, 1
 Call sp_AgregarCuenta(10018,63432,'Nómina','2001-03-22', 3202165498321, 18, 2, 9);
 Call sp_AgregarCuenta(10019,3154.15,'Nómina','1988-02-25', 0321597812202, 19, 19, 9);
 Call sp_AgregarCuenta(10020,1552.25,'Corriente','2011-01-18', 3210546892132, 20, 11, 8);
-
 #	Listar Cuentas 	#
 Delimiter $$
 	Create procedure sp_ListarCuentas()
@@ -925,8 +924,8 @@ Delimiter ;
 Delimiter //
 	Create procedure sp_agregarServicio(in tipoServicio varchar(100), in correlativo varchar(100), in montoServicio decimal(10,2), in whatIs varchar(500), in idCuenta int)
 		Begin
-			Insert into Servicio(tipoServicio, correlativo, montoServicio, idCuenta)
-				values(tipoServicio, correlativo, montoServicio, idCuenta);
+			Insert into Servicio(tipoServicio, correlativo, montoServicio, whatIs, idCuenta)
+				values(tipoServicio, correlativo, montoServicio, whatIs, idCuenta);
         End //
 Delimiter ;
 
@@ -952,11 +951,13 @@ Delimiter //
 				S.idServicio, 
 				S.tipoServicio, 
                 S.correlativo, 
-                S.montoServicio, 
+                S.montoServicio,
+                S.whatIs,
                 S.idCuenta from Servicio S;
 			
         End //
 Delimiter ;
+call sp_listarServicios();
 
 -- *********************************** PROCEDURE EDITAR SERVICIO *************************************************
 
