@@ -7,10 +7,12 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Empleado;
 import model.Login;
 import modelDAO.LoginDAO;
 
@@ -22,6 +24,7 @@ public class Validar extends HttpServlet {
 
     LoginDAO loginDAO = new LoginDAO();
     Login login = new Login();
+    Empleado empleado = new Empleado();
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -76,18 +79,35 @@ public class Validar extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         String accion = request.getParameter("accion");
         if (accion.equalsIgnoreCase("Ingresar")) {
             String user = request.getParameter("txtUser");
             String pass = request.getParameter("txtPass");
+
             login = loginDAO.validar(user, pass);
+            empleado = loginDAO.validarEmpleado(user, pass);
+            System.out.println(empleado.getNombreEmpleado());
             if (login.getNombreUsuario() != null) {
+                request.setAttribute("idMyCuenta", login.getIdCuenta());
                 request.setAttribute("nombreUsuario", login);
-                request.getRequestDispatcher("Controlador?menu=index").forward(request, response);
+
+                request.getRequestDispatcher("ControladorFunc?menu=indexCliente").forward(request, response);
+            } else if (empleado.getNombreEmpleado() != null) {
+                request.setAttribute("nombreUsuario", login);
+                request.getRequestDispatcher("ControladorFunc?menu=index").forward(request, response);
             } else {
                 request.getRequestDispatcher("indexLogin.jsp").forward(request, response);
             }
+        } else if (accion.equals("Agregar")) {
+            Login newlogin = new Login();
+            String horaSesion = LocalDateTime.now().toString();
+            newlogin.setNombreUsuario(request.getParameter("txtUser"));
+            newlogin.setPasswordUsuario(request.getParameter("txtPass"));
+            newlogin.setHoraSesion(horaSesion);
+            newlogin.setIdCuenta(Integer.parseInt(request.getParameter("txtIdCuenta")));
+            loginDAO.agregar(newlogin);
+            request.getRequestDispatcher("indexLogin.jsp").forward(request, response);
         } else {
             request.getRequestDispatcher("indexLogin.jsp").forward(request, response);
         }
@@ -98,4 +118,4 @@ public class Validar extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-}   
+}

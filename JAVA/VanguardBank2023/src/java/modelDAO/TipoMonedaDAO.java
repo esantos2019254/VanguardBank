@@ -51,7 +51,7 @@ public class TipoMonedaDAO {
                 nTipoMoneda.setConversionDolar(rs.getDouble("conversionDolar"));
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace();   
         }
         return nTipoMoneda;
     }
@@ -70,9 +70,9 @@ public class TipoMonedaDAO {
     }
 
     public boolean editar(TipoMoneda tipo) {
-        String sql = "Update TipoMoneda set simboloMoneda ='" + tipo.getSimboloMoneda() + "', nombreMoneda = '"
-                + tipo.getNombreMoneda() + "', conversionDolar = '" + tipo.getConversionDolar()
-                + "' where idTipoMoneda = " + tipo.getIdTipoMoneda();
+        String sql = "Update TipoMoneda set simboloMoneda ='"+ tipo.getSimboloMoneda() + "', nombreMoneda = '"
+                + tipo.getNombreMoneda() + "', conversionDolar = '"+ tipo.getConversionDolar()
+                +"' where idTipoMoneda = " + tipo.getIdTipoMoneda();
         try {
             con = conect.getConnection();
             ps = con.prepareStatement(sql);
@@ -82,7 +82,6 @@ public class TipoMonedaDAO {
         }
         return false;
     }
-
     public void eliminar(int tipoMoneda) {
         String sql = "delete from tipoMoneda where idTipoMoneda =" + tipoMoneda;
         try {
@@ -92,6 +91,5 @@ public class TipoMonedaDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 }
