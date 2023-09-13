@@ -87,8 +87,6 @@ public class ProveedorDAO implements ProveedorCRUD {
         }
         return false;
     }
-<<<<<<< HEAD
-=======
     @Override
     public void eliminar(int id) {
         String sql = "Delete from Proveedor where idProveedor =" + id;
@@ -100,5 +98,4 @@ public class ProveedorDAO implements ProveedorCRUD {
             e.printStackTrace();
         }
     }
->>>>>>> jsandoval-2022231
 }

@@ -11,8 +11,5 @@ public interface ProveedorCRUD {
     public Proveedor buscar(int id);
     public boolean agregar(Proveedor pro);
     public boolean editar(Proveedor pro);
-<<<<<<< HEAD
-=======
     public void eliminar(int id);
->>>>>>> jsandoval-2022231
 }

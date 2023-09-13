@@ -263,7 +263,6 @@ public class Controlador extends HttpServlet {
             int idProveedor = Integer.parseInt(request.getParameter("idProveedor"));
             nuevoProveedorDAO.eliminar(idProveedor);
             acceso = listarProveedor;
->>>>>>> jsandoval-2022231
 
         } else if (accion.equalsIgnoreCase("listarTipoEmpleado")) {
             acceso = listarTipoEmpleado;
