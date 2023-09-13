@@ -18,18 +18,22 @@ public class Empleado {
     private Date fechaContratacion;
     private String direccionEmpleado;
     private String numeroContactoEmpleado;
+    private String userEmpleado;
+    private String passwordEmpleado;
     private int idTipoEmpleado;
 
     public Empleado() {
     }
 
-    public Empleado(int idEmpleado, String nombreEmpleado,String apellidoEmpleado, Date fechaContratacion, String direccionEmpleado, String numeroContactoEmpleado, int idTipoEmpleado) {
-        this.nombreEmpleado = nombreEmpleado;
+    public Empleado(int idEmpleado, String nombreEmpleado, String apellidoEmpleado, Date fechaContratacion, String direccionEmpleado, String numeroContactoEmpleado, String userEmpleado, String passwordEmpleado, int idTipoEmpleado) {
         this.idEmpleado = idEmpleado;
+        this.nombreEmpleado = nombreEmpleado;
         this.apellidoEmpleado = apellidoEmpleado;
         this.fechaContratacion = fechaContratacion;
         this.direccionEmpleado = direccionEmpleado;
         this.numeroContactoEmpleado = numeroContactoEmpleado;
+        this.userEmpleado = userEmpleado;
+        this.passwordEmpleado = passwordEmpleado;
         this.idTipoEmpleado = idTipoEmpleado;
     }
 
@@ -81,6 +85,22 @@ public class Empleado {
         this.numeroContactoEmpleado = numeroContactoEmpleado;
     }
 
+    public String getUserEmpleado() {
+        return userEmpleado;
+    }
+
+    public void setUserEmpleado(String userEmpleado) {
+        this.userEmpleado = userEmpleado;
+    }
+
+    public String getPasswordEmpleado() {
+        return passwordEmpleado;
+    }
+
+    public void setPasswordEmpleado(String passwordEmpleado) {
+        this.passwordEmpleado = passwordEmpleado;
+    }
+
     public int getIdTipoEmpleado() {
         return idTipoEmpleado;
     }
@@ -89,6 +109,8 @@ public class Empleado {
         this.idTipoEmpleado = idTipoEmpleado;
     }
 
+    
+    
     @Override
     public String toString() {
         return "Empleado{" + "idEmpleado=" + idEmpleado + ", nombreEmpleado=" + nombreEmpleado + ", apellidoEmpleado=" + apellidoEmpleado + ", fechaContratacion=" + fechaContratacion + ", direccionEmpleado=" + direccionEmpleado + ", numeroContactoEmpleado=" + numeroContactoEmpleado + ", idTipoEmpleado=" + idTipoEmpleado + '}';

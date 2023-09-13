@@ -63,8 +63,5 @@ public class Login {
     public void setIdCuenta(int idCuenta) {
         this.idCuenta = idCuenta;
     }
-    
-    
-    
-    
+
 }

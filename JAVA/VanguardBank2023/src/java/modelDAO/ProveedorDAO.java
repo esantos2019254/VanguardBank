@@ -87,4 +87,18 @@ public class ProveedorDAO implements ProveedorCRUD {
         }
         return false;
     }
+<<<<<<< HEAD
+=======
+    @Override
+    public void eliminar(int id) {
+        String sql = "Delete from Proveedor where idProveedor =" + id;
+        try {
+            con = conect.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+>>>>>>> jsandoval-2022231
 }

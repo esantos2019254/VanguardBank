@@ -41,6 +41,29 @@ public class DepositoDAO implements DepositoCRUD{
         }
        return listaDeposito;
     }
+    
+    public List listarPorCuenta(int id) {
+       ArrayList <Deposito> listaDeposito = new ArrayList<>();
+       String sql = "select * from Deposito where idCuentaOrigen = " + id;
+        try {
+            con = connect.getConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Deposito nuevoDeposito = new Deposito ();
+                nuevoDeposito.setIdDeposito(rs.getInt("idDeposito"));
+		nuevoDeposito.setMontoDeposito(rs.getDouble("montoDeposito")); 
+		nuevoDeposito.setFechaDeposito(rs.getString("fechaDeposito")); 
+		nuevoDeposito.setHoraDeposito(rs.getString("horaDeposito")); 
+		nuevoDeposito.setIdCuentaOrigen(rs.getInt("idCuentaOrigen")); 
+		nuevoDeposito.setIdCuentaDeposito(rs.getInt("idCuentaDeposito"));
+                listaDeposito.add(nuevoDeposito);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+       return listaDeposito;
+    }
 
     @Override
     public Deposito buscar(int id) {
@@ -94,7 +117,7 @@ public class DepositoDAO implements DepositoCRUD{
         }
         return false;
     }
-        @Override
+    @Override
     public void eliminar(int idDep) {
         String sql = "delete from Deposito where idDeposito =" + idDep;
         try {
@@ -105,5 +128,4 @@ public class DepositoDAO implements DepositoCRUD{
             e.printStackTrace();
         }
     }
-    
 }
