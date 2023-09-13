@@ -13,10 +13,6 @@
         <servlet-name>Validar</servlet-name>
         <servlet-class>controller.Validar</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>ControladorFunc</servlet-name>
-        <servlet-class>controller.ControladorFunc</servlet-class>
-    </servlet>
     <servlet-mapping>
         <servlet-name>Controlador</servlet-name>
         <url-pattern>/Controlador</url-pattern>
@@ -24,10 +20,6 @@
     <servlet-mapping>
         <servlet-name>Validar</servlet-name>
         <url-pattern>/Validar</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ControladorFunc</servlet-name>
-        <url-pattern>/ControladorFunc</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

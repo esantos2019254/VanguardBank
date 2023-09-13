@@ -10,4 +10,5 @@ public interface TipoMonedaCRUD {
     public boolean agregar(TipoMoneda tipo);
     public boolean editar(TipoMoneda tipo);
     public void eliminar(int tipoMoneda);
+    
 }

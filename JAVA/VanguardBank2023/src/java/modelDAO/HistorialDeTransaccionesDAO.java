@@ -82,8 +82,8 @@ public class HistorialDeTransaccionesDAO implements HistorialDeTransaccionesCRUD
 
     @Override
     public boolean editar(HistorialDeTransacciones histo) {
-        String sql = "Update HistorialDeTransacciones set idCuenta = '"+histo.getIdCuenta()+"', idTransaccion = '"
-                    +histo.getIdTransaccion()+"' where idHistorialTransaccion = "+histo.getIdHistorialTransaccion();
+        String sql = "Update HistorialDeTransacciones set idCuenta = '" + histo.getIdCuenta() + "', idTransaccion = '"
+                + histo.getIdTransaccion() + "' where idHistorialTransaccion = " + histo.getIdHistorialTransaccion();
         try {
             con = conect.getConnection();
             ps = con.prepareStatement(sql);
@@ -94,6 +94,7 @@ public class HistorialDeTransaccionesDAO implements HistorialDeTransaccionesCRUD
         return false;
 
     }
+
     @Override
     public void eliminar(int HistorialDeTransacciones) {
         String sql = "delete from historialdetransacciones where idHistorialTransaccion =" + HistorialDeTransacciones;
@@ -106,4 +107,16 @@ public class HistorialDeTransaccionesDAO implements HistorialDeTransaccionesCRUD
 
         }
     }
+
+//        @Override
+//    public void eliminar(int idTrn){
+//        String sql = "delete from Transaccion where idTransaccion="+idTrn;
+//        try {
+//            con = connect.getConnection();
+//            ps = con.prepareStatement(sql);
+//            ps.executeUpdate();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 }

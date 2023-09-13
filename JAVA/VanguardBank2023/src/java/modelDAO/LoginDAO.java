@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
-import model.Empleado;
 import model.Login;
 
 public class LoginDAO implements LoginCRUD {
@@ -42,36 +41,6 @@ public class LoginDAO implements LoginCRUD {
         }
         
         return login;
-    }
-    
-    public Empleado validarEmpleado(String nombreUsuario, String passwordUsuario) {
-        
-        Empleado empleado = new Empleado();
-        String sql = "select * from Empleado where userEmpleado = ? and passwordEmpleado = ?";
-        try {
-            con = conect.getConnection();
-            ps = con.prepareStatement(sql);
-            ps.setString(1, nombreUsuario);
-            ps.setString(2, passwordUsuario);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                empleado.setIdEmpleado(rs.getInt(1));
-                empleado.setNombreEmpleado(rs.getString(2));
-                empleado.setApellidoEmpleado(rs.getString(3));
-                empleado.setFechaContratacion(rs.getDate(4));
-                empleado.setDireccionEmpleado(rs.getString(5));
-                empleado.setNumeroContactoEmpleado(rs.getString(6));
-                empleado.setUserEmpleado(rs.getString(7));
-                empleado.setPasswordEmpleado(rs.getString(8));
-                empleado.setIdTipoEmpleado(rs.getInt(9));
-                
-            }
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        
-        return empleado;
     }
     
     @Override

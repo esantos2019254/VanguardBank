@@ -3,9 +3,6 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -18,10 +15,7 @@ import model.Departamento;
 import model.Deposito;
 import model.Empleado;
 import model.HistorialDeTransacciones;
-import model.Login;
 import model.Proveedor;
-import model.Servicio;
-import model.Sucursal;
 import model.TipoEmpleado;
 import model.TipoMoneda;
 import model.Transaccion;
@@ -32,19 +26,12 @@ import modelDAO.DepartamentoDAO;
 import modelDAO.DepositoDAO;
 import modelDAO.EmpleadoDAO;
 import modelDAO.HistorialDeTransaccionesDAO;
-import modelDAO.LoginDAO;
 import modelDAO.ProveedorDAO;
-import modelDAO.ServicioDAO;
-import modelDAO.SucursalDAO;
 import modelDAO.TipoEmpleadoDAO;
 import modelDAO.TipoMonedaDAO;
 import modelDAO.TransaccionDAO;
 
 public class Controlador extends HttpServlet {
-
-    String indexlol = "index.jsp";
-    String carritoServicio = "view/carritoServicio.jsp";
-    String equipoJsp = "view/equipo.jsp";
 
     String listar = "view/listarCliente.jsp";
     String add = "view/agregarCliente.jsp";
@@ -57,21 +44,6 @@ public class Controlador extends HttpServlet {
     String editDeposito = "view/editarDeposito.jsp";
     Deposito nuevoDeposito = new Deposito();
     DepositoDAO nuevoDepositoDAO = new DepositoDAO();
-
-    //SERVICIO
-    String listarServicio = "view/listarServicio.jsp";
-    String agregarServicio = "view/agregarServicio.jsp";
-    String editServicio = "view/editarServicio.jsp";
-    Servicio nuevoServicio = new Servicio();
-    ServicioDAO nuevoServicioDAO = new ServicioDAO();
-    List<Servicio> listaServicio = new ArrayList<>();
-
-    //SUCURSAL
-    String listarSucursal = "view/listarSucursal.jsp";
-    String agregarSucu = "view/agregarSucursal.jsp";
-    String editarSucursal = "view/editarSucursal.jsp";
-    Sucursal nuevaSucursal = new Sucursal();
-    SucursalDAO nuevaSucursalDAO = new SucursalDAO();
 
     String listarProveedor = "view/listarProveedor.jsp";
     String addProveedor = "view/agregarProveedor.jsp";
@@ -134,15 +106,14 @@ public class Controlador extends HttpServlet {
     String editarCredito = "view/editarCredito.jsp";
     Credito nuevoCredito = new Credito();
     CreditoDAO creditoDAO = new CreditoDAO();
-    
-    //Login
-    String addLogin = "view/agregarLogin.jsp";
-    LoginDAO loginDAO = new LoginDAO();
-    Login login = new Login();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        String menu = request.getParameter("menu");
+        String accion = request.getParameter("accion");
+        if (menu.equals("index")) {
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -161,8 +132,6 @@ public class Controlador extends HttpServlet {
         String accion = request.getParameter("accion");
         if (accion.equalsIgnoreCase("listar")) {
             acceso = listar;
-        } else if (accion.equalsIgnoreCase("index")) {
-            acceso = indexlol;
         } else if (accion.equalsIgnoreCase("add")) {
             acceso = add;
         } else if (accion.equalsIgnoreCase("Agregar")) {
@@ -225,14 +194,14 @@ public class Controlador extends HttpServlet {
             nuevoDeposito.setIdCuentaDeposito(Integer.parseInt(request.getParameter("txtIdCuentaDeposito")));
             nuevoDepositoDAO.editar(nuevoDeposito);
             acceso = listarDeposito;
+
         } else if (accion.equalsIgnoreCase("eliminarDeposito")) {
             int idDeposito = Integer.parseInt(request.getParameter("idDeposito"));
             nuevoDepositoDAO.eliminar(idDeposito);
             acceso = listarDeposito;
-            
         } else if (accion.equalsIgnoreCase("listarProveedor")) {
             acceso = listarProveedor;
-            
+
         } else if (accion.equalsIgnoreCase("addProveedor")) {
             acceso = addProveedor;
         } else if (accion.equalsIgnoreCase("AgregarProveedor")) {
@@ -258,8 +227,8 @@ public class Controlador extends HttpServlet {
             nuevoProveedor.setTelefonoProveedor(request.getParameter("txtTelefono"));
             nuevoProveedorDAO.editar(nuevoProveedor);
             acceso = listarProveedor;
-        }else if (accion.equalsIgnoreCase("eliminarProveedor")){
-            int idProveedor = Integer.parseInt(request.getParameter("idProveedor"));
+        } else if (accion.equalsIgnoreCase("eliminarProveedor")) {
+            int idProveedor = Integer.parseInt(request.getParameter("IDPRO"));
             nuevoProveedorDAO.eliminar(idProveedor);
             acceso = listarProveedor;
 
@@ -456,6 +425,7 @@ public class Controlador extends HttpServlet {
             nuevoTipoMoneda.setConversionDolar(conversionDolar);
             nuevoTipoMonedaDAO.editar(nuevoTipoMoneda);
             acceso = listarTipoMoneda;
+
         } else if (accion.equalsIgnoreCase("eliminarTipoMoneda")) {
             int idTipoMoneda = Integer.parseInt(request.getParameter("idTipoMoneda"));
             nuevoTipoMonedaDAO.eliminar(idTipoMoneda);
@@ -475,16 +445,18 @@ public class Controlador extends HttpServlet {
         } else if (accion.equalsIgnoreCase("editarHistorial")) {
             request.setAttribute("idHistorial", request.getParameter("idHistorialTransaccion"));
             acceso = editHistorial;
+        } else if (accion.equalsIgnoreCase("ActualizarHistorial")) {
+            int idHistorialTransaccion = Integer.parseInt(request.getParameter("txtIdHistorialTransacion"));
+            int idCuenta = Integer.parseInt(request.getParameter("txtIdCuenta"));
+            int idTransaccion = Integer.parseInt(request.getParameter("txtIdTransaccion"));
+            nuevoHistorialDeTransacciones.setIdTransaccion(idHistorialTransaccion);
+            nuevoHistorialDeTransacciones.setIdCuenta(idCuenta);
+            nuevoHistorialDeTransacciones.setIdTransaccion(idTransaccion);
+            nuevoHistorialDeTransaccionesDAO.editar(nuevoHistorialDeTransacciones);
+            acceso = listHistorial;
         } else if (accion.equalsIgnoreCase("eliminarHistorial")) {
             int idHistorialTransaccion = Integer.parseInt(request.getParameter("idHistorialTransaccion"));
             nuevoHistorialDeTransaccionesDAO.eliminar(idHistorialTransaccion);
-            acceso = listHistorial;
-            
-        } else if (accion.equalsIgnoreCase("ActualizarHistorial")) {
-            nuevoHistorialDeTransacciones.setIdHistorialTransaccion(Integer.parseInt(request.getParameter("txtIdHistorialTransacion")));
-            nuevoHistorialDeTransacciones.setIdCuenta(Integer.parseInt(request.getParameter("txtIdCuenta")));
-            nuevoHistorialDeTransacciones.setIdTransaccion(Integer.parseInt(request.getParameter("txtIdTransaccion")));
-            nuevoHistorialDeTransaccionesDAO.editar(nuevoHistorialDeTransacciones);
             acceso = listHistorial;
         } else if (accion.equalsIgnoreCase("listarCuenta")) {
             acceso = listarCuenta;
@@ -535,94 +507,7 @@ public class Controlador extends HttpServlet {
             int numeroCuenta = Integer.parseInt(request.getParameter("numDeCuenta"));
             cuentaDAO.eliminarCuenta(numeroCuenta);
             acceso = listarCuenta;
-        } else if (accion.equalsIgnoreCase("listarServicio")) {
-            acceso = listarServicio;
-        } else if (accion.equalsIgnoreCase("agregarServicio")) {
-            acceso = agregarServicio;
-        } else if (accion.equalsIgnoreCase("Agregar Servicio")) {
-            String tipoServicio = request.getParameter("txtTipoServicio");
-            String correlativo = request.getParameter("txtCorrelativo");
-            double montoServicio = Double.parseDouble(request.getParameter("txtMontoServicio"));
-            int idCuenta = Integer.parseInt(request.getParameter("txtIdCuenta"));
-            nuevoServicio.setTipoServicio(tipoServicio);
-            nuevoServicio.setCorrelativo(correlativo);
-            nuevoServicio.setMontoServicio(montoServicio);
-            nuevoServicio.setIdCuenta(idCuenta);
-            nuevoServicioDAO.agregar(nuevoServicio);
-            acceso = listarServicio;
-        } else if (accion.equalsIgnoreCase("editarServicio")) {
-            request.setAttribute("idServ", request.getParameter("noServicio"));
-            acceso = editServicio;
-        } else if (accion.equalsIgnoreCase("ActualizarServicio")) {
-            int idServici = Integer.parseInt(request.getParameter("txtIdServicio"));
-            String tipoServicio = request.getParameter("txtTipoServicio");
-            String correlativo = request.getParameter("txtCorrelativo");
-            double monto = Double.parseDouble(request.getParameter("txtMontoServicio"));
-            nuevoServicio.setIdServicio(idServici);
-            nuevoServicio.setTipoServicio(tipoServicio);
-            nuevoServicio.setCorrelativo(correlativo);
-            nuevoServicio.setMontoServicio(monto);
-            nuevoServicioDAO.editar(nuevoServicio);
-            acceso = listarServicio;
-        } else if (accion.equalsIgnoreCase("eliminarServicio")) {
-            int idSer = Integer.parseInt(request.getParameter("idServicio"));
-            nuevoServicioDAO.eliminar(idSer);
-            acceso = listarServicio;
-        } else if (accion.equalsIgnoreCase("listarSucursal")) {
-            acceso = listarSucursal;
-        } else if (accion.equalsIgnoreCase("agregarSucu")) {
-            acceso = agregarSucu;
-        } else if (accion.equalsIgnoreCase("Agregar Sucursal")) {
-            String nombreSucursal = request.getParameter("txtNombreSucursal");
-            String direccionSucursal = request.getParameter("txtDireccionSucursal");
-            String correoSucursal = request.getParameter("txtCorreoSucursal");
-            int idDepartamento = Integer.parseInt(request.getParameter("txtIdDepartamento"));
-            int idProveedor = Integer.parseInt(request.getParameter("txtIdProveedor"));
-            nuevaSucursal.setNombreSucursal(nombreSucursal);
-            nuevaSucursal.setDireccionSucursal(direccionSucursal);
-            nuevaSucursal.setCorreoSucursal(correoSucursal);
-            nuevaSucursal.setIdDepartamento(idDepartamento);
-            nuevaSucursal.setIdProveedor(idProveedor);
-            nuevaSucursalDAO.agregar(nuevaSucursal);
-            acceso = listarSucursal;
-        } else if (accion.equalsIgnoreCase("editarSucursal")) {
-            request.setAttribute("idSucu", request.getParameter("idSucursal"));
-            acceso = editarSucursal;
-        } else if (accion.equalsIgnoreCase("ActualizarSucursal")) {
-            nuevaSucursal.setIdSucursal(Integer.parseInt(request.getParameter("txtIdSucursal")));
-            nuevaSucursal.setNombreSucursal(request.getParameter("txtNombreSucursal"));
-            nuevaSucursal.setDireccionSucursal(request.getParameter("txtDireccionSucursal"));
-            nuevaSucursal.setCorreoSucursal(request.getParameter("txtCorreoSucursal"));
-            nuevaSucursalDAO.editar(nuevaSucursal);
-            acceso = listarSucursal;
-        } else if (accion.equalsIgnoreCase("eliminarSucursal")) {
-            int idSuc = Integer.parseInt(request.getParameter("idSucursal"));
-            nuevaSucursalDAO.eliminar(idSuc);
-            acceso = listarSucursal;
-        } else if (accion.equalsIgnoreCase("carritoServicio")) {
-            request.setAttribute("listaServicios", listaServicio);
-            acceso = carritoServicio;
-        } else if (accion.equalsIgnoreCase("agregarCarrito")) {
-            System.out.println("llega a agregar carrito?");
-            int idSer = Integer.parseInt(request.getParameter("idServicio"));
-            nuevoServicioDAO.buscar(idSer);
-            nuevoServicio = nuevoServicioDAO.listarPorId(idSer);
-            listaServicio.add(nuevoServicio);
-            acceso = listarServicio;
-        } else if (accion.equalsIgnoreCase("equipo")) {
-            acceso = equipoJsp;
-        } else if (accion.equals("addLogin")) {
-            request.getRequestDispatcher("view/agregarLogin.jsp").forward(request, response);
-        } else if (accion.equalsIgnoreCase("AgregarCuenta")) {
-            String horaSesion = LocalDateTime.now().toString();
-            login.setNombreUsuario(request.getParameter("txtUser"));
-            login.setPasswordUsuario(request.getParameter("txtPass"));
-            login.setHoraSesion(horaSesion);
-            login.setIdCuenta(Integer.parseInt(request.getParameter("txtIdCuenta")));
-            loginDAO.agregar(login);
-            request.getRequestDispatcher("indexLogin.jsp").forward(request, response);
         }
-
         RequestDispatcher vista = request.getRequestDispatcher(acceso);
         vista.forward(request, response);
     }

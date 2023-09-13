@@ -11,7 +11,7 @@ import model.Cuenta;
 public interface CuentaCRUD {
     public List listarCuentas();
     public boolean agregarCuenta(Cuenta nuevaCuenta);
-    public Cuenta buscarCuenta(int numCuenta);
+    public Cuenta buscarCuenta(long numCuenta);
     public boolean editarCuenta(Cuenta cuenta);
     public void eliminarCuenta(long numCuenta);
 }

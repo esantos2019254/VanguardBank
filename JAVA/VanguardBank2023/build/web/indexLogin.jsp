@@ -14,6 +14,7 @@
         <title>Bienvenidos</title>
     </head>
     <body style="background-color: #183952">
+
         <div class="container mt-4 col-lg-4">
             <div class="card col-sm-10">
                 <div class="card-body">
@@ -32,9 +33,6 @@
                             <input type="password" name="txtPass" class="form-control">
                         </div>
                         <input type="submit" name="accion" value="Ingresar" class="btn btn-dark btn-block">
-                        <div class="form-group">
-                            <a href="Controlador?accion=addLogin">No tiene cuenta? Registrese aqui</a>
-                        </div>
                     </form>
                 </div>
             </div>
