@@ -58,6 +58,8 @@ Create table Empleado(
     fechaContratacion date not null,
     direccionEmpleado varchar(200) not null,
     numeroContactoEmpleado varchar(10) not null,
+    userEmpleado varchar(25) not null,
+	passwordEmpleado varchar(15) not null,
     idTipoEmpleado int not null,
     primary key PK_idEmpleado (idEmpleado),
     constraint FK_Empleado_TipoEmpleado foreign key (idTipoEmpleado)
@@ -86,7 +88,7 @@ Create table Cuenta(
     saldoCuenta decimal (10,2) not null,
     tipoCuenta varchar(100) not null, 
     fechaApertura date not null,
-    DPI bigint not null,
+    DPI bigint not null, 
     idEmpleado int not null,
     idTipoMoneda int not null,
     idSucursal int not null,
@@ -110,7 +112,7 @@ Create table Credito(
     idCuenta int not null,
     primary key PK_idCredito(idCredito),
     constraint FK_Credito_Cuenta foreign key (idCuenta)
-		references Cuenta(idCuenta)
+		references Cuenta(idCuenta) on delete cascade
 );
 
 -- Entidad Servicios --
@@ -585,35 +587,36 @@ Delimiter ;
 #	Agregar Empleado	#
 Delimiter $$
 	Create procedure sp_AgregarEmpleado(in nombreEmpleado varchar(100),in apellidoEmpleado varchar(100),in fechaContratacion date,
-    in direccionEmpleado varchar(200),in numeroContactoEmpleado varchar(10),in idTipoEmpleado int)
+    in direccionEmpleado varchar(200),in numeroContactoEmpleado varchar(10),in userEmpleado varchar(15), in passwordEmpleado varchar(15), in idTipoEmpleado int)
 		Begin
-			Insert into Empleado(nombreEmpleado, apellidoEmpleado, fechaContratacion, direccionEmpleado, numeroContactoEmpleado,
+			Insert into Empleado(nombreEmpleado, apellidoEmpleado, fechaContratacion, direccionEmpleado, numeroContactoEmpleado, userEmpleado, passwordEmpleado,
 				idTipoEmpleado)
-				values (nombreEmpleado, apellidoEmpleado, fechaContratacion, direccionEmpleado, numeroContactoEmpleado, idTipoEmpleado);
+				values (nombreEmpleado, apellidoEmpleado, fechaContratacion, direccionEmpleado, numeroContactoEmpleado, userEmpleado, passwordEmpleado,idTipoEmpleado);
         End$$
 Delimiter ;
 
-Call sp_AgregarEmpleado('Luisa Silvia','Hidalgo de Barrera','2017-06-15','7ma calle 69-31 zona 1 de Mixco, Guatemala','9845-8796', 1);
-Call sp_AgregarEmpleado('Pedro Castro','Menéndez Contreras','2011-11-03','5ta calle 25-12 Colonia Quinta Samayoa zona 7 Ciudad de Guatemala, Guatemala','2138-4758', 2);
-Call sp_AgregarEmpleado('Humberto Daniel','Domingues Arriola','2016-10-21','9na calle 15-2 zona 1 Guatemala, Guatemala','1973-8264', 3);
-Call sp_AgregarEmpleado('Hugo Monserrat','Perez Granizo','2018-06-15','10ma avenida, 5ta calle 5-65 zona 4 Guatemala','6519-3784', 4);
-Call sp_AgregarEmpleado('Frankli Isaac','Flores Corado','2018-06-15','2da avenida, 11va calle 36-19 zona 8 Antigua Guatemala','3461-8212', 5);
-Call sp_AgregarEmpleado('Daniel Rocio','Flores López','2001-06-21','4ta calle 3-8 zona 8','6512-8212', 6);
-Call sp_AgregarEmpleado('Omar Rander','Emmiten Osorio','200-01-29','9na avenida 9calle zona 12','6512-3215', 7);
-Call sp_AgregarEmpleado('Rosa Ximena','García Mayen','2009-10-12','12va calle 3-98 zona 9','3254-9745', 8);
-Call sp_AgregarEmpleado('Randy Render','Lore Lovoto','2011-07-17','9na avenida 6-51 zona 14','7413-8212', 9);
-Call sp_AgregarEmpleado('Daniel Soza','Rodríguez de Córdova','1991-04-17','6ta calle 3-8 zona 15','6591-3912', 10);
-Call sp_AgregarEmpleado('Lennin Benjamín','Ixche Soc','2006-06-12','4ta avenida 3-17 zona 17','9185-1752', 10);
-Call sp_AgregarEmpleado('Franco Romeo','Donis Rogel','2007-04-04','10ma avenida 63-54 zona 1','3791-1793', 9);
-Call sp_AgregarEmpleado('Rebeca Daylin','Sanchez Torres','1997-08-21','3ra avenida 17-23 zona 4','6548-9846', 8);
-Call sp_AgregarEmpleado('Alondra Rocio','Suñiga Florian','1991-05-21','8va calle 32-19 zona 10','3215-7895', 7);
-Call sp_AgregarEmpleado('Angeles Fernana','Herrarte Loza','2002-09-16','4ta avenida 16-27 zona 8','9517-3597', 6);
-Call sp_AgregarEmpleado('Emily Aloja','Rivera Andrade','2005-04-17','7ma avenida 25-95 zona 7','3518-6428', 5);
-Call sp_AgregarEmpleado('Carlos Emmanuel','Gómez Yol','1994-10-13','15ta calle 5-25 zona 6','7541-6259', 4);
-Call sp_AgregarEmpleado('Henry Javier','Biancas Zuc','1989-11-06','19na avenida 3ta calle 21-13 zona 13','9562-4857', 3);
-Call sp_AgregarEmpleado('Edgar Adolfo','Escobedo López','1998-12-24','2da avenida 5-65 zona 14','3245-7865', 2);
-Call sp_AgregarEmpleado('Douglas Eduardo','de la Cruz Yat','2005-04-08','8va avenida 32-96 zona 16','1741-1843', 1);
+Call sp_AgregarEmpleado('Luisa Silvia','Hidalgo de Barrera','2017-06-15','7ma calle 69-31 zona 1 de Mixco, Guatemala','9845-8796', 'lsilvia','123', 1);
+Call sp_AgregarEmpleado('Pedro Castro','Menéndez Contreras','2011-11-03','5ta calle 25-12 Colonia Quinta Samayoa zona 7 Ciudad de Guatemala, Guatemala','2138-4758', 'pcastro','123', 2);
+Call sp_AgregarEmpleado('Humberto Daniel','Domingues Arriola','2016-10-21','9na calle 15-2 zona 1 Guatemala, Guatemala','1973-8264', 'daniel','123', 3);
+Call sp_AgregarEmpleado('Hugo Monserrat','Perez Granizo','2018-06-15','10ma avenida, 5ta calle 5-65 zona 4 Guatemala','6519-3784', 'hmonserrat','123', 4);
+Call sp_AgregarEmpleado('Frankli Isaac','Flores Corado','2018-06-15','2da avenida, 11va calle 36-19 zona 8 Antigua Guatemala','3461-8212', 'fisaac', '123',5);
+Call sp_AgregarEmpleado('Daniel Rocio','Flores López','2001-06-21','4ta calle 3-8 zona 8','6512-8212', 'drocio','123',6);
+Call sp_AgregarEmpleado('Omar Rander','Emmiten Osorio','200-01-29','9na avenida 9calle zona 12','6512-3215', 'orander','123', 7);
+Call sp_AgregarEmpleado('Rosa Ximena','García Mayen','2009-10-12','12va calle 3-98 zona 9','3254-9745', 'rximena','123', 8);
+Call sp_AgregarEmpleado('Randy Render','Lore Lovoto','2011-07-17','9na avenida 6-51 zona 14','7413-8212', 'rrender','123', 9);
+Call sp_AgregarEmpleado('Daniel Soza','Rodríguez de Córdova','1991-04-17','6ta calle 3-8 zona 15','6591-3912', 'dsoza','123',10);
+Call sp_AgregarEmpleado('Lennin Benjamín','Ixche Soc','2006-06-12','4ta avenida 3-17 zona 17','9185-1752', 'lbenjamin','123', 10);
+Call sp_AgregarEmpleado('Franco Romeo','Donis Rogel','2007-04-04','10ma avenida 63-54 zona 1','3791-1793', 'fromeo','123', 9);
+Call sp_AgregarEmpleado('Rebeca Daylin','Sanchez Torres','1997-08-21','3ra avenida 17-23 zona 4','6548-9846', 'rdaylin','123', 8);
+Call sp_AgregarEmpleado('Alondra Rocio','Suñiga Florian','1991-05-21','8va calle 32-19 zona 10','3215-7895', 'arocio','123',7);
+Call sp_AgregarEmpleado('Angeles Fernana','Herrarte Loza','2002-09-16','4ta avenida 16-27 zona 8','9517-3597', 'afernana','123', 6);
+Call sp_AgregarEmpleado('Emily Aloja','Rivera Andrade','2005-04-17','7ma avenida 25-95 zona 7','3518-6428', 'ealoja','123',5);
+Call sp_AgregarEmpleado('Carlos Emmanuel','Gómez Yol','1994-10-13','15ta calle 5-25 zona 6','7541-6259', 'cemmanuel','123',4);
+Call sp_AgregarEmpleado('Henry Javier','Biancas Zuc','1989-11-06','19na avenida 3ta calle 21-13 zona 13', 'hjavier','9562-4857','123', 3);
+Call sp_AgregarEmpleado('Edgar Adolfo','Escobedo López','1998-12-24','2da avenida 5-65 zona 14','3245-7865', 'eadolfo','123',2);
+Call sp_AgregarEmpleado('Douglas Eduardo','de la Cruz Yat','2005-04-08','8va avenida 32-96 zona 16','1741-1843', 'deduardo','123',1);
 
+select * from Empleado;
 #	Listar Empleados	#
 Delimiter $$
 	Create procedure sp_ListarEmpleados()
@@ -758,6 +761,7 @@ Delimiter $$
                 idTipoMoneda, idSucursal);
         End$$
 Delimiter ;
+
 
 Call sp_AgregarCuenta(10001,1486.55,'Depósito','2011-01-18', 1879451248101, 1, 1, 9);
 Call sp_AgregarCuenta(10002,565.10,'Ahorro','2010-05-25', 6548721036548, 2, 1, 8);
@@ -1224,6 +1228,7 @@ Delimiter $$
 		End $$
 Delimiter ; 
 
+call sp_ListarDepositos();
 #call sp_ListarDepositos(); 
 
 -- BUSCAR---
