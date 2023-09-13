@@ -258,8 +258,7 @@ public class Controlador extends HttpServlet {
             nuevoProveedor.setTelefonoProveedor(request.getParameter("txtTelefono"));
             nuevoProveedorDAO.editar(nuevoProveedor);
             acceso = listarProveedor;
-<<<<<<< HEAD
-=======
+            
         }else if (accion.equalsIgnoreCase("eliminarProveedor")){
             int idProveedor = Integer.parseInt(request.getParameter("idProveedor"));
             nuevoProveedorDAO.eliminar(idProveedor);
