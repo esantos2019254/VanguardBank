@@ -118,17 +118,8 @@
                         <td><%=pro.getCorreoProveedor()%></td>
                         <td><%=pro.getTelefonoProveedor()%></td>
                         <td>
-<<<<<<< HEAD
-<<<<<<< HEAD
-                            <a href="Controlador?accion=editarProveedor&idProveedor=<%= pro.getIdProveedor() %>">Edit</a>
-=======
-                            <a href="Controlador?accion=editarProveedor&idProveedor=<%= pro.getIdProveedor() %>">Editar</a>
-                            <a href="Controlador?accion=eliminarProveedor&IDPRO=<%= pro.getIdProveedor() %>">Eliminar</a>
->>>>>>> dsiney-2021664
-=======
                             <a class="btn btn-warning" href="Controlador?accion=editarProveedor&idProveedor=<%= pro.getIdProveedor()%>">Edit</a>
                             <a class="btn btn-danger" href="Controlador?accion=eliminarProveedor&idProveedor=<%= pro.getIdProveedor() %>">Eliminar</a>
->>>>>>> jsandoval-2022231
                         </td>
                     </tr>
                     <%}%>
